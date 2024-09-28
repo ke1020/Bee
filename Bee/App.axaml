@@ -6,10 +6,12 @@
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
+        <!--视图定位器使用命名约定将视图模型类型映射到视图类型-->
         <local:ViewLocator/>
     </Application.DataTemplates>
   
     <Application.Styles>
+        <!--样式主题-->
         <FluentTheme />
     </Application.Styles>
 </Application>
