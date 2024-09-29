@@ -21,6 +21,18 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="{Binding Greeting}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="{DynamicResource BgBody}"
+            Foreground="{DynamicResource TextPrimary}"
+            Padding="50"
+        />
+        <Button
+            Content="切换主题"
+            Command="{Binding ChangeThemeCommand}"
+        />
+    </StackPanel>
 
 </Window>

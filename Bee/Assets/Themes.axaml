@@ -1,0 +1,21 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Add Resources Here -->
+
+  <ResourceDictionary.ThemeDictionaries>
+
+    <!--默认主题-->
+    <ResourceDictionary x:Key='Default'>
+      <SolidColorBrush x:Key="BgBody" Color="Blue" />
+      <SolidColorBrush x:Key="TextPrimary" Color="White" />
+    </ResourceDictionary>
+
+    <!--暗色主题-->
+    <ResourceDictionary x:Key='Dark'>
+      <SolidColorBrush x:Key="BgBody" Color="Red" />
+      <SolidColorBrush x:Key="TextPrimary" Color="White" />
+    </ResourceDictionary>
+
+  </ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>

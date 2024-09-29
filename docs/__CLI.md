@@ -24,9 +24,12 @@ dotnet new list
 dotnet new avalonia.mvvm -o Bee
 ```
 
-## 向 GitHub 推送数据
+## 向 GitHub 与 Gitee 推送数据
 
 ```bash
 # git branch -M main
-git push -u github master
+git push -u github main
+
+# gitee
+git push -u gitee main
 ```
