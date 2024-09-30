@@ -6,14 +6,35 @@
 
     <!--默认主题-->
     <ResourceDictionary x:Key='Default'>
-      <SolidColorBrush x:Key="BgBody" Color="Blue" />
-      <SolidColorBrush x:Key="TextPrimary" Color="White" />
+      <SolidColorBrush x:Key="BorderColor" Color="#dedfe1" />
+      <!--背景-->
+      <SolidColorBrush x:Key="BgToolbar" Color="#f5f5f6" />
+      <SolidColorBrush x:Key="BgBody" Color="White" />
+      <SolidColorBrush x:Key="BgSidebarItemHover" Color="#f5f5f6" />
+      <SolidColorBrush x:Key="BgSidebarItemPressed" Color="#ebebed" />
+      <SolidColorBrush x:Key="BgSearchInput" Color="#f6f6f7" />
+      <!--文本-->
+      <SolidColorBrush x:Key="TextPrimary" Color="#25262b" />
+      <SolidColorBrush x:Key="TextSecondary" Color="" />
+      <!--按钮-->
+      <SolidColorBrush x:Key="BtnDefault" Color="#f5f5f6" />
+      <SolidColorBrush x:Key="BtnDefaultHover" Color="#ececee" />
+      <SolidColorBrush x:Key="BtnDefaultActive" Color="#e3e3e5" />
     </ResourceDictionary>
 
     <!--暗色主题-->
     <ResourceDictionary x:Key='Dark'>
-      <SolidColorBrush x:Key="BgBody" Color="Red" />
+      <SolidColorBrush x:Key="BorderColor" Color="#3c3c3c" />
+      <SolidColorBrush x:Key="BgToolbar" Color="#222226" />
+      <SolidColorBrush x:Key="BgBody" Color="#111113" />
+      <SolidColorBrush x:Key="BgSidebarItemHover" Color="#1f1f22" />
+      <SolidColorBrush x:Key="BgSidebarItemPressed" Color="#2d2d30" />
+      <SolidColorBrush x:Key="BgSearchInput" Color="#19191c" />
       <SolidColorBrush x:Key="TextPrimary" Color="White" />
+      <SolidColorBrush x:Key="TextSecondary" Color="#606062" />
+      <SolidColorBrush x:Key="BtnDefault" Color="#222226" />
+      <SolidColorBrush x:Key="BtnDefaultHover" Color="#2e2e32" />
+      <SolidColorBrush x:Key="BtnDefaultActive" Color="#3a3a3f" />
     </ResourceDictionary>
 
   </ResourceDictionary.ThemeDictionaries>

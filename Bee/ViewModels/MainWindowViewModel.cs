@@ -1,6 +1,13 @@
-﻿using Avalonia;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using Avalonia;
+using Avalonia.Media;
 using Avalonia.Styling;
+using Bee.Models;
+using Bee.ViewModels.Menu;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Options;
 
 namespace Bee.ViewModels;
 
@@ -9,6 +16,23 @@ public partial class MainWindowViewModel : ViewModelBase
 #pragma warning disable CA1822 // Mark members as static
     public string Greeting => "Welcome to Avalonia!";
 #pragma warning restore CA1822 // Mark members as static
+
+    /// <summary>
+    /// 工具栏按钮集合
+    /// </summary>
+    [ObservableProperty]
+    private ObservableCollection<MenuItemViewModel> _toolbarMenus;
+
+    public MainWindowViewModel(IOptions<MenuItem[]> menuItems)
+    {
+        var menuList = menuItems.Value.Select(x => new MenuItemViewModel(x.LocaleKey)
+        {
+            Key = x.Key,
+            IsActive = x.IsActive == true,
+            Icon = string.IsNullOrWhiteSpace(x.Icon) ? null : StreamGeometry.Parse(x.Icon),
+        });
+        ToolbarMenus = new ObservableCollection<MenuItemViewModel>(menuList);
+    }
 
     /// <summary>
     /// 改变主题方法

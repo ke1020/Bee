@@ -21,18 +21,69 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Text="{Binding Greeting}"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Background="{DynamicResource BgBody}"
-            Foreground="{DynamicResource TextPrimary}"
-            Padding="50"
-        />
-        <Button
-            Content="切换主题"
-            Command="{Binding ChangeThemeCommand}"
-        />
-    </StackPanel>
+    <!--
+    DockPanel: 布局控件。将子控件沿指定边缘（顶部、底部、左侧、右侧）排列，并使其中一个填充剩余空间
+    DynamicResource: 延迟加载一个键控资源，该资源将在变体资源改变时更新
+    -->
+    <DockPanel Background="{DynamicResource BgBody}">
+
+        <!-- 工具栏
+        BorderThickness: (0,0,1,0) 表示右边框宽度 1，数字分别代表 左、上、右、下 边框的宽度
+        -->
+        <Border x:Name="AppToolbar"
+            Width="70"
+            Background="{DynamicResource BgToolbar}"
+            BorderBrush="{DynamicResource BorderColor}"
+            BorderThickness="0,0,1,0"
+            DockPanel.Dock="Left"
+        >
+            <DockPanel>
+                <!--
+                DockPanel.Dock="Top" 要设置到 DockPanel 的直接子元素上
+                -->
+                <ItemsControl ItemsSource="{Binding ToolbarMenus}" DockPanel.Dock="Top">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button>
+                                <StackPanel>
+                                    <PathIcon Data="{Binding Icon}" />
+                                    <TextBlock Text="{Binding Text}" />
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </Border>
+
+        <!-- 二级菜单侧栏 -->
+        <Border
+            IsVisible="True"
+            BorderBrush="{DynamicResource BorderColor}"
+            Width="210"
+            BorderThickness="0,0,1,0"
+            DockPanel.Dock="Left"
+            Padding="10"
+        >
+        </Border>
+
+        <!--工作区-->
+        <Border>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{Binding Greeting}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource BgBody}"
+                    Foreground="{DynamicResource TextPrimary}"
+                    Padding="50"
+                />
+                <Button
+                    Content="切换主题"
+                    Command="{Binding ChangeThemeCommand}"
+                />
+            </StackPanel>
+        </Border>
+
+    </DockPanel>
 
 </Window>
