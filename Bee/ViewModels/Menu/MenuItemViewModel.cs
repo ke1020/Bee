@@ -14,6 +14,10 @@ public partial class MenuItemViewModel : ObservableObject
     /// </summary>
     public string Key { get; set; } = string.Empty;
     /// <summary>
+    /// 按钮文本
+    /// </summary>
+    public string Text { get; set; } = string.Empty;
+    /// <summary>
     /// 图标
     /// </summary>
     public StreamGeometry? Icon { get; set; }
@@ -21,8 +25,9 @@ public partial class MenuItemViewModel : ObservableObject
     /// 子菜单
     /// </summary>
     public ICollection<MenuItemViewModel>? Items { get; private set; }
-    [ObservableProperty]
-    private string _text;
+    /// <summary>
+    /// 菜单是否选中
+    /// </summary>
     [ObservableProperty]
     private bool _isActive;
 
