@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia;
 using Avalonia.Media;
@@ -22,16 +24,47 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     [ObservableProperty]
     private ObservableCollection<MenuItemViewModel> _toolbarMenus;
+    /// <summary>
+    /// 设置菜单集合
+    /// </summary>
+    [ObservableProperty]
+    private ObservableCollection<MenuItemViewModel> _settingMenus;
+
+    private Func<bool, Func<MenuItem, MenuItemViewModel>> _menuItemToViewModel => (bool hasCommand) => x => new MenuItemViewModel(x.LocaleKey)
+    {
+        Key = x.Key,
+        IsActive = x.IsActive == true,
+        Icon = string.IsNullOrWhiteSpace(x.Icon) ? null : StreamGeometry.Parse(x.Icon),
+        MenuClickCommand = hasCommand ? new RelayCommand<string>((string? key) =>
+        {
+            var item = ToolbarMenus?.FirstOrDefault(i => i.Key == key);
+            if (item is not null)
+            {
+                if (item.IsActive == true)
+                {
+                    return;
+                }
+
+                // 取消之前选中项
+                var actived = ToolbarMenus?.FirstOrDefault(i => i.IsActive == true);
+                if (actived is not null)
+                {
+                    actived.IsActive = false;
+                }
+
+                item.IsActive = true;
+            }
+        }) : null
+    };
 
     public MainWindowViewModel(IOptions<MenuItem[]> menuItems)
     {
-        var menuList = menuItems.Value.Select(x => new MenuItemViewModel(x.LocaleKey)
-        {
-            Key = x.Key,
-            IsActive = x.IsActive == true,
-            Icon = string.IsNullOrWhiteSpace(x.Icon) ? null : StreamGeometry.Parse(x.Icon),
-        });
-        ToolbarMenus = new ObservableCollection<MenuItemViewModel>(menuList);
+        ToolbarMenus = new ObservableCollection<MenuItemViewModel>(
+            menuItems.Value.Where(x => x.GroupLocaleKey == "Toolbar").Select(_menuItemToViewModel(true))
+        );
+        SettingMenus = new ObservableCollection<MenuItemViewModel>(
+            menuItems.Value.Where(x => x.GroupLocaleKey == "Settings").Select(_menuItemToViewModel(false))
+        );
     }
 
     /// <summary>

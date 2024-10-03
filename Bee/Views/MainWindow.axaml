@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Bee.ViewModels"
+    xmlns:menu="using:Bee.ViewModels.Menu"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -44,7 +45,9 @@
                 <ItemsControl ItemsSource="{Binding ToolbarMenus}" DockPanel.Dock="Top">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button>
+                            <Button Classes="ToolbarIconButton" Classes.Active="{Binding IsActive}"
+                                Command="{Binding MenuClickCommand}"
+                                CommandParameter="{Binding Key}">
                                 <StackPanel>
                                     <PathIcon Data="{Binding Icon}" />
                                     <TextBlock Text="{Binding Text}" />
@@ -53,6 +56,42 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+
+                <!--设置菜单-->
+                <ItemsControl ItemsSource="{Binding SettingMenus}" DockPanel.Dock="Bottom">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Classes="ToolbarIconButton">
+                                <Button.Flyout>
+                                    <MenuFlyout Placement="Top" ItemsSource="{Binding Items}">
+                                        <MenuFlyout.ItemContainerTheme>
+                                            <ControlTheme TargetType="MenuItem"
+                                                BasedOn="{StaticResource {x:Type MenuItem}}"
+                                                x:DataType="menu:MenuItemViewModel">
+                                                <Setter Property="Header" Value="{Binding Text}" />
+                                                <Setter Property="ItemsSource"
+                                                    Value="{Binding Items}" />
+                                                <Setter Property="Icon" Value="{Binding Icon}" />
+                                                <Setter Property="Command"
+                                                    Value="{Binding MenuClickCommand}" />
+                                                <Setter Property="CommandParameter"
+                                                    Value="{Binding Key}" />
+                                            </ControlTheme>
+                                        </MenuFlyout.ItemContainerTheme>
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                                <StackPanel>
+                                    <PathIcon Data="{Binding Icon}" />
+                                    <TextBlock Text="{Binding Text}" />
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- 必须始终定义一个最后的子控件（没有停靠属性），否则停靠计算将无法正确进行 -->
+                <Border />
+
             </DockPanel>
         </Border>
 

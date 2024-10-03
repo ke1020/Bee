@@ -1,0 +1,37 @@
+<Styles xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <!-- Add Controls for Previewer Here -->
+    </Border>
+  </Design.PreviewWith>
+
+  <!-- Add Styles Here -->
+  <!-- 工具栏 -->
+  <Style Selector="Button.ToolbarIconButton">
+    <Setter Property="Margin" Value="10" />
+    <Setter Property="Width" Value="60" />
+    <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Style Selector="^:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BtnDefaultHover}" />
+    </Style>
+    <Style Selector="^:pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BtnDefaultActive}" />
+    </Style>
+  </Style>
+  <Style Selector="Button.ToolbarIconButton.Active">
+    <Setter Property="Background" Value="{DynamicResource BtnDefaultActive}" />
+  </Style>
+  <Style Selector="Button.ToolbarIconButton PathIcon">
+    <Setter Property="Foreground" Value="{DynamicResource TextPrimary}" />
+    <Setter Property="Margin" Value="4" />
+  </Style>
+  <Style Selector="Button.ToolbarIconButton TextBlock">
+    <Setter Property="HorizontalAlignment" Value="Center" />
+  </Style>
+
+</Styles>

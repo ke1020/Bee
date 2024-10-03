@@ -14,6 +14,7 @@
     <Application.Styles>
         <!--样式主题-->
         <FluentTheme />
+        <StyleInclude Source="avares://Bee/Assets/Styles.axaml" />
     </Application.Styles>
 
     <Application.Resources>

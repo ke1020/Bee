@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Windows.Input;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -30,6 +31,10 @@ public partial class MenuItemViewModel : ObservableObject
     /// </summary>
     [ObservableProperty]
     private bool _isActive;
+    /// <summary>
+    /// 菜单点击命令
+    /// </summary>
+    public ICommand? MenuClickCommand { get; set; }
 
     public MenuItemViewModel(string text)
     {
