@@ -25,7 +25,7 @@ public partial class MenuItemViewModel : ObservableObject
     /// <summary>
     /// 子菜单
     /// </summary>
-    public ICollection<MenuItemViewModel>? Items { get; private set; }
+    public ICollection<MenuItemViewModel>? Items { get; set; }
     /// <summary>
     /// 菜单是否选中
     /// </summary>
@@ -35,6 +35,10 @@ public partial class MenuItemViewModel : ObservableObject
     /// 菜单点击命令
     /// </summary>
     public ICommand? MenuClickCommand { get; set; }
+    /// <summary>
+    /// 命令参数
+    /// </summary>
+    public string? CommandParameter { get; set; }
 
     public MenuItemViewModel(string text)
     {

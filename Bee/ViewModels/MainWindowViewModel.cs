@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia;
 using Avalonia.Media;
 using Avalonia.Styling;
-using Bee.Models;
+using Bee.Models.Menu;
 using Bee.ViewModels.Menu;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -15,10 +14,6 @@ namespace Bee.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-#pragma warning disable CA1822 // Mark members as static
-    public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
-
     /// <summary>
     /// 工具栏按钮集合
     /// </summary>
@@ -30,62 +25,89 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<MenuItemViewModel> _settingMenus;
 
-    private Func<bool, Func<MenuItem, MenuItemViewModel>> _menuItemToViewModel => (bool hasCommand) => x => new MenuItemViewModel(x.LocaleKey)
+    private Func<MenuItem, MenuItemViewModel> _menuItemToViewModel => x => new MenuItemViewModel(x.LocaleKey)
     {
         Key = x.Key,
         IsActive = x.IsActive == true,
         Icon = string.IsNullOrWhiteSpace(x.Icon) ? null : StreamGeometry.Parse(x.Icon),
-        MenuClickCommand = hasCommand ? new RelayCommand<string>((string? key) =>
+        CommandParameter = x.CommandParameter,
+        Items = x.Items.Select(_menuItemToViewModel).ToList(),
+        MenuClickCommand = GetRelayCommand(x.CommandType)
+    };
+
+    /// <summary>
+    /// 根据命令类型返回中继命令
+    /// </summary>
+    /// <param name="commandType"></param>
+    /// <returns></returns>
+    private IRelayCommand? GetRelayCommand(string? commandType)
+    {
+        if (!Enum.TryParse<MenuClickCommandType>(commandType, out var cmdType))
         {
-            var item = ToolbarMenus?.FirstOrDefault(i => i.Key == key);
-            if (item is not null)
+            return null;
+        }
+
+        return cmdType switch
+        {
+            // 激活菜单命令返回的中继命令
+            MenuClickCommandType.Active => new RelayCommand<MenuItemViewModel>((MenuItemViewModel? menuItem) =>
             {
-                if (item.IsActive == true)
+                // 已经选中
+                if (menuItem is null || menuItem.IsActive == true)
                 {
                     return;
                 }
 
-                // 取消之前选中项
-                var actived = ToolbarMenus?.FirstOrDefault(i => i.IsActive == true);
-                if (actived is not null)
+                // 清除之前选中项
+                var beforeActived = ToolbarMenus.FirstOrDefault(x => x.IsActive);
+                if (beforeActived != null)
                 {
-                    actived.IsActive = false;
+                    beforeActived.IsActive = false;
                 }
 
-                item.IsActive = true;
-            }
-        }) : null
-    };
+                menuItem.IsActive = true;
+            }),
+
+            // 主题切换返回的中继命令
+            MenuClickCommandType.SwitchTheme => new RelayCommand<MenuItemViewModel>((MenuItemViewModel? menuItem) =>
+            {
+                if (Application.Current is null)
+                {
+                    return;
+                }
+
+                ThemeVariant? tv = menuItem?.CommandParameter switch
+                {
+                    nameof(ThemeVariant.Default) => ThemeVariant.Default,
+                    nameof(ThemeVariant.Dark) => ThemeVariant.Dark,
+                    _ => ThemeVariant.Default
+                };
+
+                // 可以通过 Application.Current 设置或修改 RequestedThemeVariant 属性
+                Application.Current.RequestedThemeVariant = tv;
+            }),
+
+            // 打开链接返回的中继命令
+            MenuClickCommandType.Link => new RelayCommand<MenuItemViewModel>((MenuItemViewModel? menuItem) =>
+            {
+                var url = menuItem?.CommandParameter;
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                 {
+                     FileName = url,
+                     UseShellExecute = true
+                 });
+            }),
+
+            // 返回 null
+            _ => null
+        };
+    }
 
     public MainWindowViewModel(IOptions<MenuItem[]> menuItems)
     {
-        ToolbarMenus = new ObservableCollection<MenuItemViewModel>(
-            menuItems.Value.Where(x => x.GroupLocaleKey == "Toolbar").Select(_menuItemToViewModel(true))
-        );
-        SettingMenus = new ObservableCollection<MenuItemViewModel>(
-            menuItems.Value.Where(x => x.GroupLocaleKey == "Settings").Select(_menuItemToViewModel(false))
-        );
+        var toolbarMenus = menuItems.Value.Where(x => x.Group == "Toolbar").Select(_menuItemToViewModel);
+        ToolbarMenus = new ObservableCollection<MenuItemViewModel>(toolbarMenus);
+        var settingMenus = menuItems.Value.Where(x => x.Group == "Settings").Select(_menuItemToViewModel);
+        SettingMenus = new ObservableCollection<MenuItemViewModel>(settingMenus);
     }
-
-    /// <summary>
-    /// 改变主题方法
-    /// </summary>
-    [RelayCommand]
-    private void ChangeTheme()
-    {
-        if (Application.Current is null)
-        {
-            return;
-        }
-
-        // 可以通过 Application.Current 设置或修改 RequestedThemeVariant 属性
-        Application.Current.RequestedThemeVariant = Application.Current.RequestedThemeVariant == ThemeVariant.Dark
-            ? ThemeVariant.Default : ThemeVariant.Dark;
-    }
-
-    /*
-    private RelayCommand? changeThemeCommand;
-
-    public IRelayCommand ChangeThemeCommand => changeThemeCommand ??= new RelayCommand(ChangeTheme);
-    */
 }

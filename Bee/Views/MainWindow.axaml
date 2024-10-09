@@ -47,7 +47,7 @@
                         <DataTemplate>
                             <Button Classes="ToolbarIconButton" Classes.Active="{Binding IsActive}"
                                 Command="{Binding MenuClickCommand}"
-                                CommandParameter="{Binding Key}">
+                                CommandParameter="{Binding}">
                                 <StackPanel>
                                     <PathIcon Data="{Binding Icon}" />
                                     <TextBlock Text="{Binding Text}" />
@@ -75,7 +75,7 @@
                                                 <Setter Property="Command"
                                                     Value="{Binding MenuClickCommand}" />
                                                 <Setter Property="CommandParameter"
-                                                    Value="{Binding Key}" />
+                                                    Value="{Binding}" />
                                             </ControlTheme>
                                         </MenuFlyout.ItemContainerTheme>
                                     </MenuFlyout>
@@ -91,7 +91,6 @@
 
                 <!-- 必须始终定义一个最后的子控件（没有停靠属性），否则停靠计算将无法正确进行 -->
                 <Border />
-
             </DockPanel>
         </Border>
 
@@ -108,19 +107,7 @@
 
         <!--工作区-->
         <Border>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="{Binding Greeting}"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="{DynamicResource BgBody}"
-                    Foreground="{DynamicResource TextPrimary}"
-                    Padding="50"
-                />
-                <Button
-                    Content="切换主题"
-                    Command="{Binding ChangeThemeCommand}"
-                />
-            </StackPanel>
+            
         </Border>
 
     </DockPanel>

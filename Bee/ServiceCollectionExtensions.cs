@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
-using Bee.Models;
+using Bee.Models.Menu;
 using Bee.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;

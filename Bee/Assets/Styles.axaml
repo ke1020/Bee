@@ -6,7 +6,6 @@
     </Border>
   </Design.PreviewWith>
 
-  <!-- Add Styles Here -->
   <!-- 工具栏 -->
   <Style Selector="Button.ToolbarIconButton">
     <Setter Property="Margin" Value="10" />
