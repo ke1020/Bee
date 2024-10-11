@@ -1,0 +1,33 @@
+{
+    "AppName": "日理万机",
+    "ThemeLight": "亮色",
+    "ThemeDark": "暗色",
+    "AI": "AI",
+    "Audio And Video": "音视频",
+    "Document": "文档",
+    "Other": "其它",
+    "Home": "主页",
+
+    "Image Generation and Processing": "图片生成与处理",
+    "Poster Generation": "创意海报生成",
+    "Image Completion": "图像擦除补全",
+    "Text to Image": "文本生成图片",
+    "Image Background Synthesis": "图像背景生成",
+    "Image Format Conversion": "图片格式转换",
+
+    "Speech Recognition and Synthesis": "语音识别与合成",
+    "Speech Recognition": "语音识别",
+    "Text to Speech": "语音合成",
+    "Voice Clone": "语音克隆",
+
+    "Document Processing": "文档处理",
+    "Document Format Conversion": "文档格式转换",
+
+    "Themes": "主题",
+    "Default Theme": "默认主题",
+    "Dark Theme": "暗色主题",
+    "Setting": "设置",
+    "About": "关于",
+
+    "Languages": "语言"
+}

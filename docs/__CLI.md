@@ -33,3 +33,9 @@ git push -u github main
 # gitee
 git push -u gitee main
 ```
+
+## 推送 Nuget 包
+
+```bash
+dotnet nuget push .\bin\Release\Ke.Bee.Localization.0.1.1.nupkg --source https://api.nuget.org/v3/index.json --api-key {key}
+```

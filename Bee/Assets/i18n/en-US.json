@@ -1,0 +1,25 @@
+{
+    "AppName": "Bee",
+    "ThemeLight": "Light",
+    "ThemeDark": "Dark",
+    "Home": "Home",
+    "AI": "AI",
+    "Audio And Video": "Audio And Video",
+    "Document": "Document",
+    "Other": "Other",
+
+    "Image Generation and Processing": "Image Generation and Processing",
+    "Poster Generation": "Poster Generation",
+    "Image Completion": "Image Completion",
+    "Text to Image": "Text to Image",
+    "Image Background Synthesis": "Image Background Synthesis",
+    "Image Format Conversion": "Image Format Conversion",
+
+    "Speech Recognition and Synthesis": "Speech Recognition and Synthesis",
+    "Speech Recognition": "Speech Recognition",
+    "Text to Speech": "Text to Speech",
+    "Voice Clone": "Voice Clone",
+
+    "Document Processing": "Document Processing",
+    "Document Format Conversion": "Document Format Conversion"
+}
