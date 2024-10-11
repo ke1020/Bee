@@ -19,6 +19,10 @@ public partial class MenuItemViewModel : ObservableObject
     /// </summary>
     public string Text { get; set; } = string.Empty;
     /// <summary>
+    /// 菜单分组
+    /// </summary>
+    public string Group { get; set; } = string.Empty;
+    /// <summary>
     /// 图标
     /// </summary>
     public StreamGeometry? Icon { get; set; }

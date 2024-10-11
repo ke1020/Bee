@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -27,6 +28,11 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<MenuItemViewModel>? _settingMenus;
     /// <summary>
+    /// 侧栏二级菜单
+    /// </summary>
+    [ObservableProperty]
+    private IDictionary<string, ObservableCollection<MenuItemViewModel>>? _sidebarMenus;
+    /// <summary>
     /// 本地化资源
     /// </summary>
     private readonly ILocalizer _l;
@@ -45,7 +51,8 @@ public partial class MainWindowViewModel : ViewModelBase
         Icon = string.IsNullOrWhiteSpace(x.Icon) ? null : StreamGeometry.Parse(x.Icon),
         CommandParameter = x.CommandParameter,
         Items = x.Items.Select(_menuItemToViewModel).ToList(),
-        MenuClickCommand = GetRelayCommand(x.CommandType)
+        MenuClickCommand = GetRelayCommand(x.CommandType),
+        Group = _l[x.GroupLocaleKey] // 将本地化后的值作为分组名称
     };
 
     /// <summary>
@@ -73,6 +80,28 @@ public partial class MainWindowViewModel : ViewModelBase
 
                 // 清除之前选中项
                 var beforeActived = ToolbarMenus?.FirstOrDefault(x => x.IsActive);
+                if (beforeActived != null)
+                {
+                    beforeActived.IsActive = false;
+                }
+
+                menuItem.IsActive = true;
+
+                // 激活工具菜单时加载二级菜单
+                LoadSidebarMenus(menuItem);
+            }),
+
+            // 导航到视图中继命令
+            MenuClickCommandType.Navigate => new RelayCommand<MenuItemViewModel>((MenuItemViewModel? menuItem) =>
+            {
+                // 已经选中
+                if (menuItem is null || menuItem.IsActive == true)
+                {
+                    return;
+                }
+
+                // 清除之前选中项
+                var beforeActived = SidebarMenus?.Values.SelectMany(x => x).FirstOrDefault(x => x.IsActive == true);
                 if (beforeActived != null)
                 {
                     beforeActived.IsActive = false;
@@ -118,7 +147,7 @@ public partial class MainWindowViewModel : ViewModelBase
                     Thread.CurrentThread.CurrentCulture
                     ;
 
-                Reload();
+                LoadToolbarMenus();
             }),
 
             // 返回 null
@@ -130,14 +159,34 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _l = localizer;
         _menuItems = menuItems.Value;
-        Reload();
+        LoadToolbarMenus();
     }
 
-    private void Reload()
+    /// <summary>
+    /// 载入工具栏菜单
+    /// </summary>
+    private void LoadToolbarMenus()
     {
         var toolbarMenus = _menuItems.Where(x => x.Group == "Toolbar").Select(_menuItemToViewModel);
         ToolbarMenus = new ObservableCollection<MenuItemViewModel>(toolbarMenus);
         var settingMenus = _menuItems.Where(x => x.Group == "Settings").Select(_menuItemToViewModel);
         SettingMenus = new ObservableCollection<MenuItemViewModel>(settingMenus);
+
+        LoadSidebarMenus(ToolbarMenus[0]);
+    }
+
+    /// <summary>
+    /// 载入侧栏二级菜单
+    /// </summary>
+    /// <param name="menuItem">当前激活菜单项</param>
+    private void LoadSidebarMenus(MenuItemViewModel? menuItem)
+    {
+        // 找到激活菜单的子菜单
+        var items = _menuItems.FirstOrDefault(x => x.Key == menuItem?.Key)?.Items;
+        // 将子菜单分组 (分组键就是组名，分组值就是分组之后的菜单集合)
+        SidebarMenus = items?.Select(_menuItemToViewModel).GroupBy(x => x.Group).ToDictionary(
+            x => x.Key ?? "UNGROUPED",
+            x => new ObservableCollection<MenuItemViewModel>(x))
+            ;
     }
 }

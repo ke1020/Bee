@@ -104,11 +104,47 @@
             DockPanel.Dock="Left"
             Padding="10"
         >
+            <DockPanel>
+                <!--搜索框-->
+                <TextBox Classes="Search" Watermark="{i18n:Localize Search.Placeholder}"
+                    DockPanel.Dock="Top" Margin="0,0,0,5" />
+
+                <!--最后子元素填充剩余的未分配空间-->
+                <ScrollViewer>
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding SidebarMenus}" Margin="0,20,0,10">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,0,0,20">
+                                        <TextBlock Classes="SidebarGroupName" Text="{Binding Key}" />
+                                        <ItemsControl ItemsSource="{Binding Value}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Button
+                                                        Classes="SidebarMenuItem"
+                                                        Classes.Active="{Binding IsActive}"
+                                                        Command="{Binding MenuClickCommand}"
+                                                        CommandParameter="{Binding}">
+                                                        <WrapPanel>
+                                                            <PathIcon Data="{Binding Icon}" />
+                                                            <TextBlock Text="{Binding Text}" />
+                                                        </WrapPanel>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
         </Border>
 
         <!--工作区-->
         <Border>
-            
+
         </Border>
 
     </DockPanel>

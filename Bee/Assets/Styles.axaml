@@ -6,6 +6,11 @@
     </Border>
   </Design.PreviewWith>
 
+  <!--文本块-->
+  <Style Selector="TextBlock">
+    <Setter Property="Foreground" Value="{DynamicResource TextPrimary}" />
+  </Style>
+
   <!-- 工具栏 -->
   <Style Selector="Button.ToolbarIconButton">
     <Setter Property="Margin" Value="10" />
@@ -31,6 +36,66 @@
   </Style>
   <Style Selector="Button.ToolbarIconButton TextBlock">
     <Setter Property="HorizontalAlignment" Value="Center" />
+  </Style>
+
+  <!--侧边栏搜索框-->
+  <Style Selector="TextBox.Search">
+    <Setter Property="Background" Value="{DynamicResource BgSearchInput}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BgSearchInput}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="Padding" Value="10" />
+    <!--
+  覆盖默认 TextBox 样式，原结构可参考以下网址
+  https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Fluent/Controls/TextBox.xaml
+  -->
+    <Style Selector="^:pointerover">
+      <Style Selector="^ /template/ Border#PART_BorderElement">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{DynamicResource BgSearchInput}" />
+      </Style>
+    </Style>
+    <Style Selector="^:focus">
+      <Style Selector="^ /template/ Border#PART_BorderElement">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{DynamicResource BgSearchInput}" />
+      </Style>
+    </Style>
+  </Style>
+
+  <!--侧边栏二级菜单样式-->
+  <Style Selector="TextBlock.SidebarGroupName">
+    <Setter Property="Width" Value="190" />
+    <Setter Property="TextWrapping" Value="NoWrap" />
+    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="Padding" Value="10,0,0,10" />
+  </Style>
+  <Style Selector="Button.SidebarMenuItem">
+    <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Style Selector="^:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BgSidebarItemHover}" />
+    </Style>
+    <Style Selector="^:pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BgSidebarItemPressed}" />
+    </Style>
+  </Style>
+  <Style Selector="Button.SidebarMenuItem.Active">
+    <Setter Property="Background" Value="{DynamicResource BgSidebarItemPressed}" />
+  </Style>
+  <Style Selector="Button.SidebarMenuItem PathIcon">
+    <Setter Property="Margin" Value="0,0,6,0" />
+    <Setter Property="Width" Value="18" />
+    <Setter Property="Height" Value="18" />
+  </Style>
+  <Style Selector="Button.SidebarMenuItem TextBlock">
+    <Setter Property="Width" Value="142" />
+    <Setter Property="Padding" Value="5" />
+    <Setter Property="TextWrapping" Value="NoWrap" />
+    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
   </Style>
 
 </Styles>
