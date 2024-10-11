@@ -35,6 +35,9 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     private readonly MenuItem[] _menuItems;
 
+    /// <summary>
+    /// MenuItem 到 MenuItemViewModel 的转换器
+    /// </summary>
     private Func<MenuItem, MenuItemViewModel> _menuItemToViewModel => x => new MenuItemViewModel(_l[x.LocaleKey])
     {
         Key = x.Key,
@@ -115,7 +118,7 @@ public partial class MainWindowViewModel : ViewModelBase
                     Thread.CurrentThread.CurrentCulture
                     ;
 
-                LoadAndRefreshMenus();
+                Reload();
             }),
 
             // 返回 null
@@ -127,10 +130,10 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _l = localizer;
         _menuItems = menuItems.Value;
-        LoadAndRefreshMenus();
+        Reload();
     }
 
-    private void LoadAndRefreshMenus()
+    private void Reload()
     {
         var toolbarMenus = _menuItems.Where(x => x.Group == "Toolbar").Select(_menuItemToViewModel);
         ToolbarMenus = new ObservableCollection<MenuItemViewModel>(toolbarMenus);
