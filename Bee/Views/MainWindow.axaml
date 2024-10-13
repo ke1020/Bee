@@ -100,13 +100,13 @@
             IsVisible="True"
             BorderBrush="{DynamicResource BorderColor}"
             Width="210"
-            BorderThickness="0,0,1,0"
+            BorderThickness="0,0,1,0" 
             DockPanel.Dock="Left"
             Padding="10"
         >
             <DockPanel>
                 <!--搜索框-->
-                <TextBox Classes="Search" Watermark="{i18n:Localize Search.Placeholder}"
+                <TextBox Classes="Search" Watermark="{i18n:Localize Search.Placeholder}" KeyUp="SerachMenuKeyUp"
                     DockPanel.Dock="Top" Margin="0,0,0,5" />
 
                 <!--最后子元素填充剩余的未分配空间-->

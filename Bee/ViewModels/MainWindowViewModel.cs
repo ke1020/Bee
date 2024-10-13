@@ -6,6 +6,7 @@ using System.Threading;
 using Avalonia;
 using Avalonia.Media;
 using Avalonia.Styling;
+using Bee.Models;
 using Bee.Models.Menu;
 using Bee.ViewModels.Menu;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -33,6 +34,10 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private IDictionary<string, ObservableCollection<MenuItemViewModel>>? _sidebarMenus;
     /// <summary>
+    /// 存储筛选前的二级子菜单数据
+    /// </summary>
+    private IDictionary<string, ObservableCollection<MenuItemViewModel>>? _originalSidebarMenus;
+    /// <summary>
     /// 本地化资源
     /// </summary>
     private readonly ILocalizer _l;
@@ -40,6 +45,10 @@ public partial class MainWindowViewModel : ViewModelBase
     /// 菜单数据
     /// </summary>
     private readonly MenuItem[] _menuItems;
+    /// <summary>
+    /// 防抖器
+    /// </summary>
+    private readonly Debounce _debounce;
 
     /// <summary>
     /// MenuItem 到 MenuItemViewModel 的转换器
@@ -72,42 +81,18 @@ public partial class MainWindowViewModel : ViewModelBase
             // 激活菜单命令返回的中继命令
             MenuClickCommandType.Active => new RelayCommand<MenuItemViewModel>((MenuItemViewModel? menuItem) =>
             {
-                // 已经选中
-                if (menuItem is null || menuItem.IsActive == true)
-                {
-                    return;
-                }
+                SetMenuActive(menuItem, () => ToolbarMenus?.FirstOrDefault(x => x.IsActive));
 
-                // 清除之前选中项
-                var beforeActived = ToolbarMenus?.FirstOrDefault(x => x.IsActive);
-                if (beforeActived != null)
-                {
-                    beforeActived.IsActive = false;
-                }
-
-                menuItem.IsActive = true;
-
-                // 激活工具菜单时加载二级菜单
+                // 激活工具栏菜单时载入二级菜单数据
                 LoadSidebarMenus(menuItem);
             }),
 
             // 导航到视图中继命令
             MenuClickCommandType.Navigate => new RelayCommand<MenuItemViewModel>((MenuItemViewModel? menuItem) =>
             {
-                // 已经选中
-                if (menuItem is null || menuItem.IsActive == true)
-                {
-                    return;
-                }
-
-                // 清除之前选中项
-                var beforeActived = SidebarMenus?.Values.SelectMany(x => x).FirstOrDefault(x => x.IsActive == true);
-                if (beforeActived != null)
-                {
-                    beforeActived.IsActive = false;
-                }
-
-                menuItem.IsActive = true;
+                SetMenuActive(menuItem, () => SidebarMenus?.Values.SelectMany(x => x)?.FirstOrDefault(x => x.IsActive));
+                
+                // 导航到视图
             }),
 
             // 主题切换返回的中继命令
@@ -159,6 +144,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _l = localizer;
         _menuItems = menuItems.Value;
+        _debounce = new Debounce(500);
         LoadToolbarMenus();
     }
 
@@ -184,9 +170,62 @@ public partial class MainWindowViewModel : ViewModelBase
         // 找到激活菜单的子菜单
         var items = _menuItems.FirstOrDefault(x => x.Key == menuItem?.Key)?.Items;
         // 将子菜单分组 (分组键就是组名，分组值就是分组之后的菜单集合)
-        SidebarMenus = items?.Select(_menuItemToViewModel).GroupBy(x => x.Group).ToDictionary(
-            x => x.Key ?? "UNGROUPED",
-            x => new ObservableCollection<MenuItemViewModel>(x))
-            ;
+        _originalSidebarMenus = SidebarMenus = ParseGroupDictionary(items?.Select(_menuItemToViewModel));
+    }
+
+    /// <summary>
+    /// 搜索查找菜单
+    /// </summary>
+    /// <param name="keywords"></param>
+    public void OnSerachMenu(string? keywords)
+    {
+        // 防抖是指在一定时间范围内，只有最后一次操作才会被执行。如果在这段时间内再次触发操作，则重新计时。
+        // KeyUp 事件会在每个按键弹起时执行，为了避免频繁触发事件。所以进行防抖处理
+        _debounce.Trigger(() =>
+        {
+            // 筛选菜单。在国际化场景中，使用 InvariantCultureIgnoreCase，以确保跨文化的比较行为一致
+            var filterdMenus = _originalSidebarMenus?.Values
+                .SelectMany(x => x)
+                .Where(x => x.Text.Contains(keywords ?? string.Empty, StringComparison.InvariantCultureIgnoreCase))
+                ;
+
+            SidebarMenus = ParseGroupDictionary(filterdMenus);
+        });
+    }
+
+    /// <summary>
+    /// 将菜单分组然后转换为字典类型
+    /// </summary>
+    /// <param name="menuItems"></param>
+    /// <returns></returns>
+    private IDictionary<string, ObservableCollection<MenuItemViewModel>>? ParseGroupDictionary(IEnumerable<MenuItemViewModel>? menuItems)
+    {
+        return menuItems?.GroupBy(x => x.Group).ToDictionary(
+                x => x.Key ?? "UNGROUPED",
+                x => new ObservableCollection<MenuItemViewModel>(x))
+                ;
+    }
+
+    /// <summary>
+    /// 设置激活菜单
+    /// </summary>
+    /// <param name="menuItem">要激活项</param>
+    /// <param name="callBeforeActivedItem">之前激活项</param>
+    private void SetMenuActive(MenuItemViewModel? menuItem, Func<MenuItemViewModel?> callBeforeActivedItem)
+    {
+        // 已经选中
+        if (menuItem is null || menuItem.IsActive == true)
+        {
+            return;
+        }
+
+        // 清除之前选中项
+        var beforeActived = callBeforeActivedItem();
+        if (beforeActived != null)
+        {
+            beforeActived.IsActive = false;
+        }
+
+        menuItem.IsActive = true;
     }
 }

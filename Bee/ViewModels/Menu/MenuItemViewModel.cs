@@ -13,7 +13,7 @@ public partial class MenuItemViewModel : ObservableObject
     /// <summary>
     /// 唯一标识
     /// </summary>
-    public string Key { get; set; } = string.Empty;
+    public string Key { get; set; } = string.Empty; 
     /// <summary>
     /// 按钮文本
     /// </summary>
