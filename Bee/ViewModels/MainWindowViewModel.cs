@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using Avalonia;
 using Avalonia.Media;
 using Avalonia.Styling;
-using Bee.Models;
+using Bee.Helpers;
 using Bee.Models.Menu;
+using Bee.Models.Navigation;
+using Bee.Services.Abstractions.Navigation;
 using Bee.ViewModels.Menu;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -49,6 +52,15 @@ public partial class MainWindowViewModel : ViewModelBase
     /// 防抖器
     /// </summary>
     private readonly Debounce _debounce;
+    /// <summary>
+    /// 视图导航器
+    /// </summary>
+    private readonly IViewNavigator _viewNavigator;
+    /// <summary>
+    /// 当前页面视图模型
+    /// </summary>
+    [ObservableProperty]
+    private PageViewModelBase? _currentPage;
 
     /// <summary>
     /// MenuItem 到 MenuItemViewModel 的转换器
@@ -91,8 +103,14 @@ public partial class MainWindowViewModel : ViewModelBase
             MenuClickCommandType.Navigate => new RelayCommand<MenuItemViewModel>((MenuItemViewModel? menuItem) =>
             {
                 SetMenuActive(menuItem, () => SidebarMenus?.Values.SelectMany(x => x)?.FirstOrDefault(x => x.IsActive));
-                
+
                 // 导航到视图
+                if (!Enum.TryParse<ViewPages>(menuItem?.CommandParameter, out var viewPage))
+                {
+                    return;
+                }
+
+                _viewNavigator.NavigateTo(viewPage);
             }),
 
             // 主题切换返回的中继命令
@@ -140,12 +158,22 @@ public partial class MainWindowViewModel : ViewModelBase
         };
     }
 
-    public MainWindowViewModel(IOptions<MenuItem[]> menuItems, ILocalizer localizer)
+    public MainWindowViewModel(IOptions<MenuItem[]> menuItems, ILocalizer localizer, IViewNavigator viewNavigator)
     {
         _l = localizer;
         _menuItems = menuItems.Value;
         _debounce = new Debounce(500);
+        _viewNavigator = viewNavigator;
+        _viewNavigator.PropertyChanged += OnNavigatorPropertyChanged;
         LoadToolbarMenus();
+    }
+
+    private void OnNavigatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if(e.PropertyName == nameof(_viewNavigator.CurrentPage))
+        {
+            CurrentPage = _viewNavigator.CurrentPage;
+        }
     }
 
     /// <summary>

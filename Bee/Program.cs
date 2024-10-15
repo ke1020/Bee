@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Media;
+using Bee.Services;
 using System;
 
 namespace Bee;

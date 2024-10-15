@@ -106,7 +106,7 @@
         >
             <DockPanel>
                 <!--搜索框-->
-                <TextBox Classes="Search" Watermark="{i18n:Localize Search.Placeholder}" KeyUp="SerachMenuKeyUp"
+                <TextBox Classes="Search" Watermark="{i18n:Localize View.SearchInput.Placeholder}" KeyUp="SerachMenuKeyUp"
                     DockPanel.Dock="Top" Margin="0,0,0,5" />
 
                 <!--最后子元素填充剩余的未分配空间-->
@@ -144,7 +144,7 @@
 
         <!--工作区-->
         <Border>
-
+            <TransitioningContentControl Content="{Binding CurrentPage}" />
         </Border>
 
     </DockPanel>

@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Bee.Services;
 using Bee.ViewModels;
 using Bee.Views;
 using Microsoft.Extensions.DependencyInjection;

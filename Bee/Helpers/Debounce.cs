@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace Bee.Models;
+namespace Bee.Helpers;
 
 /// <summary>
 /// 防抖器

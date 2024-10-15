@@ -1,27 +1,35 @@
 {
-    "AppName": "Bee",
-    "ThemeLight": "Light",
-    "ThemeDark": "Dark",
-    "Home": "Home",
-    "AI": "AI",
-    "Audio And Video": "Audio And Video",
-    "Document": "Document",
-    "Other": "Other",
+  "AppName": "Bee",
 
-    "Image Generation and Processing": "Image Generation and Processing",
-    "Poster Generation": "Poster Generation",
-    "Image Completion": "Image Completion",
-    "Text to Image": "Text to Image",
-    "Image Background Synthesis": "Image Background Synthesis",
-    "Image Format Conversion": "Image Format Conversion",
+  "Menu.Toolbar.Home": "Home",
+  "Menu.Toolbar.AI": "AI",
+  "Menu.Toolbar.AV": "Audio And Video",
+  "Menu.Toolbar.Document": "Document",
+  "Menu.Toolbar.Other": "Other",
 
-    "Speech Recognition and Synthesis": "Speech Recognition and Synthesis",
-    "Speech Recognition": "Speech Recognition",
-    "Text to Speech": "Text to Speech",
-    "Voice Clone": "Voice Clone",
+  "Menu.Settings": "Settings",
+  "Menu.Settings.Language": "Language",
+  "Menu.Settings.Theme": "Themes",
+  "Menu.Settings.Theme.Default": "Default",
+  "Menu.Settings.Theme.Dark": "Dark",
+  "Menu.Settings.About": "About",
 
-    "Document Processing": "Document Processing",
-    "Document Format Conversion": "Document Format Conversion",
+  "Menu.Sidebar.ImageGenerationAndProcessing": "Image Generation and Processing",
+  "Menu.Sidebar.PosterGenerator": "Poster Generator",
+  "Menu.Sidebar.TextToImage": "Text to Image",
+  "Menu.Sidebar.ImageCompletion": "Image Completion",
+  "Menu.Sidebar.ImageBackgroundSynthesis": "Image Background Synthesis",
+  "Menu.Sidebar.ImageFormatConversion": "Image Format Conversion",
 
-    "Search.Placeholder": "Search The Toolbox"
+  "Menu.Sidebar.SpeechRecognitionAndSynthesis": "Speech Recognition and Synthesis",
+  "Menu.Sidebar.SpeechRecognition": "Speech Recognition",
+  "Menu.Sidebar.TTS": "Text to Speech",
+  "Menu.Sidebar.VoiceClone": "Voice Clone",
+
+  "Menu.Sidebar.DocumentProcessing": "Document Processing",
+  "Menu.Sidebar.DocumentFormatConversion": "Document Format Conversion",
+
+  "View.SearchInput.Placeholder": "Search The Toolbox",
+
+  "Errors.Invalid.ViewPage": "Invalid View Page"
 }

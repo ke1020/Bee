@@ -1,7 +1,7 @@
 using System;
 using Avalonia.Media.Fonts;
 
-namespace Bee;
+namespace Bee.Services;
 
 public sealed class HarmonyOSFontCollection : EmbeddedFontCollection
 {

@@ -1,35 +1,35 @@
 {
   "AppName": "日理万机",
-  "ThemeLight": "亮色",
-  "ThemeDark": "暗色",
-  "AI": "AI",
-  "Audio And Video": "音视频",
-  "Document": "文档",
-  "Other": "其它",
-  "Home": "主页",
 
-  "Image Generation and Processing": "图片生成与处理",
-  "Poster Generation": "创意海报生成",
-  "Image Completion": "图像擦除补全",
-  "Text to Image": "文本生成图片",
-  "Image Background Synthesis": "图像背景生成",
-  "Image Format Conversion": "图片格式转换",
+  "Menu.Toolbar.Home": "主页",
+  "Menu.Toolbar.AI": "AI",
+  "Menu.Toolbar.AV": "音视频",
+  "Menu.Toolbar.Document": "文档",
+  "Menu.Toolbar.Other": "其它",
 
-  "Speech Recognition and Synthesis": "语音识别与合成",
-  "Speech Recognition": "语音识别",
-  "Text to Speech": "语音合成",
-  "Voice Clone": "语音克隆",
+  "Menu.Settings": "设置",
+  "Menu.Settings.Language": "语言",
+  "Menu.Settings.Theme": "主题",
+  "Menu.Settings.Theme.Default": "默认主题",
+  "Menu.Settings.Theme.Dark": "暗色主题",
+  "Menu.Settings.About": "关于",
 
-  "Document Processing": "文档处理",
-  "Document Format Conversion": "文档格式转换",
+  "Menu.Sidebar.ImageGenerationAndProcessing": "图片生成与处理",
+  "Menu.Sidebar.PosterGenerator": "创意海报生成",
+  "Menu.Sidebar.TextToImage": "文本生成图片",
+  "Menu.Sidebar.ImageCompletion": "图像擦除补全",
+  "Menu.Sidebar.ImageBackgroundSynthesis": "图像背景生成",
+  "Menu.Sidebar.ImageFormatConversion": "图片格式转换",
 
-  "Themes": "主题",
-  "Default Theme": "默认主题",
-  "Dark Theme": "暗色主题",
-  "Setting": "设置",
-  "About": "关于",
+  "Menu.Sidebar.SpeechRecognitionAndSynthesis": "语音识别与合成",
+  "Menu.Sidebar.SpeechRecognition": "语音识别",
+  "Menu.Sidebar.TTS": "语音合成",
+  "Menu.Sidebar.VoiceClone": "语音克隆",
 
-  "Languages": "语言",
+  "Menu.Sidebar.DocumentProcessing": "文档处理",
+  "Menu.Sidebar.DocumentFormatConversion": "文档格式转换",
 
-  "Search.Placeholder": "在工具箱中搜索"
+  "View.SearchInput.Placeholder": "在工具箱中搜索",
+
+  "Errors.Invalid.ViewPage": "无效的视图页面"
 }

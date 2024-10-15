@@ -5,6 +5,8 @@ using System.IO;
 using System.Text.Json;
 using System.Threading;
 using Bee.Models.Menu;
+using Bee.Services.Abstractions.Navigation;
+using Bee.Services.Impl.Navigation;
 using Bee.ViewModels;
 using Ke.Bee.Localization.Extensions;
 using Ke.Bee.Localization.Options;
@@ -12,7 +14,7 @@ using Ke.Bee.Localization.Providers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Bee;
+namespace Bee.Services;
 
 public static class ServiceCollectionExtensions
 {
@@ -33,6 +35,8 @@ public static class ServiceCollectionExtensions
 
         // 注册本地化
         services.AddLocalization();
+        // 注册视图导航器
+        services.AddSingleton<IViewNavigator, DefaultViewNavigator>();
 
         return services;
     }
