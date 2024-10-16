@@ -24,7 +24,7 @@ sealed class Program
             })
             .With(new FontManagerOptions()
             {
-                DefaultFamilyName = "HarmonyOS Sans SC"
+                DefaultFamilyName = "fonts:HarmonyOS Sans#HarmonyOS Sans SC"
             })
             .LogToTrace();
 }
