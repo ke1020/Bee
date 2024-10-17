@@ -39,3 +39,11 @@ git push -u gitee main
 ```bash
 dotnet nuget push .\bin\Release\Ke.Bee.Localization.0.1.1.nupkg --source https://api.nuget.org/v3/index.json --api-key {key}
 ```
+
+
+## 生成 UML 图命令
+
+```bash
+puml-gen D:\0Open\Bee\Bee\Services D:\0Open\Bee\UML -dir -ignore Private,Protected -createAssociation -allInOne -excludePaths ServiceCollectionExten
+sions.cs,HarmonyOSFontCollection.cs
+```
