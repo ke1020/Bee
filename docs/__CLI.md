@@ -44,8 +44,7 @@ dotnet nuget push .\bin\Release\Ke.Bee.Localization.0.1.1.nupkg --source https:/
 ## 生成 UML 图命令
 
 ```bash
-puml-gen D:\0Open\Bee\Bee\Services D:\0Open\Bee\uml -dir -ignore Private,Protected -createAssociation -allInOne -excludePaths ServiceCollectionExten
-sions.cs,HarmonyOSFontCollection.cs
+puml-gen D:\0Open\Bee\Bee\Services D:\0Open\Bee\uml -dir -ignore Private,Protected -createAssociation -allInOne -excludePaths ServiceCollectionExtensions.cs,HarmonyOSFontCollection.cs
 ```
 
 ## docker 运行 plantuml-server 服务

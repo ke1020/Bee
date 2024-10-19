@@ -1,5 +1,7 @@
 {
   "AppName": "日理万机",
+  "SelectFolder": "选择文件夹",
+  "SelectFile": "选择文件",
 
   "Menu.Toolbar.Home": "主页",
   "Menu.Toolbar.AI": "AI",
@@ -28,6 +30,9 @@
 
   "Menu.Sidebar.DocumentProcessing": "文档处理",
   "Menu.Sidebar.DocumentFormatConversion": "文档格式转换",
+
+  "Menu.Sidebar.DevTools": "开发工具",
+  "Menu.Sidebar.UmlGenerator": "C# 类图生成器",
 
   "View.SearchInput.Placeholder": "在工具箱中搜索",
 

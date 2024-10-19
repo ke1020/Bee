@@ -1,5 +1,7 @@
 {
   "AppName": "Bee",
+  "SelectFolder": "Select Folder",
+  "SelectFile": "Select File",
 
   "Menu.Toolbar.Home": "Home",
   "Menu.Toolbar.AI": "AI",
@@ -20,14 +22,14 @@
   "Menu.Sidebar.ImageCompletion": "Image Completion",
   "Menu.Sidebar.ImageBackgroundSynthesis": "Image Background Synthesis",
   "Menu.Sidebar.ImageFormatConversion": "Image Format Conversion",
-
   "Menu.Sidebar.SpeechRecognitionAndSynthesis": "Speech Recognition and Synthesis",
   "Menu.Sidebar.SpeechRecognition": "Speech Recognition",
   "Menu.Sidebar.TTS": "Text to Speech",
   "Menu.Sidebar.VoiceClone": "Voice Clone",
-
   "Menu.Sidebar.DocumentProcessing": "Document Processing",
   "Menu.Sidebar.DocumentFormatConversion": "Document Format Conversion",
+  "Menu.Sidebar.DevTools": "Development Tools",
+  "Menu.Sidebar.UmlGenerator": "C# UML Generator",
 
   "View.SearchInput.Placeholder": "Search The Toolbox",
 

@@ -71,6 +71,14 @@
         "GroupLocaleKey": "Menu.Sidebar.DocumentProcessing",
         "CommandType": "Navigate",
         "CommandParameter": "DocumentConverter"
+      },
+      {
+        "Key": "UmlGenerator",
+        "Icon": "",
+        "LocaleKey": "Menu.Sidebar.UmlGenerator",
+        "GroupLocaleKey": "Menu.Sidebar.DevTools",
+        "CommandType": "Navigate",
+        "CommandParameter": "UmlGenerator"
       }
     ]
   },
