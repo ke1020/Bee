@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using Bee.Models.Navigation;
-using Bee.Services.Abstractions.Navigation;
-using Bee.Services.Impl.Navigation.Commands;
-using Bee.ViewModels;
+using Bee.Base.Abstractions.Navigation;
+using Bee.Base.Helpers;
+using Bee.Base.Models.Navigation;
+using Bee.Base.ViewModels;
 using Ke.Bee.Localization.Localizer.Abstractions;
 
-namespace Bee.Services.Impl.Navigation;
+namespace Bee.Base.Impl.Navigation;
 
 /// <summary>
 /// 默认视图导航器
@@ -23,38 +21,34 @@ public class DefaultViewNavigator : IViewNavigator
     /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
     /// <summary>
-    /// 命令字典 （视图页面与导航命令对象之间的映射）
+    /// 导航命令集合
     /// </summary>
-    private readonly IReadOnlyDictionary<ViewPages, INavigationCommand> _navigationCommands;
+    private readonly IEnumerable<INavigationCommand> _commands;
     /// <summary>
     /// 本地化资源对象
     /// </summary>
     private readonly ILocalizer _l;
 
-    public DefaultViewNavigator(ILocalizer localizer)
+    public DefaultViewNavigator(ILocalizer localizer, IEnumerable<INavigationCommand> commands)
     {
         _l = localizer;
-
-        _navigationCommands = new Dictionary<ViewPages, INavigationCommand>
-        {
-            { ViewPages.PosterGenerator, new PosterGeneratorNavigationCommand()  },
-            { ViewPages.DocumentConverter, new DocumentConverterNavigationCommand() }
-        };
+        _commands = commands;
     }
 
     /// <summary>
     /// 导航到指定视图页面
     /// </summary>
-    /// <param name="page"></param>
+    /// <param name="key"></param>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public void NavigateTo(ViewPages page)
+    public void NavigateTo(string key)
     {
-        if (!_navigationCommands.TryGetValue(page, out var command))
-        {
-            throw new ArgumentOutOfRangeException(nameof(page), page, _l["Errors.Invalid.ViewPage"]);
-        }
+        ArgumentExceptionHelper.ThrowIfNullOrEmpty(key);
 
-        command.Execute(new NavigationCommandContext(this));
+        var command = _commands.FirstOrDefault(x => x.Key == key);
+
+        ArgumentExceptionHelper.ThrowIfNavigationCommandNull(command, key);
+
+        command?.Execute(new NavigationCommandContext(this));
     }
 
     /// <summary>

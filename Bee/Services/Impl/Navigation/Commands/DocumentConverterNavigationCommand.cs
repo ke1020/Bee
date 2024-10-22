@@ -1,6 +1,5 @@
-
-using Bee.Models.Navigation;
-using Bee.Services.Abstractions.Navigation;
+using Bee.Base.Abstractions.Navigation;
+using Bee.Base.Models.Navigation;
 using Bee.ViewModels.Documents;
 
 namespace Bee.Services.Impl.Navigation.Commands;
@@ -10,6 +9,8 @@ namespace Bee.Services.Impl.Navigation.Commands;
 /// </summary>
 public class DocumentConverterNavigationCommand : INavigationCommand
 {
+    public string Key => "DocumentConverter";
+
     public void Execute(NavigationCommandContext context)
     {
         context.Navigator?.SetCurrentPage(new DocumentConverterViewModel());

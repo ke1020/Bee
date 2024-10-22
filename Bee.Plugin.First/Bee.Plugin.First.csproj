@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12.0</LangVersion>
+    <CopyToDirectory>D:\0Open\Bee\Bee\Plugins\First</CopyToDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Bee.Base/Bee.Base.csproj" />
+  </ItemGroup>
+
+  <Target Name="CopyFilesToDestination" AfterTargets="Build">
+    <ItemGroup>
+      <Source1 Include="i18n\*.*" />
+      <FilesToCopy Include="Configs\*.*" />
+      <FilesToCopy Include="$(OutputPath)**\Bee.Plugin.First.dll" />
+      <FilesToCopy Include="$(OutputPath)**\Bee.Plugin.First.pdb" />
+      <FilesToCopy Include="$(OutputPath)**\Bee.Plugin.First.deps.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(CopyToDirectory)\%(RecursiveDir)" />
+    <Copy SourceFiles="@(Source1)" DestinationFolder="$(CopyToDirectory)\i18n\" />
+  </Target>
+
+</Project>

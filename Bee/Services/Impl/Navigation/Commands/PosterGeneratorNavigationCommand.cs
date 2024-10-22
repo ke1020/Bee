@@ -1,5 +1,5 @@
-using Bee.Models.Navigation;
-using Bee.Services.Abstractions.Navigation;
+using Bee.Base.Abstractions.Navigation;
+using Bee.Base.Models.Navigation;
 using Bee.ViewModels.Images;
 
 namespace Bee.Services.Impl.Navigation.Commands;
@@ -9,6 +9,8 @@ namespace Bee.Services.Impl.Navigation.Commands;
 /// </summary>
 public class PosterGeneratorNavigationCommand : INavigationCommand
 {
+    public string Key => "PosterGenerator";
+
     /// <summary>
     /// 执行导航
     /// </summary>

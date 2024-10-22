@@ -8,14 +8,15 @@ using Avalonia;
 using Avalonia.Media;
 using Avalonia.Styling;
 using Bee.Helpers;
-using Bee.Models.Menu;
-using Bee.Models.Navigation;
-using Bee.Services.Abstractions.Navigation;
 using Bee.ViewModels.Menu;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Ke.Bee.Localization.Localizer.Abstractions;
 using Microsoft.Extensions.Options;
+using Bee.Models.Navigation;
+using Bee.Base.Abstractions.Navigation;
+using Bee.Base.ViewModels;
+using Bee.Base.Models.Menu;
 
 namespace Bee.ViewModels;
 
@@ -47,7 +48,7 @@ public partial class MainWindowViewModel : ViewModelBase
     /// <summary>
     /// 菜单数据
     /// </summary>
-    private readonly MenuItem[] _menuItems;
+    private readonly List<MenuItem> _menuItems;
     /// <summary>
     /// 防抖器
     /// </summary>
@@ -104,13 +105,13 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 SetMenuActive(menuItem, () => SidebarMenus?.Values.SelectMany(x => x)?.FirstOrDefault(x => x.IsActive));
 
-                // 导航到视图
-                if (!Enum.TryParse<ViewPages>(menuItem?.CommandParameter, out var viewPage))
+                if (menuItem?.CommandParameter is null)
                 {
                     return;
                 }
 
-                _viewNavigator.NavigateTo(viewPage);
+                // 导航到视图
+                _viewNavigator.NavigateTo(menuItem.CommandParameter);
             }),
 
             // 主题切换返回的中继命令
@@ -158,10 +159,10 @@ public partial class MainWindowViewModel : ViewModelBase
         };
     }
 
-    public MainWindowViewModel(IOptions<MenuItem[]> menuItems, ILocalizer localizer, IViewNavigator viewNavigator)
+    public MainWindowViewModel(MenuConfigurationContext menuContext, ILocalizer localizer, IViewNavigator viewNavigator)
     {
         _l = localizer;
-        _menuItems = menuItems.Value;
+        _menuItems = menuContext.Menus;
         _debounce = new Debounce(500);
         _viewNavigator = viewNavigator;
         _viewNavigator.PropertyChanged += OnNavigatorPropertyChanged;
@@ -170,7 +171,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void OnNavigatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if(e.PropertyName == nameof(_viewNavigator.CurrentPage))
+        if (e.PropertyName == nameof(_viewNavigator.CurrentPage))
         {
             CurrentPage = _viewNavigator.CurrentPage;
         }

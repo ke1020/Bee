@@ -2,11 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading;
-using Bee.Models.Menu;
-using Bee.Services.Abstractions.Navigation;
-using Bee.Services.Impl.Navigation;
+using Bee.Base.Abstractions.Navigation;
+using Bee.Base.Abstractions.Plugin;
+using Bee.Base.Impl.Navigation;
+using Bee.Base.Models;
+using Bee.Base.Models.Menu;
+using Bee.Services.Impl.Navigation.Commands;
 using Bee.ViewModels;
 using Ke.Bee.Localization.Extensions;
 using Ke.Bee.Localization.Options;
@@ -27,17 +32,89 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<MainWindowViewModel>();
 
-        // 从配置文件读取菜单注入到 DI 容器
-        var menuItems = JsonSerializer.Deserialize<MenuItem[]>(
-            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Configs", "menus.json"))
-            );
-        services.AddSingleton(Options.Create(menuItems!));
+        services.AddSettings();
+        services.AddMenus();
 
-        // 注册本地化
-        services.AddLocalization();
         // 注册视图导航器
         services.AddSingleton<IViewNavigator, DefaultViewNavigator>();
 
+        // 注册命令
+        services.AddSingleton<INavigationCommand, PosterGeneratorNavigationCommand>();
+        services.AddSingleton<INavigationCommand, DocumentConverterNavigationCommand>();
+
+        services.AddPlugins();
+
+        // 注册本地化
+        services.AddLocalization();
+
+        return services;
+    }
+
+    /// <summary>
+    /// 注册全局配置
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    private static IServiceCollection AddSettings(this IServiceCollection services)
+    {
+        var appSettings = Options.Create(new AppSettings
+        {
+            OutputPath = Path.Combine(AppContext.BaseDirectory, "output"),
+            PluginPath = Path.Combine(AppContext.BaseDirectory, "Plugins")
+        });
+        services.AddSingleton(appSettings);
+        return services;
+    }
+
+    /// <summary>
+    /// 注册应用菜单
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    private static IServiceCollection AddMenus(this IServiceCollection services)
+    {
+        // 从配置文件读取菜单注入到 DI 容器
+        var menuItems = JsonSerializer.Deserialize<List<MenuItem>>(
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Configs", "menus.json"))
+            );
+        var menuContext = new MenuConfigurationContext(menuItems);
+        services.AddSingleton(menuContext);
+        return services;
+    }
+
+    /// <summary>
+    /// 注册插件服务
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    private static IServiceCollection AddPlugins(this IServiceCollection services)
+    {
+        var serviceProvider = services.BuildServiceProvider();
+        var menuContext = serviceProvider.GetService<MenuConfigurationContext>();
+        var appSettings = serviceProvider.GetService<IOptions<AppSettings>>();
+        var pluginPath = appSettings?.Value.PluginPath;
+        if (!Directory.Exists(pluginPath))
+        {
+            return services;
+        }
+
+        var files = Directory.GetFiles(pluginPath, "*.dll", SearchOption.AllDirectories);
+        foreach (var file in files)
+        {
+            var assembly = Assembly.LoadFrom(file);
+            var plugins = assembly.GetTypes()
+                // 所有 IPlugin 接口的非抽象类实现
+                .Where(t => typeof(PluginBase).IsAssignableFrom(t) && !t.IsAbstract)
+                // 创建实例
+                .Select(t => (IPlugin)Activator.CreateInstance(t, appSettings)!)
+                ;
+
+            foreach (var plugin in plugins)
+            {
+                plugin.RegisterServices(services);
+                plugin.ConfigureMenu(menuContext!);
+            }
+        }
         return services;
     }
 
@@ -52,11 +129,10 @@ public static class ServiceCollectionExtensions
         {
             var options = new AvaloniaLocalizationOptions(
                 // 支持的本地化语言文化
-                new List<CultureInfo>
-                {
+                [
                     new("en-US"),
                     new("zh-CN")
-                },
+                ],
                 // defaultCulture, 用于设置当前文化（currentCulture）不在 cultures 列表中时的情况以及作为缺失的本地化条目的备用文化（fallback culture）
                 new CultureInfo("en-US"),
                 // currentCulture 在基础设施加载时设置，可以从应用程序设置或其他地方获取

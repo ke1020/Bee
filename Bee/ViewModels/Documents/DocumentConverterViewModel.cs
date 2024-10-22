@@ -1,4 +1,6 @@
 
+using Bee.Base.ViewModels;
+
 namespace Bee.ViewModels.Documents;
 
 /// <summary>

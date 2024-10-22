@@ -1,13 +1,17 @@
 
-using Bee.Models.Navigation;
+using Bee.Base.Models.Navigation;
 
-namespace Bee.Services.Abstractions.Navigation;
+namespace Bee.Base.Abstractions.Navigation;
 
 /// <summary>
 /// 导航命令接口
 /// </summary>
 public interface INavigationCommand
 {
+    /// <summary>
+    /// 页面唯一标识
+    /// </summary>
+    string Key { get; }
     /// <summary>
     /// 执行导航
     /// </summary>

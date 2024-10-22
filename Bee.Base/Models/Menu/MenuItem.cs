@@ -1,6 +1,5 @@
-using System.Collections.Generic;
 
-namespace Bee.Models.Menu;
+namespace Bee.Base.Models.Menu;
 
 /// <summary>
 /// 菜单项实体
