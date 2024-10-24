@@ -42,6 +42,7 @@ public class DefaultViewNavigator : IViewNavigator
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public void NavigateTo(string key)
     {
+        
         ArgumentExceptionHelper.ThrowIfNullOrEmpty(key);
 
         var command = _commands.FirstOrDefault(x => x.Key == key);

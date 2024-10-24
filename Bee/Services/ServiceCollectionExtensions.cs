@@ -90,13 +90,14 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddPlugins(this IServiceCollection services)
     {
         var serviceProvider = services.BuildServiceProvider();
-        var menuContext = serviceProvider.GetService<MenuConfigurationContext>();
         var appSettings = serviceProvider.GetService<IOptions<AppSettings>>();
         var pluginPath = appSettings?.Value.PluginPath;
         if (!Directory.Exists(pluginPath))
         {
             return services;
         }
+
+        var menuContext = serviceProvider.GetService<MenuConfigurationContext>();
 
         var files = Directory.GetFiles(pluginPath, "*.dll", SearchOption.AllDirectories);
         foreach (var file in files)
