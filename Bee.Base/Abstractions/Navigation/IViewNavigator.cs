@@ -27,4 +27,8 @@ public interface IViewNavigator
     /// </summary>
     /// <param name="key"></param>
     void NavigateTo(string key);
+    /// <summary>
+    /// 重载视图
+    /// </summary>
+    void ReloadCurrentPage();
 }

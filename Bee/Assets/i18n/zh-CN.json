@@ -27,14 +27,20 @@
   "Menu.Sidebar.SpeechRecognition": "语音识别",
   "Menu.Sidebar.TTS": "语音合成",
   "Menu.Sidebar.VoiceClone": "语音克隆",
-
   "Menu.Sidebar.DocumentProcessing": "文档处理",
   "Menu.Sidebar.DocumentFormatConversion": "文档格式转换",
-
   "Menu.Sidebar.DevTools": "开发工具",
-  
 
   "View.SearchInput.Placeholder": "在工具箱中搜索",
+
+  "Task.TaskListTitle": "任务列表",
+  "Task.DragDropText": "从本地电脑拖放文件到此处加入任务列表",
+  "Task.TaskPendingStatusText": "任务列表有 {0} 个文件待处理",
+  "Task.TaskRunningStatusText": "正在处理第 {0}/{1} 个文件",
+  "Task.TaskCompletedStatusText": "所有文件处理完毕",
+  "Task.ExecuteButtonText": "执行任务",
+  "Task.ClearButtonText": "清除任务",
+  "Task.OutputDirectoryButtonText": "输出目录",
 
   "Errors.Invalid.ViewPage": "无效的视图页面"
 }

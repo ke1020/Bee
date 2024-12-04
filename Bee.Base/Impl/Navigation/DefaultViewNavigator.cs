@@ -3,7 +3,6 @@ using Bee.Base.Abstractions.Navigation;
 using Bee.Base.Helpers;
 using Bee.Base.Models.Navigation;
 using Bee.Base.ViewModels;
-using Ke.Bee.Localization.Localizer.Abstractions;
 
 namespace Bee.Base.Impl.Navigation;
 
@@ -24,15 +23,13 @@ public class DefaultViewNavigator : IViewNavigator
     /// 导航命令集合
     /// </summary>
     private readonly IEnumerable<INavigationCommand> _commands;
-    /// <summary>
-    /// 本地化资源对象
-    /// </summary>
-    private readonly ILocalizer _l;
 
-    public DefaultViewNavigator(ILocalizer localizer, IEnumerable<INavigationCommand> commands)
+    private readonly IServiceProvider _serviceProvider;
+
+    public DefaultViewNavigator(IEnumerable<INavigationCommand> commands, IServiceProvider serviceProvider)
     {
-        _l = localizer;
         _commands = commands;
+        _serviceProvider = serviceProvider;
     }
 
     /// <summary>
@@ -42,7 +39,6 @@ public class DefaultViewNavigator : IViewNavigator
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public void NavigateTo(string key)
     {
-        
         ArgumentExceptionHelper.ThrowIfNullOrEmpty(key);
 
         var command = _commands.FirstOrDefault(x => x.Key == key);
@@ -58,7 +54,25 @@ public class DefaultViewNavigator : IViewNavigator
     /// <param name="page"></param>
     public void SetCurrentPage(PageViewModelBase page)
     {
+        
         CurrentPage = page;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentPage)));
+    }
+
+    /// <summary>
+    /// 重载视图
+    /// </summary>
+    public void ReloadCurrentPage()
+    {
+        if (CurrentPage == null)
+        {
+            return;
+        }
+
+        // 使用 DI 容器创建实例 (因为视图模型都是以瞬态模式注入，所以获取的实例都是新实例)
+        if (_serviceProvider.GetService(CurrentPage.GetType()) is PageViewModelBase newPage)
+        {
+            SetCurrentPage(newPage);
+        }
     }
 }

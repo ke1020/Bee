@@ -11,7 +11,10 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Avalonia" Version="11.1.0" />
+    <!--
     <PackageReference Include="Ke.Bee.Localization" Version="0.1.2" />
+    -->
+    <ProjectReference Include="C:\Users\ke\dev\proj\avalonia\Ke.Bee.Localization\Ke.Bee.Localization.csproj" />
   </ItemGroup>
 
 </Project>

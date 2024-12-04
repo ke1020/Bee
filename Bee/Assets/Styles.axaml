@@ -6,6 +6,17 @@
     </Border>
   </Design.PreviewWith>
 
+  <Style Selector="Border.Rounded-1">
+    <Setter Property="CornerRadius" Value="5" />
+  </Style>
+  <Style Selector="Border.Rounded-2">
+    <Setter Property="CornerRadius" Value="10" />
+  </Style>
+
+  <Style Selector="Button.BtnPrimary">
+    <Setter Property="Background" Value="{DynamicResource BtnPrimary}" />
+  </Style>
+
   <!--文本块-->
   <Style Selector="TextBlock">
     <Setter Property="Foreground" Value="{DynamicResource TextPrimary}" />
@@ -86,7 +97,7 @@
   <Style Selector="Button.SidebarMenuItem.Active">
     <Setter Property="Background" Value="{DynamicResource BgSidebarItemPressed}" />
   </Style>
-  <Style Selector="Button.SidebarMenuItem PathIcon"> 
+  <Style Selector="Button.SidebarMenuItem PathIcon">
     <Setter Property="Margin" Value="0,0,6,0" />
     <Setter Property="Width" Value="18" />
     <Setter Property="Height" Value="18" />

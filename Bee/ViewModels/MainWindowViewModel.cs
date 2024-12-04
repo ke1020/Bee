@@ -12,8 +12,6 @@ using Bee.ViewModels.Menu;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Ke.Bee.Localization.Localizer.Abstractions;
-using Microsoft.Extensions.Options;
-using Bee.Models.Navigation;
 using Bee.Base.Abstractions.Navigation;
 using Bee.Base.ViewModels;
 using Bee.Base.Models.Menu;
@@ -66,13 +64,13 @@ public partial class MainWindowViewModel : ViewModelBase
     /// <summary>
     /// MenuItem 到 MenuItemViewModel 的转换器
     /// </summary>
-    private Func<MenuItem, MenuItemViewModel> _menuItemToViewModel => x => new MenuItemViewModel(_l[x.LocaleKey])
+    private Func<MenuItem, MenuItemViewModel> MenuItemToViewModel => x => new MenuItemViewModel(_l[x.LocaleKey])
     {
         Key = x.Key,
         IsActive = x.IsActive == true,
         Icon = string.IsNullOrWhiteSpace(x.Icon) ? null : StreamGeometry.Parse(x.Icon),
         CommandParameter = x.CommandParameter,
-        Items = x.Items.Select(_menuItemToViewModel).ToList(),
+        Items = x.Items.Select(MenuItemToViewModel).ToList(),
         MenuClickCommand = GetRelayCommand(x.CommandType),
         Group = _l[x.GroupLocaleKey] // 将本地化后的值作为分组名称
     };
@@ -151,6 +149,9 @@ public partial class MainWindowViewModel : ViewModelBase
                     Thread.CurrentThread.CurrentCulture
                     ;
 
+                // 重载视图，触发本地化更新
+                _viewNavigator.ReloadCurrentPage();
+
                 LoadToolbarMenus();
             }),
 
@@ -182,10 +183,10 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     private void LoadToolbarMenus()
     {
-        var toolbarMenus = _menuItems.Where(x => x.Group == "Toolbar").Select(_menuItemToViewModel);
-        ToolbarMenus = new ObservableCollection<MenuItemViewModel>(toolbarMenus);
-        var settingMenus = _menuItems.Where(x => x.Group == "Settings").Select(_menuItemToViewModel);
-        SettingMenus = new ObservableCollection<MenuItemViewModel>(settingMenus);
+        var toolbarMenus = _menuItems.Where(x => x.Group == "Toolbar").Select(MenuItemToViewModel);
+        ToolbarMenus = [.. toolbarMenus];
+        var settingMenus = _menuItems.Where(x => x.Group == "Settings").Select(MenuItemToViewModel);
+        SettingMenus = [.. settingMenus];
 
         LoadSidebarMenus(ToolbarMenus[0]);
     }
@@ -199,7 +200,7 @@ public partial class MainWindowViewModel : ViewModelBase
         // 找到激活菜单的子菜单
         var items = _menuItems.FirstOrDefault(x => x.Key == menuItem?.Key)?.Items;
         // 将子菜单分组 (分组键就是组名，分组值就是分组之后的菜单集合)
-        _originalSidebarMenus = SidebarMenus = ParseGroupDictionary(items?.Select(_menuItemToViewModel));
+        _originalSidebarMenus = SidebarMenus = ParseGroupDictionary(items?.Select(MenuItemToViewModel));
     }
 
     /// <summary>

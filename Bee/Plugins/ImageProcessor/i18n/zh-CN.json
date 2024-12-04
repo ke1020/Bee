@@ -1,0 +1,6 @@
+{
+    "Menu.Sidebar.ImageProcess": "图像处理",
+    "Menu.Sidebar.ImageConverter": "图像格式转换",
+    "Menu.Sidebar.ImageScaler": "图像缩放",
+    "Menu.Sidebar.ImageWatermarker": "图像水印"
+}

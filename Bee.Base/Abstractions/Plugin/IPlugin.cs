@@ -14,12 +14,16 @@ public interface IPlugin
     /// </summary>
     string PluginName { get; }
     /// <summary>
+    /// 插件输出目录
+    /// </summary>
+    string OutputPath { get; }
+    /// <summary>
     /// 执行方法
     /// </summary>
     /// <param name="methodName">方法名称</param>
     /// <param name="parameters">参数</param>
     /// <returns>执行结果对象</returns>
-    R? Execute<T, R>(string methodName, T? parameters) where R : PluginResult;
+    Task<R?> Execute<T, R>(string methodName, T? parameters) where R : PluginResult;
     /// <summary>
     /// 注册服务
     /// </summary>

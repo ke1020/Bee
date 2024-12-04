@@ -28,11 +28,18 @@
   "Menu.Sidebar.VoiceClone": "Voice Clone",
   "Menu.Sidebar.DocumentProcessing": "Document Processing",
   "Menu.Sidebar.DocumentFormatConversion": "Document Format Conversion",
-  
   "Menu.Sidebar.DevTools": "Development Tools",
   
-
   "View.SearchInput.Placeholder": "Search The Toolbox",
+
+  "Task.TaskListTitle": "Task List",
+  "Task.DragDropText": "Drag and drop files from your local computer here to add them to the task list",
+  "Task.TaskPendingStatusText": "The task list has {0} files pending processing",
+  "Task.TaskRunningStatusText": "Processing file {0} out of {1}",
+  "Task.TaskCompletedStatusText": "All files have been processed.",
+  "Task.ExecuteButtonText": "Execute",
+  "Task.ClearButtonText": "Clear",
+  "Task.OutputDirectoryButtonText": "Output Directory",
 
   "Errors.Invalid.ViewPage": "Invalid View Page"
 }
