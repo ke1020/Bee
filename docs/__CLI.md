@@ -40,15 +40,15 @@ git push -u gitee main
 dotnet nuget push .\bin\Release\Ke.Bee.Localization.0.1.1.nupkg --source https://api.nuget.org/v3/index.json --api-key {key}
 ```
 
-
 ## 生成 UML 图命令
 
 ```bash
 puml-gen C:\Users\ke\dev\proj\avalonia\Bee\Bee\Services D:\0Open\Bee\uml -dir -ignore Private,Protected -createAssociation -allInOne -excludePaths ServiceCollectionExtensions.cs,HarmonyOSFontCollection.cs
 ```
 
-## docker 运行 plantuml-server 服务
+## 快速创建插件所需目录
 
 ```bash
-sudo docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
+# powershell 中执行
+cmd /c "mkdir Configs i18n Models Views ViewModels"
 ```

@@ -21,7 +21,7 @@ public class FirstPlugin : PluginBase
 
     public FirstPlugin(IOptions<AppSettings> appSettings) : base (appSettings)
     {
-
+        // 
     }
 
     public override void ConfigureMenu(MenuConfigurationContext menuContext)
@@ -61,7 +61,7 @@ public class FirstPlugin : PluginBase
 
     public override void RegisterServices(IServiceCollection services)
     {
-        services.AddTransient<IPlugin, FirstPlugin>();
+        //services.AddTransient<IPlugin, FirstPlugin>();
         services.AddTransient<FirstViewModel>();
         services.AddSingleton<INavigationCommand, FirstPluginNavigationCommand>();
         services.AddSingleton<ILocalizaitonResourceContributor, FirstLocalizaitonResourceContributor>();

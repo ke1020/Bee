@@ -68,7 +68,5 @@ public abstract class PluginBase : IPlugin
         }
     }
 
-    public abstract Task<R?> Execute<T, R>(string methodName, T? parameters) where R : PluginResult;
-
     public abstract void RegisterServices(IServiceCollection services);
 }
