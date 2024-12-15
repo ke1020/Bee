@@ -1,0 +1,156 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vm="using:Bee.Base.ViewModels"
+  xmlns:i18n="using:Ke.Bee.Localization.Extensions"
+  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+  x:Class="Bee.Base.Controls.TaskList">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="340" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <StackPanel Grid.Column="0" Margin="20,0,20,0">
+      <!-- 拖放区域 -->
+      <Grid Width="340" Height="340" Background="#10dddddd"
+        DragDrop.AllowDrop="True">
+        <Grid.Clip>
+          <RectangleGeometry Rect="0,0,340,340" RadiusX="8" RadiusY="8" />
+        </Grid.Clip>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Path Stroke="Gray" StrokeThickness="2" StrokeDashArray="4,2"
+          Grid.RowSpan="3">
+          <Path.Data>
+            <RectangleGeometry Rect="0,0,340,340" RadiusX="8" RadiusY="8" />
+          </Path.Data>
+        </Path>
+        <StackPanel Width="340" Grid.Row="1" VerticalAlignment="Center"
+          HorizontalAlignment="Center" Height="80">
+          <PathIcon Height="50" Width="50" Opacity="0.4"
+            Data="{StaticResource add_square_regular}" Margin="0,0,0,20" />
+          <TextBlock Text="{i18n:Localize 'Task.DragDropText'}"
+            TextWrapping="Wrap" TextAlignment="Center" />
+        </StackPanel>
+      </Grid>
+      <!-- 按钮 -->
+      <WrapPanel HorizontalAlignment="Center" Margin="0,10,0,0">
+        <Button Classes="BtnPrimary" Command="{Binding ExecuteCommand}"
+          Content="{i18n:Localize 'Task.ExecuteButtonText'}"></Button>
+        <Button Command="{Binding StopCommand}"
+          Content="{i18n:Localize 'Task.StopButtonText'}"></Button>
+        <Button Command="{Binding ClearTaskItemsCommand}"
+          Content="{i18n:Localize 'Task.ClearButtonText'}"></Button>
+        <Button Command="{Binding OpenOutputDirectoryCommand}"
+          Content="{i18n:Localize 'Task.OutputDirectoryButtonText'}"></Button>
+      </WrapPanel>
+
+      <Border Classes="Description Rounded-2" Margin="0,50,0,0">
+        <DockPanel LastChildFill="True">
+          <!-- 图标 -->
+          <TextBlock Text="📖" FontSize="14" Padding="12,10,0,0" DockPanel.Dock="Left" />
+
+          <!-- 文本内容 -->
+          <TextBlock ClipToBounds="False" FontSize="14" TextWrapping="Wrap" Padding="5,10,20,10" Foreground="{DynamicResource TextSecondary}"
+            Text="将图片拖入上方虚线框内加入任务列表，然后从右侧面板设置参数；最后，点击 “执行任务” 按钮。主要功能：批量处理图片格式转换、等比缩放、固定尺寸裁剪、图像水印、文本水印。" />
+        </DockPanel>
+      </Border>
+    </StackPanel>
+
+    <!-- 任务列表 -->
+    <DockPanel Grid.Column="1" Margin="20,0,0,30">
+      <!-- 标题 -->
+      <Border BorderBrush="Gray" BorderThickness="0,0,0,0.5" Margin="0,0,0,10"
+        Padding="0,0,0,10" DockPanel.Dock="Top">
+        <TextBlock Text="{i18n:Localize 'Task.TaskListTitle'}"></TextBlock>
+      </Border>
+      <!-- 状态 -->
+      <Border Margin="0,0,0,10" DockPanel.Dock="Top">
+        <TextBlock Text="{Binding TaskStatusText}" />
+      </Border>
+      <!-- 列表 -->
+      <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding TaskItems}" Padding="0,0,20,0">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- 左侧图像 -->
+                <Border Classes="Rounded-2" Margin="0,0,10,0" Width="80" Height="80"
+                  ClipToBounds="True" BorderThickness="0">
+                  <Image Source="{Binding Source}" />
+                </Border>
+
+                <!-- 右侧内容 -->
+                <StackPanel Grid.Column="1" Orientation="Vertical">
+                  <!-- 文件名称和图片大小 -->
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Name}"
+                      Margin="0,0,10,0" VerticalAlignment="Center" />
+                    <!--<TextBlock
+                                                    Text="2MB" Margin="0,0,10,0"
+                                                    VerticalAlignment="Center" />
+                                                    -->
+                    <Panel Grid.Column="1"
+                      HorizontalAlignment="Right"
+                      Margin="0,0,0,10">
+                      <!--
+                        // 绑定到 ViewModel 的中继命令上
+                        <Button Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
+                        Path=DataContext.RemoveCommand}"
+                        CommandParameter="{Binding}" />
+                        -->
+                      <!--处理前显示删除图标-->
+                      <PathIcon
+                        IsVisible="{Binding !IsCompleted}"
+                        Width="16" Height="16"
+                        PointerPressed="RemoveItemPressed"
+                        Data="{StaticResource delete_regular}"
+                        Foreground="{DynamicResource TextDanger}"
+                        Cursor="Hand"
+                      />
+                      <!--处理完毕显示成功图标-->
+                      <PathIcon Width="16" Height="16"
+                        Foreground="{DynamicResource TextSuccess}"
+                        Data="{StaticResource check}"
+                        IsVisible="{Binding IsCompleted}" />
+                    </Panel>
+                  </Grid>
+
+                  <!-- 进度条 -->
+                  <ProgressBar Value="{Binding Percent}" Minimum="0"
+                    Maximum="100"
+                    Height="5" Margin="0,10,0,10" />
+
+                  <!-- 处理进度文本 -->
+                  <TextBlock
+                    Text="{Binding Percent, StringFormat='{}{0} %'}"
+                    Margin="0,0,0,10"
+                    VerticalAlignment="Center" />
+                </StackPanel>
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </DockPanel>
+  </Grid>
+</UserControl>

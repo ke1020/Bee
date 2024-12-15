@@ -13,9 +13,11 @@
       <SolidColorBrush x:Key="BgSidebarItemHover" Color="#f5f5f6" />
       <SolidColorBrush x:Key="BgSidebarItemPressed" Color="#ebebed" />
       <SolidColorBrush x:Key="BgSearchInput" Color="#f6f6f7" />
+      <SolidColorBrush x:Key="BgTransparent" Color="#80eeeeee" />
+      <SolidColorBrush x:Key="BgPane" Color="#f5f5f6" />
       <!--文本-->
       <SolidColorBrush x:Key="TextPrimary" Color="#25262b" />
-      <SolidColorBrush x:Key="TextSecondary" Color="" />
+      <SolidColorBrush x:Key="TextSecondary" Color="#343a40" />
       <SolidColorBrush x:Key="TextSuccess" Color="#198754" />
       <SolidColorBrush x:Key="TextDanger" Color="#dc3545" />
       <!--按钮-->
@@ -33,8 +35,10 @@
       <SolidColorBrush x:Key="BgSidebarItemHover" Color="#1f1f22" />
       <SolidColorBrush x:Key="BgSidebarItemPressed" Color="#2d2d30" />
       <SolidColorBrush x:Key="BgSearchInput" Color="#19191c" />
+      <SolidColorBrush x:Key="BgTransparent" Color="#80171717" />
+      <SolidColorBrush x:Key="BgPane" Color="#222226" />
       <SolidColorBrush x:Key="TextPrimary" Color="White" />
-      <SolidColorBrush x:Key="TextSecondary" Color="#606062" />
+      <SolidColorBrush x:Key="TextSecondary" Color="#e9ecef" />
       <SolidColorBrush x:Key="TextSuccess" Color="#198754" />
       <SolidColorBrush x:Key="TextDanger" Color="#dc3545" />
       <SolidColorBrush x:Key="BtnDefault" Color="#222226" />

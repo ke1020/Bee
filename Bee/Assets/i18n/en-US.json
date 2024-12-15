@@ -38,6 +38,7 @@
   "Task.TaskRunningStatusText": "Processing file {0} out of {1}",
   "Task.TaskCompletedStatusText": "All files have been processed.",
   "Task.ExecuteButtonText": "Execute",
+  "Task.StopButtonText": "Stop",
   "Task.ClearButtonText": "Clear",
   "Task.OutputDirectoryButtonText": "Output Directory",
 

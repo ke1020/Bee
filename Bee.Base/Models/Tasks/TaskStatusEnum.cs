@@ -1,5 +1,5 @@
 
-namespace Bee.Base.Models.Task;
+namespace Bee.Base.Models.Tasks;
 
 /// <summary>
 /// 任务状态枚举对象

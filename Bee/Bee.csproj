@@ -28,7 +28,6 @@
     <ProjectReference Include="../Bee.Base/Bee.Base.csproj" />
   </ItemGroup>
 
-
   <!-- 定义需要复制的文件 -->
   <ItemGroup>
     <None Include="Configs\**\*.*" CopyToOutputDirectory="PreserveNewest"

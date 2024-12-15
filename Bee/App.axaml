@@ -15,13 +15,15 @@
         <FluentTheme />
         <StyleInclude Source="avares://Bee/Assets/Styles.axaml" />
         <StyleInclude Source="avares://Bee/Assets/Icons.axaml" />
+        <StyleInclude Source="avares://Bee/Assets/Tab.axaml" />
+        <StyleInclude Source="avares://Bee.Base/Controls/Workspace/Workspace.axaml"/>
     </Application.Styles>
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!--引入主题资源-->
-                <ResourceInclude Source="/Assets/Themes.axaml" />
+                <MergeResourceInclude Source="/Assets/Themes.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

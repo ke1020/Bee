@@ -14,7 +14,8 @@
     <!--
     <PackageReference Include="Ke.Bee.Localization" Version="0.1.2" />
     -->
-    <ProjectReference Include="C:\Users\ke\dev\proj\avalonia\Ke.Bee.Localization\Ke.Bee.Localization.csproj" />
+    <ProjectReference
+      Include="C:\Users\ke\dev\proj\avalonia\Ke.Bee.Localization\Ke.Bee.Localization.csproj" />
   </ItemGroup>
 
 </Project>

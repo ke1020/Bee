@@ -1,5 +1,5 @@
 
-namespace Bee.Base.Models.Task;
+namespace Bee.Base.Models.Tasks;
 
 public class InvalidTaskStatusException : ApplicationException
 {

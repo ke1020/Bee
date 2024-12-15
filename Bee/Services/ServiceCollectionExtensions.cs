@@ -61,12 +61,22 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     private static IServiceCollection AddSettings(this IServiceCollection services)
     {
-        var appSettings = Options.Create(new AppSettings
+        var appSettings = JsonSerializer.Deserialize<AppSettings>(
+            File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Configs", "appsettings.json"))) ??
+            new AppSettings
+            {
+                OutputPath = Path.Combine(AppContext.BaseDirectory, "Output")
+            }
+            ;
+
+
+        if (!Path.IsPathRooted(appSettings.OutputPath))
         {
-            OutputPath = Path.Combine(AppContext.BaseDirectory, "output"),
-            PluginPath = Path.Combine(AppContext.BaseDirectory, "Plugins")
-        });
-        services.AddSingleton(appSettings);
+            appSettings.OutputPath = Path.Combine(AppContext.BaseDirectory, appSettings.OutputPath);
+        }
+
+        appSettings.PluginPath = Path.Combine(AppContext.BaseDirectory, "Plugins");
+        services.AddSingleton(Options.Create(appSettings));
         return services;
     }
 

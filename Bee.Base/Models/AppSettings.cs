@@ -11,4 +11,8 @@ public class AppSettings
     /// 全局插件目录
     /// </summary>
     public string PluginPath { get; set; } = string.Empty;
+    /// <summary>
+    /// 任务列表项默认封面图
+    /// </summary>
+    public string DefaultTaskImageUri { get; set; } = string.Empty;
 }

@@ -1,0 +1,47 @@
+<Styles xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Style Selector="TabControl.Arguments">
+        <Setter Property="Background" Value="{DynamicResource BgPane}" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+    <!-- 定义 TabItem 的样式 -->
+    <Style Selector="TabItem">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="{DynamicResource BtnDefaultActive}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimary}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BgPane}" />
+        <Setter Property="BorderThickness" Value="0.5" />
+    </Style>
+    <Style Selector="TabItem /template/ ContentPresenter">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TabControl.Arguments TabItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    </Style>
+    <Style Selector="TabControl.Arguments TabItem:focus">
+    </Style>
+    <Style Selector="TabControl.Arguments TabItem:focus /template/ ContentPresenter#PART_ContentPresenter">
+    </Style>
+    <Style Selector="TabControl.Arguments TabItem:selected">
+        <!--
+        <Setter Property="BorderBrush" Value="Transparent" />
+        -->
+    </Style>
+    <Style Selector="TabControl.Arguments TabItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+
+    </Style>
+
+    <!-- 隐藏掉选中项边框 -->
+    <Style Selector="TabItem:selected /template/ Border#PART_SelectedPipe">
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
+</Styles>

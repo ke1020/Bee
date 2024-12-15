@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Bee.Base;
 using Bee.Services;
 using Bee.ViewModels;
 using Bee.Views;
@@ -30,6 +31,7 @@ public partial class App : Application
 
         // 从 collection 提供的 IServiceCollection 中创建包含服务的 ServiceProvider
         var service = services.BuildServiceProvider();
+        ServiceLocator.Current = service;
 
         var vm = service.GetRequiredService<MainWindowViewModel>();
 

@@ -1,0 +1,62 @@
+<Styles xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="using:Bee.Base.Controls"
+>
+    <Style Selector="ctrl|Workspace">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <SplitView
+                    IsPaneOpen="{Binding IsPaneOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                    DisplayMode="CompactInline"
+                    OpenPaneLength="240" CompactPaneLength="40" PanePlacement="Right">
+
+                    <!-- 内容区域 -->
+                    <Grid VerticalAlignment="Stretch" Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" VerticalAlignment="Center" Margin="0,0,0,20">
+                            <DockPanel>
+                                <Border DockPanel.Dock="Left">
+                                    <TextBlock
+                                        Text="{Binding Title, RelativeSource={RelativeSource TemplatedParent}}"
+                                        FontSize="20"
+                                        FontWeight="Bold" />
+                                </Border>
+
+                                <ToggleSwitch
+                                    Command="{Binding PaneToggleCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    DockPanel.Dock="Right"
+                                    Width="26" Cursor="Hand">
+                                    <Panel>
+                                        <PathIcon Data="{StaticResource arrow_left_square}"
+                                            IsVisible="{Binding !IsPaneOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Foreground="Gray" />
+                                        <PathIcon Data="{StaticResource arrow_right_square}"
+                                            IsVisible="{Binding IsPaneOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Foreground="Gray" />
+                                    </Panel>
+                                </ToggleSwitch>
+
+                                <Border />
+                            </DockPanel>
+                        </Border>
+
+                        <Border Grid.Row="1">
+                            <ContentPresenter
+                                Content="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Border>
+                    </Grid>
+
+                    <!-- 面板区域 -->
+                    <SplitView.Pane>
+                        <ContentPresenter
+                            Content="{Binding Pane, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </SplitView.Pane>
+                </SplitView>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

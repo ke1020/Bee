@@ -6,7 +6,7 @@ namespace Bee.Base.Abstractions.Navigation;
 /// <summary>
 /// 导航命令抽象基类
 /// </summary>
-/// <typeparam name="T"></typeparam>
+/// <typeparam name="T">视图模型</typeparam>
 /// <param name="key"></param>
 /// <param name="vm"></param>
 public class NavigationCommandBase<T>(string key, T vm) : INavigationCommand where T : PageViewModelBase
@@ -16,8 +16,8 @@ public class NavigationCommandBase<T>(string key, T vm) : INavigationCommand whe
     /// </summary>
     public string Key => key;
 
-    public void Execute(NavigationCommandContext context)
+    public virtual void Execute(NavigationCommandContext context)
     {
-        context.Navigator?.SetCurrentPage(vm);
+        context.Navigator?.SetCurrentPage(vm); 
     }
 }

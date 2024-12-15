@@ -39,6 +39,7 @@
   "Task.TaskRunningStatusText": "正在处理第 {0}/{1} 个文件",
   "Task.TaskCompletedStatusText": "所有文件处理完毕",
   "Task.ExecuteButtonText": "执行任务",
+  "Task.StopButtonText": "停止任务",
   "Task.ClearButtonText": "清除任务",
   "Task.OutputDirectoryButtonText": "输出目录",
 

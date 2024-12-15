@@ -50,5 +50,5 @@ puml-gen C:\Users\ke\dev\proj\avalonia\Bee\Bee\Services D:\0Open\Bee\uml -dir -i
 
 ```bash
 # powershell 中执行
-cmd /c "mkdir Configs i18n Models Views ViewModels"
+cmd /c "mkdir Configs i18n Models Navigation Views ViewModels Methods"
 ```

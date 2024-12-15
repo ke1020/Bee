@@ -1,7 +1,6 @@
 using System.Text.Json;
 using Bee.Base.Models;
 using Bee.Base.Models.Menu;
-using Bee.Base.Models.Plugin;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
