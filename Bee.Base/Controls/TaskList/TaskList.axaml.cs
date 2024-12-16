@@ -2,7 +2,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Bee.Base.Abstractions.Tasks;
 using Bee.Base.Models.Tasks;
-using Bee.Base.ViewModels;
 
 namespace Bee.Base.Controls;
 

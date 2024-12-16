@@ -3,7 +3,6 @@ using System.Diagnostics;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
-using Avalonia.Threading;
 using Bee.Base.Abstractions.Tasks;
 using Bee.Base.Models;
 using Bee.Base.Models.Tasks;
