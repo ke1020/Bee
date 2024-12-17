@@ -17,6 +17,9 @@ public partial class TaskItem : ObservableObject, IDisposable
     /// </summary>
     [ObservableProperty]
     private double _percent = 0;
+    /// <summary>
+    /// 任务完成标志
+    /// </summary>
     [ObservableProperty]
     private bool _isCompleted = false;
     /// <summary>

@@ -227,35 +227,46 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     [RelayCommand]
     private async Task Execute()
     {
-        // 为了避免操作阻塞 UI，在后台执行耗时操作
-        await Task.Run(async () =>
+        // 任务列表总数
+        var taskListCount = TaskItems.Count;
+        if (taskListCount == 0)
         {
-            // 确保只有一个任务在运行
-            if (_cancellationTokenSource != null)
-            {
-                return;
-            }
+            return;
+        }
 
-            _cancellationTokenSource = new CancellationTokenSource();
+        // 初始化取消令牌对象
+        _cancellationTokenSource ??= new CancellationTokenSource();
 
-            var taskListCount = TaskItems.Count;
+        // 创建 ParallelOptions 并设置 CancellationToken
+        var parallelOptions = new ParallelOptions
+        {
+            CancellationToken = _cancellationTokenSource.Token,
+            MaxDegreeOfParallelism = Environment.ProcessorCount // 设置最大并行度
+        };
 
+        // 为了避免操作阻塞 UI，在后台执行耗时操作
+        await Task.Run(() =>
+        {
             try
             {
-                int index = 0;
-                foreach (var task in TaskItems)
+                // 开始并行处理...
+                Parallel.For(0, taskListCount, parallelOptions, async i =>
                 {
+                    // 检查是否应该取消
                     _cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
-                    SetRunningStatus(index + 1, taskListCount);
-
-                    await _taskHandler.ExecuteAsync(task, TaskArguments, (percent) =>
+                    await _taskHandler.ExecuteAsync(TaskItems[i], TaskArguments, (percent) =>
                     {
-                        task.Percent = percent;
-                        task.IsCompleted = percent == 100;
+                        TaskItems[i].Percent = percent; // 设置任务进度
+                        TaskItems[i].IsCompleted = percent == 100; // 设置完成状态
+                        SetRunningStatus(i + 1, taskListCount);
                     });
+                });
+                // 所有项处理完毕
 
-                    index++;
+                if (taskListCount > 0)
+                {
+                    SetCompletedStatus();
                 }
             }
             catch (OperationCanceledException)
@@ -268,15 +279,12 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
                 // 处理其他异常
                 Console.WriteLine($"任务执行失败: {ex.Message}");
             }
-
-
-            if (taskListCount > 0)
+            finally
             {
-                SetCompletedStatus();
+                // 释放资源
+                _cancellationTokenSource?.Dispose();
+                _cancellationTokenSource = null;
             }
-
-            // 任务完成后重置 CancellationTokenSource
-            _cancellationTokenSource = null;
         });
     }
 
@@ -332,7 +340,18 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     [RelayCommand]
     private void Stop()
     {
-        _cancellationTokenSource?.Cancel();
+        if (_cancellationTokenSource == null)
+        {
+            return;
+        }
+
+        // 取消任务
+        if (!_cancellationTokenSource.IsCancellationRequested)
+        {
+            _cancellationTokenSource.Cancel();
+        }
+
+        _cancellationTokenSource = null;
     }
 
     /// <summary>
