@@ -83,13 +83,17 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     /// </summary>
     private readonly ITaskCoverHandler? _taskCoverHandler;
     /// <summary>
+    /// 应用配置
+    /// </summary>
+    private readonly AppSettings _appSettings;
+    /// <summary>
     /// 取消任务的取消令牌
     /// </summary>
     private CancellationTokenSource? _cancellationTokenSource;
     /// <summary>
-    /// 应用配置
+    /// 当前正在处理的任务
     /// </summary>
-    private readonly AppSettings _appSettings;
+    private Task? _currentTask;
 
     /// <summary>
     /// 构造函数
@@ -122,11 +126,11 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     /// <summary>
     /// 设置运行中状态
     /// </summary>
-    /// <param name="currentTaskIndex"></param>
+    /// <param name="completedCount">已完成</param>
     /// <param name="tasksTotalCount"></param>
-    private void SetRunningStatus(int currentTaskIndex, int tasksTotalCount)
+    private void SetRunningStatus(int completedCount, int tasksTotalCount)
     {
-        SetTaskStatusText(TaskStatusEnum.Running, currentTaskIndex, tasksTotalCount);
+        SetTaskStatusText(TaskStatusEnum.Running, completedCount, tasksTotalCount);
     }
 
     /// <summary>
@@ -234,40 +238,56 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
             return;
         }
 
-        // 初始化取消令牌对象
-        _cancellationTokenSource ??= new CancellationTokenSource();
-
-        // 创建 ParallelOptions 并设置 CancellationToken
-        var parallelOptions = new ParallelOptions
+        // 如果已经有任务在运行，则先取消它
+        if (_currentTask != null && !_currentTask.IsCompleted)
         {
-            CancellationToken = _cancellationTokenSource.Token,
-            MaxDegreeOfParallelism = Environment.ProcessorCount // 设置最大并行度
-        };
+            _cancellationTokenSource?.Cancel();
+            // 等待现有任务完成
+            await _currentTask;
+        }
+
+        // 重置令牌
+        _cancellationTokenSource = new CancellationTokenSource();
 
         // 为了避免操作阻塞 UI，在后台执行耗时操作
-        await Task.Run(() =>
+        _currentTask = Task.Run(async () =>
         {
+            // 创建 ParallelOptions 并设置 CancellationToken
+            var parallelOptions = new ParallelOptions
+            {
+                CancellationToken = _cancellationTokenSource.Token,
+                MaxDegreeOfParallelism = TaskArguments?.MaxDegreeOfParallelism ?? 1 // 设置最大并行度
+            };
+
             try
             {
                 // 开始并行处理...
-                Parallel.For(0, taskListCount, parallelOptions, async i =>
-                {
-                    // 检查是否应该取消
-                    _cancellationTokenSource.Token.ThrowIfCancellationRequested();
-
-                    await _taskHandler.ExecuteAsync(TaskItems[i], TaskArguments, (percent) =>
+                await Parallel.ForEachAsync(TaskItems, parallelOptions, async (taskItem, token) =>
                     {
-                        TaskItems[i].Percent = percent; // 设置任务进度
-                        TaskItems[i].IsCompleted = percent == 100; // 设置完成状态
-                        SetRunningStatus(i + 1, taskListCount);
-                    });
-                });
-                // 所有项处理完毕
+                        // 检查是否应该取消
+                        token.ThrowIfCancellationRequested();
 
-                if (taskListCount > 0)
-                {
-                    SetCompletedStatus();
-                }
+                        // 任务是已完成状态
+                        if (taskItem.IsCompleted)
+                        {
+                            return;
+                        }
+
+                        // await Task.Delay(300, token); // 模拟异步工作
+
+                        await _taskHandler.ExecuteAsync(taskItem, TaskArguments, (percent) =>
+                        {
+                            taskItem.Percent = percent; // 设置任务进度
+                            taskItem.IsCompleted = percent == 100; // 设置完成状态
+                        });
+
+                        // 设置已完成数量
+                        SetRunningStatus(TaskItems.Count(x => x.IsCompleted), taskListCount);
+                    })
+                    ;
+
+                // 所有项处理完毕
+                SetCompletedStatus();
             }
             catch (OperationCanceledException)
             {
@@ -340,18 +360,10 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     [RelayCommand]
     private void Stop()
     {
-        if (_cancellationTokenSource == null)
+        if (_currentTask != null && !_currentTask.IsCompleted)
         {
-            return;
+            _cancellationTokenSource?.Cancel(); // 发出取消请求
         }
-
-        // 取消任务
-        if (!_cancellationTokenSource.IsCancellationRequested)
-        {
-            _cancellationTokenSource.Cancel();
-        }
-
-        _cancellationTokenSource = null;
     }
 
     /// <summary>
@@ -360,7 +372,7 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     /// <param name="inputPaths">输入路径集合</param>
     /// <param name="inputExtensions">输入扩展名集合</param>
     /// <returns></returns>
-    private async Task<List<TaskItem>> GetTasksAsync(IEnumerable<string> inputPaths, IEnumerable<string> inputExtensions)
+    private async Task<List<TaskItem>> GetTasksAsync(IList<string> inputPaths, IEnumerable<string> inputExtensions)
     {
         if (inputPaths == null)
         {

@@ -35,7 +35,7 @@
   "Task.TaskListTitle": "Task List",
   "Task.DragDropText": "Drag and drop files from your local computer here to add them to the task list",
   "Task.TaskPendingStatusText": "The task list has {0} files pending processing",
-  "Task.TaskRunningStatusText": "Processing file {0} out of {1}",
+  "Task.TaskRunningStatusText": "Completed {0}/{1}",
   "Task.TaskCompletedStatusText": "All files have been processed.",
   "Task.ExecuteButtonText": "Execute",
   "Task.StopButtonText": "Stop",

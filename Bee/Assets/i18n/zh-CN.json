@@ -36,7 +36,7 @@
   "Task.TaskListTitle": "任务列表",
   "Task.DragDropText": "从本地电脑拖放文件到此处加入任务列表",
   "Task.TaskPendingStatusText": "任务列表有 {0} 个文件待处理",
-  "Task.TaskRunningStatusText": "正在处理第 {0}/{1} 个文件",
+  "Task.TaskRunningStatusText": "已完成 {0}/{1}",
   "Task.TaskCompletedStatusText": "所有文件处理完毕",
   "Task.ExecuteButtonText": "执行任务",
   "Task.StopButtonText": "停止任务",

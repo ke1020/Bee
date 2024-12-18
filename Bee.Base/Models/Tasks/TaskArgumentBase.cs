@@ -9,4 +9,8 @@ public class TaskArgumentBase
     /// 输出目录
     /// </summary>
     public string OutputDirectory { get; set; } = string.Empty;
+    /// <summary>
+    /// 并发请求数
+    /// </summary>
+    public int MaxDegreeOfParallelism { get; set; } = 1;
 }
