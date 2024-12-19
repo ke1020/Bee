@@ -3,6 +3,7 @@
     "Menu.Sidebar.ImageConverter": "Image Converter",
     "Menu.Sidebar.ImageScaler": "Image Scaler",
     "Menu.Sidebar.ImageWatermarker": "Image Watermarker",
+    "Bee.Plugin.ImageProcess.ViewComment": "Drag the images into the dashed-line box above to add them to the task list, then set the parameters from the right-hand panel; finally, click the \"Execute Tasks\" button.",
     "Bee.Plugin.ImageProcess.ImageConvertTitle": "Image Format Convert",
     "Bee.Plugin.ImageProcess.Width": "Width",
     "Bee.Plugin.ImageProcess.Height": "Height",

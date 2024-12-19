@@ -5,7 +5,8 @@
         "LocaleKey": "Menu.Sidebar.ImageConverter",
         "GroupLocaleKey": "Menu.Sidebar.ImageProcess",
         "CommandType": "Navigate",
-        "CommandParameter": "ImageConvert"
+        "CommandParameter": "ImageConvert",
+        "CommentLocalKey": "Menu.Sidebar.ImageProcess.ViewComment"
     },
     {
         "Key": "ImageScaler",

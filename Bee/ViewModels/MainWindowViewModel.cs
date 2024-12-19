@@ -8,13 +8,13 @@ using Avalonia;
 using Avalonia.Media;
 using Avalonia.Styling;
 using Bee.Helpers;
-using Bee.ViewModels.Menu;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Ke.Bee.Localization.Localizer.Abstractions;
 using Bee.Base.Abstractions.Navigation;
 using Bee.Base.ViewModels;
 using Bee.Base.Models.Menu;
+using Bee.Base.ViewModels.Menus;
 
 namespace Bee.ViewModels;
 
