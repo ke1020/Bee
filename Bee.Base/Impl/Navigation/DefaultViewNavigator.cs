@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using Bee.Base.Abstractions.Navigation;
-using Bee.Base.Helpers;
 using Bee.Base.Models.Navigation;
 using Bee.Base.ViewModels;
+using Bee.Base.ViewModels.Menus;
 
 namespace Bee.Base.Impl.Navigation;
 
@@ -39,12 +39,11 @@ public class DefaultViewNavigator : IViewNavigator
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public void NavigateTo(string key)
     {
-        ArgumentExceptionHelper.ThrowIfNullOrEmpty(key);
+        ArgumentNullException.ThrowIfNull(key);
 
         var command = _commands.FirstOrDefault(x => x.Key == key);
 
-        ArgumentExceptionHelper.ThrowIfNavigationCommandNull(command, key);
-
+        ArgumentNullException.ThrowIfNull(command);
         command?.Execute(new NavigationCommandContext(this));
     }
 
@@ -54,7 +53,7 @@ public class DefaultViewNavigator : IViewNavigator
     /// <param name="page"></param>
     public void SetCurrentPage(PageViewModelBase page)
     {
-        
+
         CurrentPage = page;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentPage)));
     }

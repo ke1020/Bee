@@ -8,6 +8,7 @@ namespace Bee.Base.Helpers;
 /// <summary>
 /// 参数异常助手类
 /// </summary>
+[Obsolete("不再使用")]
 public class ArgumentExceptionHelper
 {
     public static void ThrowIfNullOrEmpty(string? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)

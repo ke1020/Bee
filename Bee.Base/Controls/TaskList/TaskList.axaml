@@ -52,14 +52,14 @@
       </WrapPanel>
 
       <!-- 功能描述 -->
-      <Border Classes="Description Rounded-2" Margin="0,50,0,0">
+      <Border IsVisible="True" Classes="Description Rounded-2" Margin="0,50,0,0">
         <DockPanel LastChildFill="True">
           <!-- 图标 -->
           <TextBlock Text="📖" FontSize="14" Padding="12,10,0,0" DockPanel.Dock="Left" />
 
           <!-- 文本内容 -->
           <TextBlock ClipToBounds="False" FontSize="14" TextWrapping="Wrap" Padding="5,10,20,10" Foreground="{DynamicResource TextSecondary}"
-            Text="将图片拖入上方虚线框内加入任务列表，然后从右侧面板设置参数；最后，点击 “执行任务” 按钮。主要功能：批量处理图片格式转换、等比缩放、固定尺寸裁剪、图像水印、文本水印。" />
+            Text="{Binding ViewComment}" />
         </DockPanel>
       </Border>
     </StackPanel>

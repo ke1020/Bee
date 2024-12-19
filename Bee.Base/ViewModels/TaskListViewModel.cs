@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
+using Bee.Base.Abstractions.Navigation;
 using Bee.Base.Abstractions.Tasks;
 using Bee.Base.Models;
 using Bee.Base.Models.Tasks;
@@ -68,6 +69,16 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     {
         get => _taskArguments;
         private set => SetProperty(ref _taskArguments, value);
+    }
+
+    private string? _viewComment;
+    /// <summary>
+    /// 页面功能说明
+    /// </summary>
+    public string ViewComment
+    {
+        get => _viewComment ?? string.Empty;
+        private set => SetProperty(ref _viewComment, value);
     }
 
     /// <summary>
@@ -186,6 +197,15 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     public void SetInputExtensions(IEnumerable<string> inputExtensions)
     {
         InputExtensions = inputExtensions;
+    }
+
+    /// <summary>
+    /// 设置页面功能说明
+    /// </summary>
+    /// <param name="viewComment"></param>
+    public void SetViewComment(string viewComment)
+    {
+        ViewComment = viewComment;
     }
 
     /// <summary>

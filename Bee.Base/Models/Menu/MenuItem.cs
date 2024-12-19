@@ -42,4 +42,8 @@ public class MenuItem
     /// 命令参数
     /// </summary>
     public string? CommandParameter { get; set; }
+    /// <summary>
+    /// 菜单对应的视图页面功能说明本地化键
+    /// </summary>
+    public string? CommentLocalKey { get; set; }
 }
