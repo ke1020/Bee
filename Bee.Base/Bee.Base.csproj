@@ -5,6 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>12.0</LangVersion>
+    <!-- 禁用所有默认分析器 -->
+    <AnalysisModeRoslynDiagnosticsDesign>AllDisabledByDefault</AnalysisModeRoslynDiagnosticsDesign>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +18,14 @@
     <ProjectReference
       Include="C:\Users\ke\dev\proj\avalonia\Ke.Bee.Localization\Ke.Bee.Localization.csproj" />
       -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 不应隐式捕获主构造函数参数检测 -->
+    <PackageReference Include="Roslyn.Diagnostics.Analyzers" Version="3.11.0-beta1.24527.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

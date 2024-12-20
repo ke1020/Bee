@@ -1,15 +1,19 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
-using Bee.Base.Abstractions.Navigation;
+
 using Bee.Base.Abstractions.Tasks;
 using Bee.Base.Models;
 using Bee.Base.Models.Tasks;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
 using Ke.Bee.Localization.Localizer.Abstractions;
+
 using Microsoft.Extensions.Options;
 
 namespace Bee.Base.ViewModels;

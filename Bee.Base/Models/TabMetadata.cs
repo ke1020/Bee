@@ -8,7 +8,7 @@ namespace Bee.Base.Models;
 /// <param name="viewType">对应的视图类型</param>
 public class TabMetadata(string localKey, Type viewType, Type viewModelType)
 {
-    public string LocalKey => localKey;
-    public Type ViewModelType => viewModelType;
-    public Type ViewType => viewType;
+    public string LocalKey { get; } = localKey;
+    public Type ViewModelType { get; } = viewModelType;
+    public Type ViewType { get; } = viewType;
 }

@@ -14,10 +14,14 @@ public class NavigationCommandBase<T>(string key, T vm) : INavigationCommand whe
     /// <summary>
     /// 导航命令键（要与菜单中的 CommandParameter 一致）
     /// </summary>
-    public string Key => key;
+    public string Key { get; } = key;
+    /// <summary>
+    /// 视图模型
+    /// </summary>
+    private readonly T _vm = vm;
 
     public virtual void Execute(NavigationCommandContext context)
     {
-        context.Navigator?.SetCurrentPage(vm); 
+        context.Navigator?.SetCurrentPage(_vm);
     }
 }
