@@ -237,7 +237,7 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
         // 为了避免操作阻塞 UI，在后台执行耗时操作
         await Task.Run(async () =>
         {
-            TaskItems.Merge([.. await GetTasksAsync(paths, InputExtensions.Select(x => $".{x}"))]);
+            TaskItems.Merge([.. await GetTasksAsync(paths, InputExtensions.Select(x => x.StartsWith('.') ? x : $".{x}"))]);
             SetPendingStatus(TaskItems.Count);
         });
 
@@ -303,7 +303,7 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
                         {
                             taskItem.Percent = percent; // 设置任务进度
                             taskItem.IsCompleted = percent == 100; // 设置完成状态
-                        });
+                        }, token);
 
                         // 设置已完成数量
                         SetRunningStatus(TaskItems.Count(x => x.IsCompleted), taskListCount);

@@ -1,4 +1,19 @@
 {
-    "Menu.Sidebar.DocumentProcess": "Doc Process",
-    "Bee.Plugin.DocumentProcess.ViewComment": ""
+    "Menu.Sidebar.DocumentProcess": "Document Process",
+    "Menu.Sidebar.DocumentConverter": "Document Converter",
+    "Bee.Plugin.DocumentProcess.DocumentConvertTitle": "Document Converter",
+    "Bee.Plugin.DocumentProcess.Tab.Convert": "Convert",
+    "Bee.Plugin.DocumentProcess.ViewComment": "",
+    "Bee.Plugin.DocumentProcess.InputFormat": "Input Format (Optional)",
+    "Bee.Plugin.DocumentProcess.OutputFormat": "Output Format",
+    "Bee.Plugin.DocumentProcess.Enable": "Enable",
+    "Bee.Plugin.DocumentProcess.ResourcePath": "Resource Path",
+    "Bee.Plugin.DocumentProcess.ResourcePath.Placeholder": "Please Select Resource Path",
+    "Bee.Plugin.DocumentProcess.EnableStandalone": "Enable Standalone?",
+    "Bee.Plugin.DocumentProcess.EnableRequestHeader": "Enable Request Header?",
+    "Bee.Plugin.DocumentProcess.RequestHeader": "Request Header",
+    "Bee.Plugin.DocumentProcess.RequestHeader.Placeholder": "Please Enter Request Header",
+    "Bee.Plugin.DocumentProcess.EnableEmbedResources": "Enable Embed Resources?",
+    "Bee.Plugin.DocumentProcess.EnableLogFile": "Enable Log File?",
+    "Bee.Plugin.DocumentProcess.EnableExtractMedia": "Enable Extract Media?"
 }

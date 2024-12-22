@@ -9,6 +9,7 @@
       "Bee.Plugin.DocumentProcess/1.0.0": {
         "dependencies": {
           "Bee.Base": "1.0.0",
+          "Ke.DocumentProcess.Pandoc": "1.0.0",
           "Roslyn.Diagnostics.Analyzers": "3.11.0-beta1.24527.2"
         },
         "runtime": {
@@ -74,6 +75,17 @@
           "lib/net8.0/Avalonia.Remote.Protocol.dll": {
             "assemblyVersion": "11.1.0.0",
             "fileVersion": "11.1.0.0"
+          }
+        }
+      },
+      "CliWrap/3.7.0": {
+        "dependencies": {
+          "System.Management": "9.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/CliWrap.dll": {
+            "assemblyVersion": "3.7.0.0",
+            "fileVersion": "3.7.0.0"
           }
         }
       },
@@ -153,6 +165,33 @@
           "Microsoft.CodeAnalysis.PublicApiAnalyzers": "3.11.0-beta1.24527.2"
         }
       },
+      "System.CodeDom/9.0.0": {
+        "runtime": {
+          "lib/net8.0/System.CodeDom.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.24.52809"
+          }
+        }
+      },
+      "System.Management/9.0.0": {
+        "dependencies": {
+          "System.CodeDom": "9.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/System.Management.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.24.52809"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net8.0/System.Management.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.24.52809"
+          }
+        }
+      },
       "System.Text.Encodings.Web/8.0.0": {},
       "System.Text.Json/8.0.4": {
         "dependencies": {
@@ -168,6 +207,26 @@
         },
         "runtime": {
           "Bee.Base.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Ke.DocumentProcess.Abstrations/1.0.0": {
+        "runtime": {
+          "Ke.DocumentProcess.Abstrations.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Ke.DocumentProcess.Pandoc/1.0.0": {
+        "dependencies": {
+          "CliWrap": "3.7.0",
+          "Ke.DocumentProcess.Abstrations": "1.0.0"
+        },
+        "runtime": {
+          "Ke.DocumentProcess.Pandoc.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -201,6 +260,13 @@
       "sha512": "sha512-Jgv470tVeZRwLwivNGdcdEyQdWhe3bsDF0931L1PvvnLGotMaUPh6cvVZDRwLv7BVues+EA8e5wsicVATl6vMQ==",
       "path": "avalonia.remote.protocol/11.1.0",
       "hashPath": "avalonia.remote.protocol.11.1.0.nupkg.sha512"
+    },
+    "CliWrap/3.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2RgU3zmQDAD4S8Aq4igWRF31VzzH/zE6kdecLfeozoPZlibahBs9AGSqrk8B6U13K2A65dFRLg/0tNBtBaOH/A==",
+      "path": "cliwrap/3.7.0",
+      "hashPath": "cliwrap.3.7.0.nupkg.sha512"
     },
     "CommunityToolkit.Mvvm/8.2.1": {
       "type": "package",
@@ -272,6 +338,20 @@
       "path": "roslyn.diagnostics.analyzers/3.11.0-beta1.24527.2",
       "hashPath": "roslyn.diagnostics.analyzers.3.11.0-beta1.24527.2.nupkg.sha512"
     },
+    "System.CodeDom/9.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oTE5IfuMoET8yaZP/vdvy9xO47guAv/rOhe4DODuFBN3ySprcQOlXqO3j+e/H/YpKKR5sglrxRaZ2HYOhNJrqA==",
+      "path": "system.codedom/9.0.0",
+      "hashPath": "system.codedom.9.0.0.nupkg.sha512"
+    },
+    "System.Management/9.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bVh4xAMI5grY5GZoklKcMBLirhC8Lqzp63Ft3zXJacwGAlLyFdF4k0qz4pnKIlO6HyL2Z4zqmHm9UkzEo6FFsA==",
+      "path": "system.management/9.0.0",
+      "hashPath": "system.management.9.0.0.nupkg.sha512"
+    },
     "System.Text.Encodings.Web/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -287,6 +367,16 @@
       "hashPath": "system.text.json.8.0.4.nupkg.sha512"
     },
     "Bee.Base/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Ke.DocumentProcess.Abstrations/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Ke.DocumentProcess.Pandoc/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

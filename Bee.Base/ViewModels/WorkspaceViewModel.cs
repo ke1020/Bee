@@ -1,12 +1,20 @@
+using Avalonia.Controls;
+
+using Bee.Base.Models;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
+using Ke.Bee.Localization.Localizer.Abstractions;
 
 namespace Bee.Base.ViewModels;
 
 /// <summary>
 /// 工作区视图模型
 /// </summary>
-public partial class WorkspaceViewModel : PageViewModelBase
+/// <param name="serviceProvider">服务提供者</param>
+/// <param name="l">本地化资源对象</param>
+public partial class WorkspaceViewModel(IServiceProvider serviceProvider, ILocalizer l) : PageViewModelBase
 {
     [ObservableProperty]
     private bool _isPaneOpen = false;
@@ -15,5 +23,47 @@ public partial class WorkspaceViewModel : PageViewModelBase
     private void PaneToggle()
     {
         IsPaneOpen = !IsPaneOpen;
+    }
+
+    protected IServiceProvider ServiceProvider { get; } = serviceProvider;
+    protected ILocalizer L { get; } = l;
+    protected virtual List<TabMetadata> TabList { get; } = [];
+    protected virtual int SelectedTabIndex { get; } = 0;
+
+    /// <summary>
+    /// 标签页
+    /// </summary>
+    public List<TabItem> Tabs => TabList.Select((x, i) => new TabItem { TabIndex = i, Header = L[x.LocalKey] }).ToList();
+
+    private TabItem? _selectedTab;
+    /// <summary>
+    /// 选中项
+    /// </summary>
+    public TabItem SelectedTab
+    {
+        get => _selectedTab ?? Tabs[SelectedTabIndex];
+        set
+        {
+            InitialTab(value, TabList[value.TabIndex]);
+            SetProperty(ref _selectedTab, value);
+        }
+    }
+
+    /// <summary>
+    /// 初始化标签页
+    /// </summary>
+    /// <param name="tabItem">标签对象</param>
+    /// <param name="tabMetadata">标签元数据信息</param>
+    private void InitialTab(TabItem tabItem, TabMetadata tabMetadata)
+    {
+        if (ServiceProvider.GetService(tabMetadata.ViewType) is not UserControl view)
+        {
+            return;
+        }
+
+        var vm = ServiceProvider.GetService(tabMetadata.ViewModelType);
+        tabItem.DataContext = vm;
+        view.DataContext = vm;
+        tabItem.Content = view;
     }
 }

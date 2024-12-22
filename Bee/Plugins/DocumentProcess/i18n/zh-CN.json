@@ -1,4 +1,19 @@
 {
     "Menu.Sidebar.DocumentProcess": "文档处理",
-    "Bee.Plugin.DocumentProcess.ViewComment": "将图片拖入上方虚线框内加入任务列表，然后从右侧面板设置参数；最后，点击 “执行任务” 按钮。主要功能：批量处理图片格式转换、等比缩放、固定尺寸裁剪、图像水印、文本水印。"
+    "Menu.Sidebar.DocumentConverter": "文档格式转换",
+    "Bee.Plugin.DocumentProcess.DocumentConvertTitle": "文档格式转换",
+    "Bee.Plugin.DocumentProcess.Tab.Convert": "转换",
+    "Bee.Plugin.DocumentProcess.ViewComment": "将文档拖入上方虚线框内加入任务列表，然后从右侧面板设置参数；最后，点击 “执行任务” 按钮。主要功能：批量文档格式转换。",
+    "Bee.Plugin.DocumentProcess.InputFormat": "输入格式（非必须）",
+    "Bee.Plugin.DocumentProcess.OutputFormat": "输出格式",
+    "Bee.Plugin.DocumentProcess.Enable": "启用",
+    "Bee.Plugin.DocumentProcess.ResourcePath": "资源路径",
+    "Bee.Plugin.DocumentProcess.ResourcePath.Placeholder": "请选择资源路径",
+    "Bee.Plugin.DocumentProcess.EnableStandalone": "启用独立文件？",
+    "Bee.Plugin.DocumentProcess.EnableRequestHeader": "启用请求头？",
+    "Bee.Plugin.DocumentProcess.RequestHeader": "请求头",
+    "Bee.Plugin.DocumentProcess.RequestHeader.Placeholder": "请输入请求头",
+    "Bee.Plugin.DocumentProcess.EnableEmbedResources": "启用嵌入资源？",
+    "Bee.Plugin.DocumentProcess.EnableLogFile": "启用日志文件？",
+    "Bee.Plugin.DocumentProcess.EnableExtractMedia": "启用媒体提取？"
 }

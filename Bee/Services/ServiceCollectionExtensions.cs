@@ -114,20 +114,30 @@ public static class ServiceCollectionExtensions
         var menuContext = serviceProvider.GetService<MenuConfigurationContext>();
 
         var files = Directory.GetFiles(pluginPath, "*.dll", SearchOption.AllDirectories);
-        foreach (var file in files)
+        try
         {
-            var assembly = Assembly.LoadFrom(file);
-            var plugins = assembly.GetTypes()
-                // 所有 IPlugin 接口的非抽象类实现
-                .Where(t => typeof(PluginBase).IsAssignableFrom(t) && !t.IsAbstract)
-                // 创建实例
-                .Select(t => (IPlugin)Activator.CreateInstance(t, serviceProvider)!)
-                ;
-
-            foreach (var plugin in plugins)
+            foreach (var file in files)
             {
-                plugin.RegisterServices(services);
-                plugin.ConfigureMenu(menuContext!);
+                var assembly = Assembly.LoadFrom(file);
+                var plugins = assembly.GetTypes()
+                    // 所有 IPlugin 接口的非抽象类实现
+                    .Where(t => typeof(PluginBase).IsAssignableFrom(t) && !t.IsAbstract)
+                    // 创建实例
+                    .Select(t => (IPlugin)Activator.CreateInstance(t, serviceProvider)!)
+                    ;
+
+                foreach (var plugin in plugins)
+                {
+                    plugin.RegisterServices(services);
+                    plugin.ConfigureMenu(menuContext!);
+                }
+            }
+        }
+        catch (ReflectionTypeLoadException ex)
+        {
+            foreach (var loaderEx in ex.LoaderExceptions)
+            {
+                throw new Exception(loaderEx?.Message);
             }
         }
         return services;
