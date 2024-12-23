@@ -75,16 +75,6 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
         private set => SetProperty(ref _taskArguments, value);
     }
 
-    private string? _viewComment;
-    /// <summary>
-    /// 页面功能说明
-    /// </summary>
-    public string ViewComment
-    {
-        get => _viewComment ?? string.Empty;
-        private set => SetProperty(ref _viewComment, value);
-    }
-
     /// <summary>
     /// 本地化资源
     /// </summary>
@@ -186,11 +176,11 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     /// <summary>
     /// 初始化任务参数对象
     /// </summary>
-    public void InitialArguments(string outputPath)
+    public void InitialArguments(string pluginName)
     {
         TaskArguments = new T
         {
-            OutputDirectory = Path.Combine(_appSettings.OutputPath, outputPath)
+            OutputDirectory = Path.Combine(_appSettings.OutputPath, pluginName)
         };
     }
 
@@ -201,15 +191,6 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     public void SetInputExtensions(IEnumerable<string> inputExtensions)
     {
         InputExtensions = inputExtensions;
-    }
-
-    /// <summary>
-    /// 设置页面功能说明
-    /// </summary>
-    /// <param name="viewComment"></param>
-    public void SetViewComment(string viewComment)
-    {
-        ViewComment = viewComment;
     }
 
     /// <summary>

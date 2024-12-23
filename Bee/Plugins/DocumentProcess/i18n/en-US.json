@@ -3,9 +3,11 @@
     "Menu.Sidebar.DocumentConverter": "Document Converter",
     "Bee.Plugin.DocumentProcess.DocumentConvertTitle": "Document Converter",
     "Bee.Plugin.DocumentProcess.Tab.Convert": "Convert",
-    "Bee.Plugin.DocumentProcess.ViewComment": "",
+    "Bee.Plugin.DocumentProcess.ViewComment": "Drag the documents into the dashed-line box above to add them to the task list, then set the parameters from the right-hand panel; finally, click the \"Execute Task\" button. Main function: Batch document format conversion.",
     "Bee.Plugin.DocumentProcess.InputFormat": "Input Format (Optional)",
+    "Bee.Plugin.DocumentProcess.InputFormat.Placeholder": "Please Select Input Format",
     "Bee.Plugin.DocumentProcess.OutputFormat": "Output Format",
+    "Bee.Plugin.DocumentProcess.OutputFormat.Placeholder": "Please Select Output Format",
     "Bee.Plugin.DocumentProcess.Enable": "Enable",
     "Bee.Plugin.DocumentProcess.ResourcePath": "Resource Path",
     "Bee.Plugin.DocumentProcess.ResourcePath.Placeholder": "Please Select Resource Path",
@@ -15,5 +17,7 @@
     "Bee.Plugin.DocumentProcess.RequestHeader.Placeholder": "Please Enter Request Header",
     "Bee.Plugin.DocumentProcess.EnableEmbedResources": "Enable Embed Resources?",
     "Bee.Plugin.DocumentProcess.EnableLogFile": "Enable Log File?",
-    "Bee.Plugin.DocumentProcess.EnableExtractMedia": "Enable Extract Media?"
+    "Bee.Plugin.DocumentProcess.EnableExtractMedia": "Enable Extract Media?",
+    "Bee.Plugin.DocumentProcess.EnableTableOfContents": "Enable Table of Contents?",
+    "Bee.Plugin.DocumentProcess.EnableNumberSections": "Enable Number Sections?"
 }

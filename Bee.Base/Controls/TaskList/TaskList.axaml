@@ -57,9 +57,9 @@
           <!-- 图标 -->
           <TextBlock Text="📖" FontSize="14" Padding="12,10,0,0" DockPanel.Dock="Left" />
 
-          <!-- 文本内容 -->
+          <!-- 文本内容，功能介绍直接绑定到后台代码中定义的 ViewComment 属性上 -->
           <TextBlock ClipToBounds="False" FontSize="14" TextWrapping="Wrap" Padding="5,10,20,10" Foreground="{DynamicResource TextSecondary}"
-            Text="{Binding ViewComment}" />
+            Text="{Binding ViewComment, RelativeSource={RelativeSource AncestorType=UserControl}}" />
         </DockPanel>
       </Border>
     </StackPanel>

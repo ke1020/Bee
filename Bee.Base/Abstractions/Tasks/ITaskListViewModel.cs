@@ -27,13 +27,8 @@ public interface ITaskListViewModel<out T> where T : TaskArgumentBase
     /// <summary>
     /// 初始化任务参数对象
     /// </summary>
-    /// <param name="outputPath">输出路径（相对于全局输出目录下的路径）</param>
-    void InitialArguments(string outputPath);
-    /// <summary>
-    /// 设置视图功能说明
-    /// </summary>
-    /// <param name="viewComment"></param>
-    void SetViewComment(string viewComment);
+    /// <param name="pluginName">插件名称</param>
+    void InitialArguments(string pluginName);
     /// <summary>
     /// 设置输入扩展
     /// </summary>

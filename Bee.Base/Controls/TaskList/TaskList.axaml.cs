@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Bee.Base.Abstractions.Tasks;
@@ -7,6 +8,17 @@ namespace Bee.Base.Controls;
 
 public partial class TaskList : UserControl
 {
+    // 定义一个 StyledProperty
+    public static readonly StyledProperty<string> ViewCommentProperty =
+        AvaloniaProperty.Register<TaskList, string>(nameof(ViewComment), "Default Comment");
+
+    // .NET 属性包装器
+    public string ViewComment
+    {
+        get => GetValue(ViewCommentProperty);
+        set => SetValue(ViewCommentProperty, value);
+    }
+    
     public TaskList()
     {
         InitializeComponent();

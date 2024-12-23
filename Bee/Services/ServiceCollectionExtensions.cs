@@ -112,8 +112,19 @@ public static class ServiceCollectionExtensions
         }
 
         var menuContext = serviceProvider.GetService<MenuConfigurationContext>();
+        // 插件根目录数组
+        var pluginDirectories = Directory.GetDirectories(pluginPath);
 
-        var files = Directory.GetFiles(pluginPath, "*.dll", SearchOption.AllDirectories);
+        List<string> files = [];
+        if (pluginDirectories != null)
+        {
+            // 只加载插件根目录下的 dll 文件
+            foreach (var pluginDir in pluginDirectories)
+            {
+                files.AddRange(Directory.GetFiles(pluginDir, "*.dll"));
+            }
+        }
+
         try
         {
             foreach (var file in files)
@@ -135,6 +146,7 @@ public static class ServiceCollectionExtensions
         }
         catch (ReflectionTypeLoadException ex)
         {
+            File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "run.log"), ex.Message);
             foreach (var loaderEx in ex.LoaderExceptions)
             {
                 throw new Exception(loaderEx?.Message);
