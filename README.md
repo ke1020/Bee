@@ -12,8 +12,7 @@
 
 ![亮色主题](./docs/images/ui-light.png)
 
-
-# 插件列表
+## 插件列表
 
 - [图片处理](https://gitee.com/xkpro/bee-plugin-image-process)：批量格式转换、批量缩放、批量水印
 - [文档处理](https://gitee.com/xkpro/bee-plugin-document-process)：批量文档格式转换

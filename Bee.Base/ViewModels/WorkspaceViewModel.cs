@@ -16,25 +16,25 @@ namespace Bee.Base.ViewModels;
 /// <param name="l">本地化资源对象</param>
 public partial class WorkspaceViewModel(IServiceProvider serviceProvider, ILocalizer l) : PageViewModelBase
 {
-    [ObservableProperty]
-    private bool _isPaneOpen = false;
-
-    [RelayCommand]
-    private void PaneToggle()
-    {
-        IsPaneOpen = !IsPaneOpen;
-    }
-
+    
     protected IServiceProvider ServiceProvider { get; } = serviceProvider;
     protected ILocalizer L { get; } = l;
-    protected virtual List<TabMetadata> TabList { get; } = [];
-    protected virtual int SelectedTabIndex { get; } = 0;
-
     /// <summary>
-    /// 标签页
+    /// 派生类中重写该属性设置 Tab 项
     /// </summary>
-    public List<TabItem> Tabs => TabList.Select((x, i) => new TabItem { TabIndex = i, Header = L[x.LocalKey] }).ToList();
-
+    protected virtual List<TabMetadata> TabList { get; } = [];
+    /// <summary>
+    /// 派生类中重写该属性设置默认选中项
+    /// </summary>
+    protected virtual int SelectedTabIndex { get; } = 0;
+    /// <summary>
+    /// 伸缩面板是否展开状态
+    /// </summary>
+    [ObservableProperty]
+    private bool _isPaneOpen = false;
+    /// <summary>
+    /// 选中 Tab 项
+    /// </summary>
     private TabItem? _selectedTab;
     /// <summary>
     /// 选中项
@@ -47,6 +47,19 @@ public partial class WorkspaceViewModel(IServiceProvider serviceProvider, ILocal
             InitialTab(value, TabList[value.TabIndex]);
             SetProperty(ref _selectedTab, value);
         }
+    }
+    /// <summary>
+    /// 标签页
+    /// </summary>
+    public List<TabItem> Tabs => TabList.Select((x, i) => new TabItem { TabIndex = i, Header = L[x.LocalKey] }).ToList();
+
+    /// <summary>
+    /// 切换伸缩面板展开与收起状态的命令
+    /// </summary>
+    [RelayCommand]
+    private void PaneToggle()
+    {
+        IsPaneOpen = !IsPaneOpen;
     }
 
     /// <summary>

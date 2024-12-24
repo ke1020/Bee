@@ -278,7 +278,7 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
                             return;
                         }
 
-                        // await Task.Delay(300, token); // 模拟异步工作
+                        await Task.Delay(300, token); // 模拟异步工作
 
                         await _taskHandler.ExecuteAsync(taskItem, TaskArguments, (percent) =>
                         {
@@ -298,6 +298,11 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
             {
                 // 处理任务取消
                 Console.WriteLine("任务已取消");
+            }
+            catch(IOException ioEx)
+            {
+                // 如果不处理 IO 异常，会走 finally 块，导致整个任务队列停止
+                Console.WriteLine($"文件操作失败: {ioEx.Message}");
             }
             catch (Exception ex)
             {

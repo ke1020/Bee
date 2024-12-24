@@ -42,6 +42,7 @@
   "Task.StopButtonText": "停止任务",
   "Task.ClearButtonText": "清除任务",
   "Task.OutputDirectoryButtonText": "输出目录",
+  "Task.MaxDegreeOfParallelism.Label": "并发数 {0}",
 
   "Errors.Invalid.ViewPage": "无效的视图页面"
 }

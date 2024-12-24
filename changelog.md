@@ -6,7 +6,7 @@
 
 ### 修改
 
-- `ITaskHandler` 接口增加 `CancellationToken` 参数
+- `ITaskHandler` 接口 `ExecuteAsync` 方法增加 `CancellationToken` 参数
 - `ServiceCollectionExtensions.cs` 注册插件方法中
   - 增加反射类型载入异常 `ReflectionTypeLoadException` 捕获
   - 修改为只注册插件根目录下的 `dll` 文件
