@@ -16,7 +16,6 @@ namespace Bee.Base.ViewModels;
 /// <param name="l">本地化资源对象</param>
 public partial class WorkspaceViewModel(IServiceProvider serviceProvider, ILocalizer l) : PageViewModelBase
 {
-    
     protected IServiceProvider ServiceProvider { get; } = serviceProvider;
     protected ILocalizer L { get; } = l;
     /// <summary>
