@@ -1,7 +1,9 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Avalonia.Win32.Interop.Automation;
 using Bee.Base;
 using Bee.Services;
 using Bee.ViewModels;
@@ -40,6 +42,8 @@ public partial class App : Application
             desktop.MainWindow = new MainWindow
             {
                 DataContext = vm,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                WindowState = WindowState.Normal
             };
         }
 
