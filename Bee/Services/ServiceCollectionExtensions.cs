@@ -13,7 +13,6 @@ using Bee.Base.Models;
 using Bee.Base.Models.Menu;
 using Bee.Services.Impl.Navigation.Commands;
 using Bee.ViewModels;
-using Bee.ViewModels.Documents;
 using Bee.ViewModels.Images;
 using Ke.Bee.Localization.Extensions;
 using Ke.Bee.Localization.Options;
@@ -34,7 +33,6 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<PosterGeneratorViewModel>();
-        services.AddTransient<DocumentConverterViewModel>();
 
         services.AddSettings();
         services.AddMenus();
@@ -44,7 +42,6 @@ public static class ServiceCollectionExtensions
 
         // 注册命令
         services.AddSingleton<INavigationCommand, PosterGeneratorNavigationCommand>();
-        services.AddSingleton<INavigationCommand, DocumentConverterNavigationCommand>();
 
         services.AddPlugins();
 

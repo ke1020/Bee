@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -11,8 +10,10 @@ public partial class MainWindow : Window
 {
     public double OrignalWidth { get; private set; }
     public double OrignalHeight { get; private set; }
-    public int X { get; private set; }
-    public int Y { get; private set; }
+
+    // public int X { get; private set; }
+    // public int Y { get; private set; }
+
     public MainWindow()
     {
         InitializeComponent();
@@ -21,6 +22,7 @@ public partial class MainWindow : Window
 
         this.GetObservable(WindowStateProperty).Subscribe(new WindowStateObserver(this));
 
+        /*
         // 监听窗口位置变化
         PositionChanged += (sender, e) =>
         {
@@ -30,6 +32,7 @@ public partial class MainWindow : Window
                 Y = e.Point.Y;
             }
         };
+        */
     }
 
     protected override void OnResized(WindowResizedEventArgs e)
@@ -55,6 +58,10 @@ public partial class MainWindow : Window
     }
 }
 
+/// <summary>
+/// 窗口状态观察者
+/// </summary>
+/// <param name="window"></param>
 internal class WindowStateObserver(MainWindow window) : IObserver<WindowState>
 {
     private readonly MainWindow _window = window;
