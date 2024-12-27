@@ -10,7 +10,7 @@ public partial class TaskList : UserControl
 {
     // 定义一个 StyledProperty
     public static readonly StyledProperty<string> ViewCommentProperty =
-        AvaloniaProperty.Register<TaskList, string>(nameof(ViewComment), "Default Comment");
+        AvaloniaProperty.Register<TaskList, string>(nameof(ViewComment), "Comment");
 
     // .NET 属性包装器
     public string ViewComment

@@ -8,7 +8,6 @@ using System.Text.Json;
 using System.Threading;
 using Bee.Base.Abstractions.Navigation;
 using Bee.Base.Abstractions.Plugin;
-using Bee.Base.Impl.Navigation;
 using Bee.Base.Models;
 using Bee.Base.Models.Menu;
 using Bee.Services.Impl.Navigation.Commands;

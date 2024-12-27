@@ -16,6 +16,8 @@ using Ke.Bee.Localization.Localizer.Abstractions;
 
 using Microsoft.Extensions.Options;
 
+using Serilog;
+
 namespace Bee.Base.ViewModels;
 
 /// <summary>
@@ -297,17 +299,15 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
             catch (OperationCanceledException)
             {
                 // 处理任务取消
-                Console.WriteLine("任务已取消");
             }
-            catch(IOException ioEx)
+            catch (IOException ioEx)
             {
                 // 如果不处理 IO 异常，会走 finally 块，导致整个任务队列停止
-                Console.WriteLine($"文件操作失败: {ioEx.Message}");
+                Log.Information(ioEx.Message);
             }
             catch (Exception ex)
             {
-                // 处理其他异常
-                Console.WriteLine($"任务执行失败: {ex.Message}");
+                Log.Error(ex.Message);
             }
             finally
             {
@@ -360,7 +360,7 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
         }
         catch (Exception ex)
         {
-
+            Log.Error(ex.Message);
         }
     }
 

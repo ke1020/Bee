@@ -7,7 +7,7 @@ namespace Bee.Base.ViewModels.Menus;
 /// <summary>
 /// 菜单项视图模型
 /// </summary>
-public partial class MenuItemViewModel : ObservableObject
+public partial class MenuItemViewModel(string text) : ObservableObject
 {
     /// <summary>
     /// 唯一标识
@@ -16,7 +16,7 @@ public partial class MenuItemViewModel : ObservableObject
     /// <summary>
     /// 按钮文本
     /// </summary>
-    public string Text { get; set; } = string.Empty;
+    public string Text { get; set; } = text;
     /// <summary>
     /// 菜单分组
     /// </summary>
@@ -39,14 +39,13 @@ public partial class MenuItemViewModel : ObservableObject
     /// </summary>
     public ICommand? MenuClickCommand { get; set; }
     /// <summary>
+    /// 命令类型
+    /// </summary>
+    public string? CommandType { get; set; }
+    /// <summary>
     /// 命令参数
     /// </summary>
     public string? CommandParameter { get; set; }
-
-    public MenuItemViewModel(string text)
-    {
-        Text = text;
-    }
 
     public void AddItem(MenuItemViewModel item)
     {

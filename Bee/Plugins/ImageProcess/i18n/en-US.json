@@ -1,8 +1,6 @@
 {
     "Menu.Sidebar.ImageProcess": "Image Process",
-    "Menu.Sidebar.ImageConverter": "Image Process(scale,watermark)",
-    "Menu.Sidebar.ImageScaler": "Image Scaler",
-    "Menu.Sidebar.ImageWatermarker": "Image Watermarker",
+    "Menu.Sidebar.ImageProcessor": "Image Process(scale,watermark)",
     "Bee.Plugin.ImageProcess.ViewComment": "Drag the images into the dashed-line box above to add them to the task list, then set the parameters from the right-hand panel; finally, click the \"Execute Tasks\" button.",
     "Bee.Plugin.ImageProcess.ImageConvertTitle": "Image Format Convert & Scale & Watermark",
     "Bee.Plugin.ImageProcess.Width": "Width",

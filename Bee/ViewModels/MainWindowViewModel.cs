@@ -15,6 +15,7 @@ using Bee.Base.Abstractions.Navigation;
 using Bee.Base.ViewModels;
 using Bee.Base.Models.Menu;
 using Bee.Base.ViewModels.Menus;
+using System.Text.Json;
 
 namespace Bee.ViewModels;
 
@@ -69,6 +70,7 @@ public partial class MainWindowViewModel : ViewModelBase
         Key = x.Key,
         IsActive = x.IsActive == true,
         Icon = string.IsNullOrWhiteSpace(x.Icon) ? null : StreamGeometry.Parse(x.Icon),
+        CommandType = x.CommandType,
         CommandParameter = x.CommandParameter,
         Items = x.Items.Select(MenuItemToViewModel).ToList(),
         MenuClickCommand = GetRelayCommand(x.CommandType),
@@ -92,6 +94,11 @@ public partial class MainWindowViewModel : ViewModelBase
             // 激活菜单命令返回的中继命令
             MenuClickCommandType.Active => new RelayCommand<MenuItemViewModel>((MenuItemViewModel? menuItem) =>
             {
+                if (menuItem == null)
+                {
+                    return;
+                }
+
                 SetMenuActive(menuItem, () => ToolbarMenus?.FirstOrDefault(x => x.IsActive));
 
                 // 激活工具栏菜单时载入二级菜单数据
@@ -129,6 +136,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
                 // 可以通过 Application.Current 设置或修改 RequestedThemeVariant 属性
                 Application.Current.RequestedThemeVariant = tv;
+
+                // 重载视图
+                _viewNavigator.ReloadCurrentPage();
             }),
 
             // 打开链接返回的中继命令
@@ -201,6 +211,22 @@ public partial class MainWindowViewModel : ViewModelBase
         var items = _menuItems.FirstOrDefault(x => x.Key == menuItem?.Key)?.Items;
         // 将子菜单分组 (分组键就是组名，分组值就是分组之后的菜单集合)
         _originalSidebarMenus = SidebarMenus = ParseGroupDictionary(items?.Select(MenuItemToViewModel));
+
+        // 激活首个菜单
+        var first = SidebarMenus?.Values.FirstOrDefault()?.FirstOrDefault();
+        if (first == null)
+        {
+            return;
+        }
+
+        first.IsActive = true;
+        // 导航到视图
+        if (!string.IsNullOrWhiteSpace(first.CommandParameter) && 
+            Enum.TryParse(first.CommandType, true, out MenuClickCommandType commandType) &&
+            commandType == MenuClickCommandType.Navigate)
+        {
+            _viewNavigator.NavigateTo(first.CommandParameter);
+        }
     }
 
     /// <summary>
