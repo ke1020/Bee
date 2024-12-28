@@ -34,10 +34,10 @@
   "View.SearchInput.Placeholder": "Search The Toolbox",
 
   "Task.TaskListTitle": "Task List",
-  "Task.DragDropText": "Drag and drop files from your local computer here to add them to the task list",
-  "Task.TaskPendingStatusText": "The task list has {0} files pending processing",
+  "Task.DragDropText": "Drag and drop directories or files from your local computer here",
+  "Task.TaskPendingStatusText": "The list has {0} task pending processing",
   "Task.TaskRunningStatusText": "Completed {0}/{1}",
-  "Task.TaskCompletedStatusText": "All files have been processed.",
+  "Task.TaskCompletedStatusText": "All tasks have been processed.",
   "Task.ExecuteButtonText": "Execute",
   "Task.StopButtonText": "Stop",
   "Task.ClearButtonText": "Clear",

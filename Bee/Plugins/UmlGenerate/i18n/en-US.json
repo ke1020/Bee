@@ -1,0 +1,9 @@
+{
+    "Menu.Sidebar.UmlGenerate": "Uml Generator",
+    "Bee.Plugin.UmlGenerate.IndexViewTitle": "Uml Generator",
+    "Bee.Plugin.UmlGenerate.ViewComment": "Uml Generator",
+    "Bee.Plugin.ImageProcess.UmlGenerateMode": "Generate Mode",
+    "Bee.Plugin.UmlGenerate.UmlGenerateMode.Placeholder": "Select Generate Mode",
+    "Bee.Plugin.UmlGenerate.UmlGenerateMode.FromPumlFile": "From .puml File",
+    "Bee.Plugin.UmlGenerate.UmlGenerateMode.CSharpCode": "From C# Source Code"
+}

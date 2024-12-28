@@ -1,0 +1,6 @@
+{
+  "JavaPath": "C:/Users/ke/dev/jdk-23.0.1/bin/java.exe",
+  "PumlGenPath": "C:/Users/ke/dev/puml-gen/puml-gen.exe",
+  "PlantumlJarPath": "C:/Users/ke/dev/plantuml.jar",
+  "UmlLimitSize": 16384
+}

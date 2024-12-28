@@ -6,13 +6,15 @@
 
 ### 新增
 
-- 文档转换功能插件
 - `Serilog` 日志接收器
+- `ITaskHandler` 接口中增加 `CreateTasksFromInputPathsAsync` 方法
+- 为 `ITaskHandler` 接口提供一个默认实现 `TaskHandlerBase` 抽象基类
 
 ### 修改
 
 - `MainWindow` 修复窗口不能恢复原始尺寸的问题
 - `Avalonia` 框架版本升级到 `11.2.3` 版本
+- `ITaskCoverHandler` 接口修改为 `ICoverHandler`，并提供一个默认实现（作为整个应用的通用封面处理器）
 
 ### 移除
 
@@ -25,7 +27,7 @@
 - `ITaskHandler` 接口 `ExecuteAsync` 方法增加 `CancellationToken` 参数
 - `ServiceCollectionExtensions.cs` 注册插件方法中
   - 增加反射类型载入异常 `ReflectionTypeLoadException` 捕获
-  - 修改为只注册插件根目录下的 `dll` 文件
+  - `AddPlugins` 方法中修改为只注册插件根目录下的 `dll` 文件
 - 参数面板中的 `Tabs` 等视图模型抽象到 `WorkspaceViewModel` 类中
 
 ## [0.0.1.1] - 2024-12-19

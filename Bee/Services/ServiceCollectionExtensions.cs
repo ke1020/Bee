@@ -6,8 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading;
+using Bee.Base.Abstractions;
 using Bee.Base.Abstractions.Navigation;
 using Bee.Base.Abstractions.Plugin;
+using Bee.Base.Impl;
+using Bee.Base.Impl.Navigation;
 using Bee.Base.Models;
 using Bee.Base.Models.Menu;
 using Bee.Services.Impl.Navigation.Commands;
@@ -41,6 +44,9 @@ public static class ServiceCollectionExtensions
 
         // 注册命令
         services.AddSingleton<INavigationCommand, PosterGeneratorNavigationCommand>();
+
+        // 注册默认封面处理器
+        services.AddSingleton<ICoverHandler, DefaultCoverHandler>();
 
         services.AddPlugins();
 

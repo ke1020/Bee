@@ -16,4 +16,11 @@ public interface ITaskHandler<in T> where T : TaskArgumentBase
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns>true:成功，false：失败</returns>
     Task<bool> ExecuteAsync(TaskItem taskItem, T? arguments, Action<double> progressCallback, CancellationToken cancellationToken = default);
+    /// <summary>
+    /// 从输入路径创建任务列表
+    /// </summary>
+    /// <param name="inputPaths">输入路径集合</param>
+    /// <param name="inputExtensions">允许的输入文件扩展</param>
+    /// <returns></returns>
+    Task<List<TaskItem>> CreateTasksFromInputPathsAsync(List<string> inputPaths, IEnumerable<string>? inputExtensions = null, T? arguments = null);
 }

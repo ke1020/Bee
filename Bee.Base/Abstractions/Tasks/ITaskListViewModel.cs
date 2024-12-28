@@ -28,10 +28,11 @@ public interface ITaskListViewModel<out T> where T : TaskArgumentBase
     /// 初始化任务参数对象
     /// </summary>
     /// <param name="pluginName">插件名称</param>
-    void InitialArguments(string pluginName);
+    /// <param name="createDirectory">是否创建输出目录</param>
+    void InitialArguments(string pluginName, bool createDirectory = true);
     /// <summary>
     /// 设置输入扩展
     /// </summary>
     /// <param name="inputExtensions"></param>
-    void SetInputExtensions(IEnumerable<string> inputExtensions);
+    void SetInputExtensions(IEnumerable<string>? inputExtensions = null);
 }

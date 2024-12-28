@@ -1,8 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 
 using Bee.Base.Abstractions.Tasks;
@@ -23,16 +21,28 @@ namespace Bee.Base.ViewModels;
 /// <summary>
 /// 任务列表视图模型
 /// </summary>
-public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListViewModel<T> where T : TaskArgumentBase, new()
+/// <remarks>
+/// 构造函数
+/// </remarks>
+/// <param name="appSettings">全局设置对象</param>
+/// <param name="localizer">本地化</param>
+/// <param name="taskHandler">任务处理器</param>
+public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettings,
+    ILocalizer localizer,
+    ITaskHandler<T> taskHandler) :
+    ObservableObject,
+    ITaskListViewModel<T>
+    where T : TaskArgumentBase,
+    new()
 {
     /// <summary>
     /// 可用的输入文件类型 （参数面板中可选的文件类型）
     /// </summary>
-    private IEnumerable<string> _inputExtensions = ["jpg", "png", "bmp", "webp", "gif", "zip", "7z", "rar", "tar", "tar.gz"];
+    private IEnumerable<string>? _inputExtensions;
     /// <summary>
     /// 可用的输入文件类型 （参数面板中可选的文件类型）
     /// </summary>
-    public IEnumerable<string> InputExtensions
+    public IEnumerable<string>? InputExtensions
     {
         get => _inputExtensions;
         private set => SetProperty(ref _inputExtensions, value);
@@ -80,19 +90,15 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     /// <summary>
     /// 本地化资源
     /// </summary>
-    private readonly ILocalizer _l;
+    private readonly ILocalizer _l = localizer;
     /// <summary>
     /// 任务处理接口
     /// </summary>
-    private readonly ITaskHandler<T> _taskHandler;
-    /// <summary>
-    /// 任务封面图处理接口
-    /// </summary>
-    private readonly ITaskCoverHandler? _taskCoverHandler;
+    private readonly ITaskHandler<T> _taskHandler = taskHandler;
     /// <summary>
     /// 应用配置
     /// </summary>
-    private readonly AppSettings _appSettings;
+    private readonly AppSettings _appSettings = appSettings.Value;
     /// <summary>
     /// 取消任务的取消令牌
     /// </summary>
@@ -101,25 +107,6 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     /// 当前正在处理的任务
     /// </summary>
     private Task? _currentTask;
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="appSettings">全局设置对象</param>
-    /// <param name="localizer">本地化</param>
-    /// <param name="taskHandler">任务处理器</param>
-    /// <param name="taskCoverHandler">封面图片获取器</param>
-    public TaskListViewModel(IOptions<AppSettings> appSettings,
-        ILocalizer localizer,
-        ITaskHandler<T> taskHandler,
-        ITaskCoverHandler? taskCoverHandler = null)
-    {
-        _l = localizer;
-        _appSettings = appSettings.Value;
-        _taskHandler = taskHandler;
-        _taskCoverHandler = taskCoverHandler;
-        // _taskArguments = new T();
-    }
 
     /// <summary>
     /// 设置任务准备状态
@@ -178,20 +165,26 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
     /// <summary>
     /// 初始化任务参数对象
     /// </summary>
-    public void InitialArguments(string pluginName)
+    public void InitialArguments(string pluginName, bool createDirectory = true)
     {
         TaskArguments = new T
         {
             OutputDirectory = Path.Combine(_appSettings.OutputPath, pluginName)
         };
+
+        if (createDirectory && !Directory.Exists(TaskArguments.OutputDirectory))
+        {
+            Directory.CreateDirectory(TaskArguments.OutputDirectory);
+        }
     }
 
     /// <summary>
     /// 设置输入扩展
     /// </summary>
     /// <param name="inputExtensions"></param>
-    public void SetInputExtensions(IEnumerable<string> inputExtensions)
+    public void SetInputExtensions(IEnumerable<string>? inputExtensions = null)
     {
+        ClearTaskItems();
         InputExtensions = inputExtensions;
     }
 
@@ -220,7 +213,8 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
         // 为了避免操作阻塞 UI，在后台执行耗时操作
         await Task.Run(async () =>
         {
-            TaskItems.Merge([.. await GetTasksAsync(paths, InputExtensions.Select(x => x.StartsWith('.') ? x : $".{x}"))]);
+            // await GetTasksAsync(paths, InputExtensions.Select(x => x.StartsWith('.') ? x : $".{x}"))
+            TaskItems.Merge([.. await _taskHandler.CreateTasksFromInputPathsAsync(paths, InputExtensions, TaskArguments)]);
             SetPendingStatus(TaskItems.Count);
         });
 
@@ -376,12 +370,14 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
         }
     }
 
+    /*
     /// <summary>
     /// 获取任务对象集合
     /// </summary>
     /// <param name="inputPaths">输入路径集合</param>
     /// <param name="inputExtensions">输入扩展名集合</param>
     /// <returns></returns>
+    [Obsolete("请实现 ITaskHandler<T> 接口的 CreateTasksFromInputPaths 方法")]
     private async Task<List<TaskItem>> GetTasksAsync(IList<string> inputPaths, IEnumerable<string> inputExtensions)
     {
         if (inputPaths == null)
@@ -453,4 +449,5 @@ public sealed partial class TaskListViewModel<T> : ObservableObject, ITaskListVi
         }
         return files;
     }
+    */
 }

@@ -1,4 +1,5 @@
 using Avalonia.Media.Imaging;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Bee.Base.Models.Tasks;
@@ -29,7 +30,12 @@ public partial class TaskItem : ObservableObject, IDisposable
     /// <summary>
     /// 文件地址
     /// </summary>
+    [Obsolete("请使用 Input 属性")]
     public string FileName { get; set; } = string.Empty;
+    /// <summary>
+    /// 输入地址 (根据 InputType 类型确认，可能为文件或目录地址类型)
+    /// </summary>
+    public string Input { get; set; } = string.Empty;
 
     /// <summary>
     /// 释放占用资源

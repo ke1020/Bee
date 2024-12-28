@@ -1,8 +1,10 @@
 using System.ComponentModel;
+
+using Bee.Base.Abstractions.Navigation;
 using Bee.Base.Models.Navigation;
 using Bee.Base.ViewModels;
 
-namespace Bee.Base.Abstractions.Navigation;
+namespace Bee.Base.Impl.Navigation;
 
 /// <summary>
 /// 默认视图导航器

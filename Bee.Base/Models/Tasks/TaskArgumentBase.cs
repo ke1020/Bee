@@ -1,9 +1,11 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace Bee.Base.Models.Tasks;
 
 /// <summary>
 /// 任务参数基类
 /// </summary>
-public class TaskArgumentBase
+public class TaskArgumentBase : ObservableObject
 {
     /// <summary>
     /// 输出目录

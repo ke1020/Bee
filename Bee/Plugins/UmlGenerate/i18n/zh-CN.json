@@ -1,0 +1,9 @@
+{
+    "Menu.Sidebar.UmlGenerator": "Uml 生成器",
+    "Bee.Plugin.UmlGenerate.IndexViewTitle": "Uml 生成器",
+    "Bee.Plugin.UmlGenerate.ViewComment": "Uml 生成器。支持将 .puml 文件转换为图片格式输出",
+    "Bee.Plugin.UmlGenerate.UmlGenerateMode": "生成模式",
+    "Bee.Plugin.UmlGenerate.UmlGenerateMode.Placeholder": "选择生成模式",
+    "Bee.Plugin.UmlGenerate.UmlGenerateMode.FromPumlFile": "从 .puml 文件生成",
+    "Bee.Plugin.UmlGenerate.UmlGenerateMode.CSharpCode": "从 C# 源码生成"
+}

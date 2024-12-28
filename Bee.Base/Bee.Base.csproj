@@ -21,6 +21,8 @@
     <ProjectReference
       Include="C:\Users\ke\dev\proj\avalonia\Ke.Bee.Localization\Ke.Bee.Localization.csproj" />
       -->
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
