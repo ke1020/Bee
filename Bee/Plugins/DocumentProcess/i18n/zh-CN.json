@@ -21,5 +21,6 @@
     "Bee.Plugin.DocumentProcess.EnableLogFile": "启用日志文件？",
     "Bee.Plugin.DocumentProcess.EnableExtractMedia": "启用媒体提取？",
     "Bee.Plugin.DocumentProcess.EnableTableOfContents": "启用目录表？",
-    "Bee.Plugin.DocumentProcess.EnableNumberSections": "启用章节编号？"
+    "Bee.Plugin.DocumentProcess.EnableNumberSections": "启用章节编号？",
+    "Bee.Plugin.DocumentProcess.Fail.Convert": "文档转换失败"
 }

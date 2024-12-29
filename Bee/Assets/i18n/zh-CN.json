@@ -43,7 +43,10 @@
   "Task.StopButtonText": "停止任务",
   "Task.ClearButtonText": "清除任务",
   "Task.OutputDirectoryButtonText": "输出目录",
-  "Task.MaxDegreeOfParallelism.Label": "并发处理 {0}",
+  "Task.MaxDegreeOfParallelism.Label": "并发执行 {0}",
 
-  "Errors.Invalid.ViewPage": "无效的视图页面"
+  "Errors.Invalid.ViewPage": "无效的视图页面",
+  "Errors.NotSupported.InputFormat": "不支持的输入格式",
+  "Errors.NotSupported.OutputFormat": "不支持的输出格式",
+  "Errors.NotFound.File": "文件不存在 {0}"
 }

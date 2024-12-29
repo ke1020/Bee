@@ -1,9 +1,21 @@
 {
     "Menu.Sidebar.UmlGenerator": "Uml 生成器",
     "Bee.Plugin.UmlGenerate.IndexViewTitle": "Uml 生成器",
-    "Bee.Plugin.UmlGenerate.ViewComment": "Uml 生成器。支持将 .puml 文件转换为图片格式输出",
+    "Bee.Plugin.UmlGenerate.ViewComment": "支持从 .puml 文件或 C# 源码生成 UML 图，将 .puml 后缀的文件或 C# 源码目录拖入拖放区",
     "Bee.Plugin.UmlGenerate.UmlGenerateMode": "生成模式",
     "Bee.Plugin.UmlGenerate.UmlGenerateMode.Placeholder": "选择生成模式",
     "Bee.Plugin.UmlGenerate.UmlGenerateMode.FromPumlFile": "从 .puml 文件生成",
-    "Bee.Plugin.UmlGenerate.UmlGenerateMode.CSharpCode": "从 C# 源码生成"
+    "Bee.Plugin.UmlGenerate.UmlGenerateMode.CSharpCode": "从 C# 源码生成",
+    "Bee.Plugin.UmlGenerate.UmlScaleMode": "缩放模式",
+    "Bee.Plugin.UmlGenerate.UmlScaleMode.Placeholder": "选择缩放模式",
+    "Bee.Plugin.UmlGenerate.UmlScaleMode.ByScale": "按倍数缩放",
+    "Bee.Plugin.UmlGenerate.UmlScaleMode.ByWidth": "按宽度缩放",
+    "Bee.Plugin.UmlGenerate.UmlScaleMode.ByHeight": "按高度缩放",
+    "Bee.Plugin.UmlGenerate.ScaleValue": "缩放值",
+    "Bee.Plugin.UmlGenerate.ScaleValue.Placeholder": "输入缩放值",
+    "Bee.Plugin.UmlGenerate.OutputFormat": "输出格式",
+    "Bee.Plugin.UmlGenerate.Theme": "主题",
+    "Bee.Plugin.UmlGenerate.Fail.PumlFileExists": "include.puml 文件已存在",
+    "Bee.Plugin.UmlGenerate.Fail.GeneratePumlFile": "生成 .puml 文件失败",
+    "Bee.Plugin.UmlGenerate.Fail.GenerateUml": "生成 Uml 失败"
 }

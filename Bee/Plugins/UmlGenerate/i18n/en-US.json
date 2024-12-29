@@ -1,9 +1,21 @@
 {
-    "Menu.Sidebar.UmlGenerate": "Uml Generator",
+    "Menu.Sidebar.UmlGenerator": "Uml Generator",
     "Bee.Plugin.UmlGenerate.IndexViewTitle": "Uml Generator",
-    "Bee.Plugin.UmlGenerate.ViewComment": "Uml Generator",
-    "Bee.Plugin.ImageProcess.UmlGenerateMode": "Generate Mode",
+    "Bee.Plugin.UmlGenerate.ViewComment": "Supports generating UML diagrams from .puml files or C# source code. Drag and drop .puml files or directories containing C# source code into the drop zone",
+    "Bee.Plugin.UmlGenerate.UmlGenerateMode": "Generate Mode",
     "Bee.Plugin.UmlGenerate.UmlGenerateMode.Placeholder": "Select Generate Mode",
     "Bee.Plugin.UmlGenerate.UmlGenerateMode.FromPumlFile": "From .puml File",
-    "Bee.Plugin.UmlGenerate.UmlGenerateMode.CSharpCode": "From C# Source Code"
+    "Bee.Plugin.UmlGenerate.UmlGenerateMode.CSharpCode": "From C# Source Code",
+    "Bee.Plugin.UmlGenerate.UmlScaleMode": "Scale Mode",
+    "Bee.Plugin.UmlGenerate.UmlScaleMode.Placeholder": "Select Scale Mode",
+    "Bee.Plugin.UmlGenerate.UmlScaleMode.ByScale": "scale by a factor of",
+    "Bee.Plugin.UmlGenerate.UmlScaleMode.ByWidth": "scale by width",
+    "Bee.Plugin.UmlGenerate.UmlScaleMode.ByHeight": "scale by height",
+    "Bee.Plugin.UmlGenerate.ScaleValue": "Scale Value",
+    "Bee.Plugin.UmlGenerate.ScaleValue.Placeholder": "Input Scale Value",
+    "Bee.Plugin.UmlGenerate.OutputFormat": "Output Format",
+    "Bee.Plugin.UmlGenerate.Theme": "Theme",
+    "Bee.Plugin.UmlGenerate.Fail.PumlFileExists": "include.puml File already exists",
+    "Bee.Plugin.UmlGenerate.Fail.GeneratePumlFile": "Generate include.puml File Fail",
+    "Bee.Plugin.UmlGenerate.Fail.GenerateUml": "Generate Uml Fail"
 }

@@ -2,6 +2,13 @@
 
 本项目的所有重要变更都将记录在此文件中。
 
+## [] - 2024-12-29
+
+### 修改
+
+- `PluginResult` 类重命名为 `Result`
+- `ITaskHandler` 接口的 `ExecuteAsync` 方法返回值类型修改为 `Result`
+
 ## [] - 2024-12-26
 
 ### 新增

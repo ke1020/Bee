@@ -15,7 +15,6 @@ using Bee.Base.Abstractions.Navigation;
 using Bee.Base.ViewModels;
 using Bee.Base.Models.Menu;
 using Bee.Base.ViewModels.Menus;
-using System.Text.Json;
 
 namespace Bee.ViewModels;
 
@@ -162,7 +161,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 // 重载视图，触发本地化更新
                 _viewNavigator.ReloadCurrentPage();
 
-                LoadToolbarMenus();
+                LoadToolbarMenus(true);
             }),
 
             // 返回 null
@@ -191,26 +190,46 @@ public partial class MainWindowViewModel : ViewModelBase
     /// <summary>
     /// 载入工具栏菜单
     /// </summary>
-    private void LoadToolbarMenus()
+    /// <param name="isReload">是否重载菜单（true: 保持当前激活菜单）</param>
+    private void LoadToolbarMenus(bool isReload = false)
     {
         var toolbarMenus = _menuItems.Where(x => x.Group == "Toolbar").Select(MenuItemToViewModel);
         ToolbarMenus = [.. toolbarMenus];
         var settingMenus = _menuItems.Where(x => x.Group == "Settings").Select(MenuItemToViewModel);
         SettingMenus = [.. settingMenus];
 
-        LoadSidebarMenus(ToolbarMenus[0]);
+        if (isReload)
+        {
+            var currentActiveToolbarMenu = ToolbarMenus?.FirstOrDefault(x => x.IsActive);
+            var currentActiveSidebarMenu = SidebarMenus?.Values.SelectMany(x => x).FirstOrDefault(x => x.IsActive);
+            LoadSidebarMenus(currentActiveToolbarMenu, currentActiveSidebarMenu);
+        }
+        else
+        {
+            LoadSidebarMenus(ToolbarMenus[0]);
+        }
     }
 
     /// <summary>
     /// 载入侧栏二级菜单
     /// </summary>
     /// <param name="menuItem">当前激活菜单项</param>
-    private void LoadSidebarMenus(MenuItemViewModel? menuItem)
+    private void LoadSidebarMenus(MenuItemViewModel? menuItem, MenuItemViewModel? activeSidebarMenu = null)
     {
         // 找到激活菜单的子菜单
         var items = _menuItems.FirstOrDefault(x => x.Key == menuItem?.Key)?.Items;
         // 将子菜单分组 (分组键就是组名，分组值就是分组之后的菜单集合)
         _originalSidebarMenus = SidebarMenus = ParseGroupDictionary(items?.Select(MenuItemToViewModel));
+
+        if (activeSidebarMenu != null)
+        {
+            var active = SidebarMenus?.Values.SelectMany(x => x).FirstOrDefault(x => x.Key.Equals(activeSidebarMenu.Key));
+            if (active != null)
+            {
+                active.IsActive = true;
+            }
+            return;
+        }
 
         // 激活首个菜单
         var first = SidebarMenus?.Values.FirstOrDefault()?.FirstOrDefault();
@@ -221,7 +240,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         first.IsActive = true;
         // 导航到视图
-        if (!string.IsNullOrWhiteSpace(first.CommandParameter) && 
+        if (!string.IsNullOrWhiteSpace(first.CommandParameter) &&
             Enum.TryParse(first.CommandType, true, out MenuClickCommandType commandType) &&
             commandType == MenuClickCommandType.Navigate)
         {

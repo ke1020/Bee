@@ -19,5 +19,6 @@
     "Bee.Plugin.DocumentProcess.EnableLogFile": "Enable Log File?",
     "Bee.Plugin.DocumentProcess.EnableExtractMedia": "Enable Extract Media?",
     "Bee.Plugin.DocumentProcess.EnableTableOfContents": "Enable Table of Contents?",
-    "Bee.Plugin.DocumentProcess.EnableNumberSections": "Enable Number Sections?"
+    "Bee.Plugin.DocumentProcess.EnableNumberSections": "Enable Number Sections?",
+    "Bee.Plugin.DocumentProcess.Fail.Convert": "Convert Failed"
 }

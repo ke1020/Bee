@@ -42,6 +42,10 @@
   "Task.StopButtonText": "Stop",
   "Task.ClearButtonText": "Clear",
   "Task.OutputDirectoryButtonText": "Output Directory",
+  "Task.MaxDegreeOfParallelism.Label": "Degree Of Parallelism {0}",
 
-  "Errors.Invalid.ViewPage": "Invalid View Page"
+  "Errors.Invalid.ViewPage": "Invalid View Page",
+  "Errors.NotSupported.InputFormat": "Input format is not supported.",
+  "Errors.NotSupported.OutputFormat": "Output format is not supported.",
+  "Errors.NotFound.File": "File not found. {0}"
 }
