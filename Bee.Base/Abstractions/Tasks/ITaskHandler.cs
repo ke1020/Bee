@@ -1,3 +1,4 @@
+using Bee.Base.Models.Plugin;
 using Bee.Base.Models.Tasks;
 
 namespace Bee.Base.Abstractions.Tasks;
@@ -15,7 +16,7 @@ public interface ITaskHandler<in T> where T : TaskArgumentBase
     /// <param name="progressCallback">进度回调函数，用于通知任务进度。</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns>true:成功，false：失败</returns>
-    Task<bool> ExecuteAsync(TaskItem taskItem, T? arguments, Action<double> progressCallback, CancellationToken cancellationToken = default);
+    Task<Result> ExecuteAsync(TaskItem taskItem, T? arguments, Action<double> progressCallback, CancellationToken cancellationToken = default);
     /// <summary>
     /// 从输入路径创建任务列表
     /// </summary>

@@ -9,7 +9,7 @@ public class AssetConsts
     /// <summary>
     /// 文件夹图片
     /// </summary>
-    public static Uri Folder => new("avares://Bee/Assets/images/folder-80.png");
+    public static Uri Folder => new("avares://Bee/Assets/images/folder-180.png");
     /// <summary>
     /// Uml图片
     /// </summary>

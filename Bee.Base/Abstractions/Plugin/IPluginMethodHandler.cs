@@ -14,7 +14,7 @@ public interface IPluginMethodHandler<T>
     /// </summary>
     /// <param name="parameters"></param>
     /// <returns></returns>
-    Task<PluginResult> ExecuteAsync(T? parameters);
+    Task<Result> ExecuteAsync(T? parameters);
 }
 
 /// <summary>
@@ -30,5 +30,5 @@ public interface IPluginMethodHandler<T, R>
     /// <typeparam name="R"></typeparam>
     /// <param name="parameters"></param>
     /// <returns></returns>
-    Task<PluginResult<R>> ExecuteAsync(T? parameters);
+    Task<Result<R>> ExecuteAsync(T? parameters);
 }

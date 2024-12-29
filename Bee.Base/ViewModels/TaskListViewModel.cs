@@ -276,11 +276,16 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
 
                         await Task.Delay(300, token); // 模拟异步工作
 
-                        await _taskHandler.ExecuteAsync(taskItem, TaskArguments, (percent) =>
+                        var r = await _taskHandler.ExecuteAsync(taskItem, TaskArguments, (percent) =>
                         {
                             taskItem.Percent = percent; // 设置任务进度
                             taskItem.IsCompleted = percent == 100; // 设置完成状态
                         }, token);
+
+                        if(!r.OK)
+                        {
+                            Console.WriteLine(r.Message);
+                        }
 
                         // 设置已完成数量
                         SetRunningStatus(TaskItems.Count(x => x.IsCompleted), taskListCount);

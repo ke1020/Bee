@@ -1,6 +1,7 @@
 
 using Avalonia.Media.Imaging;
 
+using Bee.Base.Models.Plugin;
 using Bee.Base.Models.Tasks;
 
 
@@ -52,7 +53,7 @@ public abstract class TaskHandlerBase<T>(ICoverHandler coverHandler) : ITaskHand
         return tasks;
     }
 
-    public abstract Task<bool> ExecuteAsync(TaskItem taskItem,
+    public abstract Task<Result> ExecuteAsync(TaskItem taskItem,
         T? arguments,
         Action<double> progressCallback,
         CancellationToken cancellationToken = default)
