@@ -3,7 +3,6 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:i18n="using:Ke.Bee.Localization.Extensions"
-  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
   x:Class="Bee.Base.Controls.TaskList">
   <Grid>
     <Grid.ColumnDefinitions>
@@ -58,7 +57,8 @@
           <TextBlock Text="📖" FontSize="14" Padding="12,10,0,0" DockPanel.Dock="Left" />
 
           <!-- 文本内容，功能介绍直接绑定到后台代码中定义的 ViewComment 属性上 -->
-          <TextBlock ClipToBounds="False" FontSize="14" TextWrapping="Wrap" Padding="5,10,20,10" Foreground="{DynamicResource TextSecondary}"
+          <TextBlock ClipToBounds="False" FontSize="14" TextWrapping="Wrap" Padding="5,10,20,10"
+            Foreground="{DynamicResource TextSecondary}"
             Text="{Binding ViewComment, RelativeSource={RelativeSource AncestorType=UserControl}}" />
         </DockPanel>
       </Border>

@@ -15,10 +15,11 @@ using Bee.Base.Abstractions.Navigation;
 using Bee.Base.ViewModels;
 using Bee.Base.Models.Menu;
 using Bee.Base.ViewModels.Menus;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Bee.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public partial class MainWindowViewModel : PageViewModelBase
 {
     /// <summary>
     /// 工具栏按钮集合
@@ -60,6 +61,7 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     [ObservableProperty]
     private PageViewModelBase? _currentPage;
+    public ToastrViewModel Toastr { get; }
 
     /// <summary>
     /// MenuItem 到 MenuItemViewModel 的转换器
@@ -169,7 +171,10 @@ public partial class MainWindowViewModel : ViewModelBase
         };
     }
 
-    public MainWindowViewModel(MenuConfigurationContext menuContext, ILocalizer localizer, IViewNavigator viewNavigator)
+    public MainWindowViewModel(MenuConfigurationContext menuContext,
+        ILocalizer localizer,
+        IViewNavigator viewNavigator,
+        ToastrViewModel toastr)
     {
         _l = localizer;
         _menuItems = menuContext.Menus;
@@ -177,6 +182,7 @@ public partial class MainWindowViewModel : ViewModelBase
         _viewNavigator = viewNavigator;
         _viewNavigator.PropertyChanged += OnNavigatorPropertyChanged;
         LoadToolbarMenus();
+        Toastr = toastr;
     }
 
     private void OnNavigatorPropertyChanged(object? sender, PropertyChangedEventArgs e)

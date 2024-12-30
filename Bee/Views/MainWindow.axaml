@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i18n="using:Ke.Bee.Localization.Extensions"
-    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+    xmlns:ctrl="using:Bee.Base.Controls"
     x:Class="Bee.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
     Icon="/Assets/favicon.ico"
@@ -24,130 +24,160 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <!--
-    DockPanel: 布局控件。将子控件沿指定边缘（顶部、底部、左侧、右侧）排列，并使其中一个填充剩余空间
-    DynamicResource: 延迟加载一个键控资源，该资源将在变体资源改变时更新
-    -->
-    <DockPanel Background="{DynamicResource BgBody}">
-
-        <!-- 工具栏
-        BorderThickness: (0,0,1,0) 表示右边框宽度 1，数字分别代表 左、上、右、下 边框的宽度
+    <Panel>
+        <!--
+        DockPanel: 布局控件。将子控件沿指定边缘（顶部、底部、左侧、右侧）排列，并使其中一个填充剩余空间
+        DynamicResource: 延迟加载一个键控资源，该资源将在变体资源改变时更新
         -->
-        <Border x:Name="AppToolbar"
-            Width="70"
-            Background="{DynamicResource BgToolbar}"
-            BorderBrush="{DynamicResource BorderColor}"
-            BorderThickness="0,0,1,0"
-            DockPanel.Dock="Left"
-        >
-            <DockPanel>
-                <!--
+        <DockPanel Background="{DynamicResource BgBody}">
+            <!-- 工具栏
+            BorderThickness: (0,0,1,0) 表示右边框宽度 1，数字分别代表 左、上、右、下 边框的宽度
+            -->
+            <Border x:Name="AppToolbar"
+                Width="70"
+                Background="{DynamicResource BgToolbar}"
+                BorderBrush="{DynamicResource BorderColor}"
+                BorderThickness="0,0,1,0"
+                DockPanel.Dock="Left"
+            >
+                <DockPanel>
+                    <!--
                 DockPanel.Dock="Top" 要设置到 DockPanel 的直接子元素上
                 -->
-                <ItemsControl ItemsSource="{Binding ToolbarMenus}" DockPanel.Dock="Top">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button Classes="ToolbarIconButton" Classes.Active="{Binding IsActive}"
-                                Command="{Binding MenuClickCommand}"
-                                CommandParameter="{Binding}">
-                                <StackPanel>
-                                    <PathIcon Data="{Binding Icon}" />
-                                    <TextBlock Text="{Binding Text}" />
-                                </StackPanel>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-                <!--设置菜单-->
-                <ItemsControl ItemsSource="{Binding SettingMenus}" DockPanel.Dock="Bottom">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button Classes="ToolbarIconButton">
-                                <Button.Flyout>
-                                    <MenuFlyout Placement="Top" ItemsSource="{Binding Items}">
-                                        <MenuFlyout.ItemContainerTheme>
-                                            <ControlTheme TargetType="MenuItem"
-                                                BasedOn="{StaticResource {x:Type MenuItem}}"
-                                                x:DataType="menu:MenuItemViewModel">
-                                                <Setter Property="Header" Value="{Binding Text}" />
-                                                <Setter Property="ItemsSource"
-                                                    Value="{Binding Items}" />
-                                                <Setter Property="Icon" Value="{Binding Icon}" />
-                                                <Setter Property="Command"
-                                                    Value="{Binding MenuClickCommand}" />
-                                                <Setter Property="CommandParameter"
-                                                    Value="{Binding}" />
-                                            </ControlTheme>
-                                        </MenuFlyout.ItemContainerTheme>
-                                    </MenuFlyout>
-                                </Button.Flyout>
-                                <StackPanel>
-                                    <PathIcon Data="{Binding Icon}" />
-                                    <TextBlock Text="{Binding Text}" />
-                                </StackPanel>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-                <!-- 必须始终定义一个最后的子控件（没有停靠属性），否则停靠计算将无法正确进行 -->
-                <Border />
-            </DockPanel>
-        </Border>
-
-        <!-- 二级菜单侧栏 -->
-        <Border
-            IsVisible="True"
-            BorderBrush="{DynamicResource BorderColor}"
-            Width="210"
-            BorderThickness="0,0,1,0" 
-            DockPanel.Dock="Left"
-            Padding="10"
-        >
-            <DockPanel>
-                <!--搜索框-->
-                <TextBox Classes="Search" Watermark="{i18n:Localize View.SearchInput.Placeholder}" KeyUp="SerachMenuKeyUp"
-                    DockPanel.Dock="Top" Margin="0,0,0,5" />
-
-                <!--最后子元素填充剩余的未分配空间-->
-                <ScrollViewer>
-                    <StackPanel>
-                        <ItemsControl ItemsSource="{Binding SidebarMenus}" Margin="0,20,0,10">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Margin="0,0,0,20">
-                                        <TextBlock Classes="SidebarGroupName" Text="{Binding Key}" />
-                                        <ItemsControl ItemsSource="{Binding Value}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Button
-                                                        Classes="SidebarMenuItem"
-                                                        Classes.Active="{Binding IsActive}"
-                                                        Command="{Binding MenuClickCommand}"
-                                                        CommandParameter="{Binding}">
-                                                        <WrapPanel>
-                                                            <PathIcon Data="{Binding Icon}" />
-                                                            <TextBlock Text="{Binding Text}" />
-                                                        </WrapPanel>
-                                                    </Button>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
+                    <ItemsControl ItemsSource="{Binding ToolbarMenus}" DockPanel.Dock="Top">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Classes="ToolbarIconButton"
+                                    Classes.Active="{Binding IsActive}"
+                                    Command="{Binding MenuClickCommand}"
+                                    CommandParameter="{Binding}">
+                                    <StackPanel>
+                                        <PathIcon Data="{Binding Icon}" />
+                                        <TextBlock Text="{Binding Text}" />
                                     </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </ScrollViewer>
-            </DockPanel>
-        </Border>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
-        <!--工作区-->
-        <Border>
-            <TransitioningContentControl Content="{Binding CurrentPage}" />
-        </Border>
+                    <!--设置菜单-->
+                    <ItemsControl ItemsSource="{Binding SettingMenus}" DockPanel.Dock="Bottom">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Classes="ToolbarIconButton">
+                                    <Button.Flyout>
+                                        <MenuFlyout Placement="Top" ItemsSource="{Binding Items}">
+                                            <MenuFlyout.ItemContainerTheme>
+                                                <ControlTheme TargetType="MenuItem"
+                                                    BasedOn="{StaticResource {x:Type MenuItem}}"
+                                                    x:DataType="menu:MenuItemViewModel">
+                                                    <Setter Property="Header" Value="{Binding Text}" />
+                                                    <Setter Property="ItemsSource"
+                                                        Value="{Binding Items}" />
+                                                    <Setter Property="Icon" Value="{Binding Icon}" />
+                                                    <Setter Property="Command"
+                                                        Value="{Binding MenuClickCommand}" />
+                                                    <Setter Property="CommandParameter"
+                                                        Value="{Binding}" />
+                                                </ControlTheme>
+                                            </MenuFlyout.ItemContainerTheme>
+                                        </MenuFlyout>
+                                    </Button.Flyout>
+                                    <StackPanel>
+                                        <PathIcon Data="{Binding Icon}" />
+                                        <TextBlock Text="{Binding Text}" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
-    </DockPanel>
+                    <!-- 必须始终定义一个最后的子控件（没有停靠属性），否则停靠计算将无法正确进行 -->
+                    <Border />
+                </DockPanel>
+            </Border>
 
+            <!-- 二级菜单侧栏 -->
+            <Border
+                IsVisible="True"
+                BorderBrush="{DynamicResource BorderColor}"
+                Width="210"
+                BorderThickness="0,0,1,0"
+                DockPanel.Dock="Left"
+                Padding="10"
+            >
+                <DockPanel>
+                    <!--搜索框-->
+                    <TextBox Classes="Search"
+                        Watermark="{i18n:Localize View.SearchInput.Placeholder}"
+                        KeyUp="SerachMenuKeyUp"
+                        DockPanel.Dock="Top" Margin="0,0,0,5" />
+
+                    <!--最后子元素填充剩余的未分配空间-->
+                    <ScrollViewer>
+                        <StackPanel>
+                            <ItemsControl ItemsSource="{Binding SidebarMenus}" Margin="0,20,0,10">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="0,0,0,20">
+                                            <TextBlock Classes="SidebarGroupName"
+                                                Text="{Binding Key}" />
+                                            <ItemsControl ItemsSource="{Binding Value}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Button
+                                                            Classes="SidebarMenuItem"
+                                                            Classes.Active="{Binding IsActive}"
+                                                            Command="{Binding MenuClickCommand}"
+                                                            CommandParameter="{Binding}">
+                                                            <WrapPanel>
+                                                                <PathIcon Data="{Binding Icon}" />
+                                                                <TextBlock Text="{Binding Text}" />
+                                                            </WrapPanel>
+                                                        </Button>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+            <!--工作区-->
+            <Border>
+                <TransitioningContentControl Content="{Binding CurrentPage}" />
+            </Border>
+        </DockPanel>
+
+        <Canvas HorizontalAlignment="Stretch">
+            <!-- Toastr 提示框 -->
+            <ItemsControl
+                ItemsSource="{Binding Toastr.Items}"
+                Canvas.Right="10" Canvas.Top="10">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            IsVisible="{Binding IsVisible}"
+                            Classes="Toastr Rounded-1 P-2" Margin="0,0,0,5">
+                            <Grid MinWidth="260" MaxWidth="400">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <PathIcon Foreground="White" Data="{StaticResource info}"
+                                    Grid.Column="0" />
+                                <TextBlock Foreground="White"
+                                    Text="{Binding Message}"
+                                    Grid.Column="1" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Canvas>
+    </Panel>
 </Window>

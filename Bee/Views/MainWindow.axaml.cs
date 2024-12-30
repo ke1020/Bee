@@ -17,6 +17,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+
+        // 记录窗口原始尺寸
         OrignalWidth = Width;
         OrignalHeight = Height;
 
@@ -66,14 +68,9 @@ internal class WindowStateObserver(MainWindow window) : IObserver<WindowState>
 {
     private readonly MainWindow _window = window;
 
-    public void OnCompleted()
-    {
+    public void OnCompleted() { }
 
-    }
-
-    public void OnError(Exception error)
-    {
-    }
+    public void OnError(Exception error) { }
 
     public void OnNext(WindowState value)
     {

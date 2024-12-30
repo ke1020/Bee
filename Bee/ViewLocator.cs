@@ -3,7 +3,6 @@ using System.Text.RegularExpressions;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Bee.Base.ViewModels;
-using Bee.ViewModels;
 
 namespace Bee;
 
@@ -31,7 +30,7 @@ public class ViewLocator : IDataTemplate
 
     public bool Match(object? data)
     {
-        return data is ViewModelBase || data is PageViewModelBase;
+        return data is PageViewModelBase;
     }
 
     /// <summary>

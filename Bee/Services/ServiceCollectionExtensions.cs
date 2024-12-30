@@ -13,6 +13,7 @@ using Bee.Base.Impl;
 using Bee.Base.Impl.Navigation;
 using Bee.Base.Models;
 using Bee.Base.Models.Menu;
+using Bee.Base.ViewModels;
 using Bee.Services.Impl.Navigation.Commands;
 using Bee.ViewModels;
 using Bee.ViewModels.Images;
@@ -33,7 +34,8 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddTransient<MainWindowViewModel>();
+        services.AddSingleton<MainWindowViewModel>();
+        services.AddSingleton<ToastrViewModel>();
         services.AddTransient<PosterGeneratorViewModel>();
 
         services.AddSettings();
