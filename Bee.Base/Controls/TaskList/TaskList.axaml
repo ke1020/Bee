@@ -15,7 +15,7 @@
 
       <!-- 拖放区域 -->
       <Grid Width="340" Height="340" Background="#10dddddd"
-        DragDrop.AllowDrop="True">
+        DragDrop.AllowDrop="True" PointerPressed="OnDrapDropAreaPressed">
         <Grid.Clip>
           <RectangleGeometry Rect="0,0,340,340" RadiusX="8" RadiusY="8" />
         </Grid.Clip>

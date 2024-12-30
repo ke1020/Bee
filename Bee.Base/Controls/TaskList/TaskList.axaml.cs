@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+
 using Bee.Base.Abstractions.Tasks;
 using Bee.Base.Models.Tasks;
 
@@ -18,7 +19,7 @@ public partial class TaskList : UserControl
         get => GetValue(ViewCommentProperty);
         set => SetValue(ViewCommentProperty, value);
     }
-    
+
     public TaskList()
     {
         InitializeComponent();
@@ -48,5 +49,24 @@ public partial class TaskList : UserControl
         }
 
         (DataContext as ITaskListViewModel<TaskArgumentBase>)?.RemoveTaskItem(item);
+    }
+
+    private void OnDrapDropAreaPressed(object? sender, PointerPressedEventArgs e)
+    {
+        /*
+        var storageProvider = TopLevel.GetTopLevel(this)?.StorageProvider;
+        if (storageProvider is null)
+        {
+            return;
+        }
+
+        await storageProvider.OpenFolderPickerAsync();
+        var files = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            AllowMultiple = true,
+            Title = "Select Files",
+            // FileTypeFilter = [FilePickerFileTypes.ImageAll]
+        });
+        */
     }
 }
