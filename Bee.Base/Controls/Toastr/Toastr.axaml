@@ -1,0 +1,49 @@
+<Styles xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="using:Bee.Base.Controls"
+    xmlns:i18n="using:Ke.Bee.Localization.Extensions"
+    xmlns:converter="using:Bee.Base.Converters"
+>
+    <Styles.Resources>
+        <converter:ToastrIconConverter x:Key="ToastrIconConverter" />
+    </Styles.Resources>
+    <Style Selector="ctrl|Toastr">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Canvas HorizontalAlignment="Stretch">
+                    <!-- Toastr 提示框 -->
+                    <ItemsControl
+                        ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent}}"
+                        Canvas.Right="10" Canvas.Top="10">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <!-- 自定义伪类的 ToastrBorder 控件 -->
+                                <ctrl:ToastrBorder
+                                    ToastrType="{Binding ToastrType}"
+                                    IsVisible="{Binding IsVisible}" Margin="0,0,0,5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <PathIcon Foreground="White"
+                                            Data="{Binding ToastrType, Converter={StaticResource ToastrIconConverter}}"
+                                            Grid.Column="0" />
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Foreground="White" FontWeight="Bold"
+                                                Text="{i18n:Localize 'Toastr.Title'}"
+                                            />
+                                            <TextBlock Foreground="White"
+                                                Text="{Binding Message}"
+                                                TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </Grid>
+                                </ctrl:ToastrBorder>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Canvas>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

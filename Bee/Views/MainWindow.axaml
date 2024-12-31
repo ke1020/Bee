@@ -153,31 +153,7 @@
             </Border>
         </DockPanel>
 
-        <Canvas HorizontalAlignment="Stretch">
-            <!-- Toastr 提示框 -->
-            <ItemsControl
-                ItemsSource="{Binding Toastr.Items}"
-                Canvas.Right="10" Canvas.Top="10">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border
-                            IsVisible="{Binding IsVisible}"
-                            Classes="Toastr Rounded-1 P-2" Margin="0,0,0,5">
-                            <Grid MinWidth="260" MaxWidth="400">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <PathIcon Foreground="White" Data="{StaticResource info}"
-                                    Grid.Column="0" />
-                                <TextBlock Foreground="White"
-                                    Text="{Binding Message}"
-                                    Grid.Column="1" />
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Canvas>
+        <!-- 提示框 -->
+        <ctrl:Toastr Items="{Binding Toastr.Items}" />
     </Panel>
 </Window>

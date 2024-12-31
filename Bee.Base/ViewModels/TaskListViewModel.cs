@@ -27,9 +27,11 @@ namespace Bee.Base.ViewModels;
 /// <param name="appSettings">全局设置对象</param>
 /// <param name="localizer">本地化</param>
 /// <param name="taskHandler">任务处理器</param>
+/// <param name="toastrViewModel"></param>
 public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettings,
     ILocalizer localizer,
-    ITaskHandler<T> taskHandler) :
+    ITaskHandler<T> taskHandler,
+    ToastrViewModel toastrViewModel) :
     ObservableObject,
     ITaskListViewModel<T>
     where T : TaskArgumentBase,
@@ -95,6 +97,11 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
     /// 任务处理接口
     /// </summary>
     private readonly ITaskHandler<T> _taskHandler = taskHandler;
+    /// <summary>
+    /// Toastr 消息提示
+    /// </summary>
+    private readonly ToastrViewModel _toastr = toastrViewModel;
+
     /// <summary>
     /// 应用配置
     /// </summary>
@@ -274,7 +281,7 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
                             return;
                         }
 
-                        await Task.Delay(300, token); // 模拟异步工作
+                        //await Task.Delay(300, token); // 模拟异步工作
 
                         var r = await _taskHandler.ExecuteAsync(taskItem, TaskArguments, (percent) =>
                         {
@@ -282,9 +289,10 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
                             taskItem.IsCompleted = percent == 100; // 设置完成状态
                         }, token);
 
-                        if(!r.OK)
+                        if (!r.OK)
                         {
-                            Console.WriteLine(r.Message);
+                            _toastr.ToastrError(r.Message ?? string.Empty);
+                            //Console.WriteLine(r.Message);
                         }
 
                         // 设置已完成数量
@@ -294,6 +302,7 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
 
                 // 所有项处理完毕
                 SetCompletedStatus();
+                _toastr.ToastrSuccess(_l["Task.TaskCompletedStatusText"]);
             }
             catch (OperationCanceledException)
             {

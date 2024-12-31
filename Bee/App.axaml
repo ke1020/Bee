@@ -16,7 +16,9 @@
         <StyleInclude Source="avares://Bee/Assets/Styles.axaml" />
         <StyleInclude Source="avares://Bee/Assets/Icons.axaml" />
         <StyleInclude Source="avares://Bee/Assets/Tab.axaml" />
+        <StyleInclude Source="avares://Bee/Assets/Toastr.axaml" />
         <StyleInclude Source="avares://Bee.Base/Controls/Workspace/Workspace.axaml"/>
+        <StyleInclude Source="avares://Bee.Base/Controls/Toastr/Toastr.axaml"/>
     </Application.Styles>
 
     <Application.Resources>

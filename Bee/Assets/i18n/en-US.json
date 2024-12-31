@@ -44,6 +44,8 @@
   "Task.OutputDirectoryButtonText": "Output Directory",
   "Task.MaxDegreeOfParallelism.Label": "Degree Of Parallelism {0}",
 
+  "Toastr.Title": "Information Prompt!",
+
   "Errors.Invalid.ViewPage": "Invalid View Page",
   "Errors.NotSupported.InputFormat": "Input format is not supported.",
   "Errors.NotSupported.OutputFormat": "Output format is not supported.",

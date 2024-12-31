@@ -1,0 +1,33 @@
+<Styles xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="using:Bee.Base.Controls">
+    <Style Selector="ctrl|ToastrBorder[IsVisible=true]">
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="10" />
+        <Setter
+            Property="Opacity" Value="0.95" />
+        <Setter Property="MinWidth" Value="260" />
+        <Setter
+            Property="MaxWidth" Value="360" />
+        <Style.Animations>
+            <Animation Duration="0:0:0.3">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0.0" />
+                    <Setter Property="Margin" Value="0,0,-1000,0" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1.0" />
+                    <Setter Property="Margin" Value="0,0,10,0" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+        <Style
+            Selector="^:danger">
+            <Setter Property="Background" Value="{DynamicResource BgDanger}" />
+        </Style>
+        <Style
+            Selector="^:success">
+            <Setter Property="Background" Value="{DynamicResource BgSuccess}" />
+        </Style>
+    </Style>
+</Styles>
