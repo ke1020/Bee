@@ -241,6 +241,12 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
     [RelayCommand]
     private async Task Execute()
     {
+        if (TaskArguments == null)
+        {
+            _toastr.ToastrError(_l["Task.Arguments.Null"]);
+            return;
+        }
+
         // 任务列表总数
         var taskListCount = TaskItems.Count;
         if (taskListCount == 0)
@@ -266,7 +272,7 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
             var parallelOptions = new ParallelOptions
             {
                 CancellationToken = _cancellationTokenSource.Token,
-                MaxDegreeOfParallelism = TaskArguments?.MaxDegreeOfParallelism ?? 1 // 设置最大并行度
+                MaxDegreeOfParallelism = TaskArguments.MaxDegreeOfParallelism // 设置最大并行度
             };
 
             try

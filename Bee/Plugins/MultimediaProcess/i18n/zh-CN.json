@@ -1,0 +1,6 @@
+{
+    "Menu.Sidebar.Transcoding": "音视频转码",
+    "Bee.Plugin.Multimedia.TranscodingTitle": "音视频转码",
+    "Bee.Plugin.Multimedia.TranscodingViewComment": "将文档拖入上方虚线框内加入任务列表，然后从右侧面板设置参数；最后，点击 “执行任务” 按钮。主要功能：批量文档格式转换。",
+    "Bee.Plugin.Multimedia.OutputFormat": "输出格式"
+}

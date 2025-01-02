@@ -55,7 +55,7 @@ public abstract class TaskHandlerBase<T>(ICoverHandler coverHandler) : ITaskHand
     }
 
     public abstract Task<Fin<Unit>> ExecuteAsync(TaskItem taskItem,
-        T? arguments,
+        T arguments,
         Action<double> progressCallback,
         CancellationToken cancellationToken = default)
         ;

@@ -30,6 +30,7 @@
   "Menu.Sidebar.DevTools": "Development Tools",
 
   "Menu.Sidebar.ChartingTools": "Charting Tools",
+  "Menu.Sidebar.MultimediaProcess": "Audio Visual Processing",
   
   "View.SearchInput.Placeholder": "Search The Toolbox",
 
@@ -43,6 +44,7 @@
   "Task.ClearButtonText": "Clear",
   "Task.OutputDirectoryButtonText": "Output Directory",
   "Task.MaxDegreeOfParallelism.Label": "Degree Of Parallelism {0}",
+  "Task.Arguments.Null": "Task Arguments Is Null",
 
   "Toastr.Title": "Information Prompt!",
 

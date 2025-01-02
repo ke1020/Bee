@@ -1,0 +1,6 @@
+{
+    "Menu.Sidebar.Transcoding": "A/V Transcoding",
+    "Bee.Plugin.Multimedia.TranscodingTitle": "Audio and Video Transcoding",
+    "Bee.Plugin.Multimedia.TranscodingViewComment": "Drag the documents into the dashed-line box above to add them to the task list, then set the parameters from the right-hand panel; finally, click the \"Execute Task\" button. Main function: Batch document format conversion.",
+    "Bee.Plugin.Multimedia.OutputFormat": "Output Format"
+}

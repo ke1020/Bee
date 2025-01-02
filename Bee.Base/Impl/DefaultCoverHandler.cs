@@ -17,7 +17,56 @@ namespace Bee.Base.Impl;
 /// </summary>
 public class DefaultCoverHandler(IOptions<AppSettings> appSettings) : ICoverHandler
 {
-    private readonly string[] _availableImageFormats = [".jpg", ".png", ".bmp", ".webp", ".gif", ".tif", ".tiff", ".tga"];
+    private readonly string[] _availableImageFormats = ["jpg", "png", "bmp", "webp", "gif", "tif", "tiff", "tga"];
+    /// <summary>
+    /// 文件类型到 Uri 类型映射
+    /// </summary>
+    private readonly Dictionary<string, Uri> _fileTypeUriMaps = new()
+    {
+        // 视频
+        { "mp4", ImageAssetConsts.Video },
+        { "mkv", ImageAssetConsts.Video },
+        { "avi", ImageAssetConsts.Video },
+        { "webm", ImageAssetConsts.Video },
+        { "flv", ImageAssetConsts.Video },
+        { "mov", ImageAssetConsts.Video },
+        { "wmv", ImageAssetConsts.Video },
+        { "ogv", ImageAssetConsts.Video },
+        { "ts", ImageAssetConsts.Video },
+        { "mxf", ImageAssetConsts.Video },
+        { "rm", ImageAssetConsts.Video },
+        { "mpeg", ImageAssetConsts.Video },
+        { "vob", ImageAssetConsts.Video },
+
+        // 音频
+        { "mp3", ImageAssetConsts.Audio },
+        { "flac", ImageAssetConsts.Audio },
+        { "ape", ImageAssetConsts.Audio },
+        { "wav", ImageAssetConsts.Audio },
+        { "aac", ImageAssetConsts.Audio },
+        { "ogg", ImageAssetConsts.Audio },
+        { "aiff", ImageAssetConsts.Audio },
+        { "m4a", ImageAssetConsts.Audio },
+        { "wma", ImageAssetConsts.Audio },
+        { "ac3", ImageAssetConsts.Audio },
+        { "mka", ImageAssetConsts.Audio },
+        { "tak", ImageAssetConsts.Audio },
+        { "amr", ImageAssetConsts.Audio },
+
+        // 文档
+        { "doc", ImageAssetConsts.Document },
+        { "docx", ImageAssetConsts.Document },
+        { "pdf", ImageAssetConsts.Document },
+        { "xml", ImageAssetConsts.Document },
+        { "xls", ImageAssetConsts.Document },
+        { "xlsx", ImageAssetConsts.Document },
+        { "txt", ImageAssetConsts.Document },
+        { "md", ImageAssetConsts.Document },
+
+        // 图表
+        { ".puml", ImageAssetConsts.Uml }
+    };
+
     private readonly AppSettings _appSettings = appSettings.Value;
 
     /// <summary>
@@ -32,15 +81,23 @@ public class DefaultCoverHandler(IOptions<AppSettings> appSettings) : ICoverHand
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        // 如果不是图片类型
-        if (!_availableImageFormats.Any(x => file.EndsWith(x, StringComparison.OrdinalIgnoreCase)))
+        var ext = Path.GetExtension(file).TrimStart('.').ToLower();
+
+        // 如果是图片类型
+        if (_availableImageFormats.Any(x => x.Equals(ext)))
         {
-            return AssetLoader.Open(new Uri(_appSettings.DefaultTaskImageUri));
+            // 根据原图片创建缩略图
+            return await GetScaleStreamAsync(file, width, height, cancellationToken) ??
+                AssetLoader.Open(new Uri(_appSettings.DefaultTaskImageUri))
+                ;
         }
 
-        return await GetScaleStreamAsync(file, width, height, cancellationToken) ??
-            AssetLoader.Open(new Uri(_appSettings.DefaultTaskImageUri))
-            ;
+        if (_fileTypeUriMaps.TryGetValue(ext, out Uri? uri) && uri != null)
+        {
+            return AssetLoader.Open(uri);
+        }
+
+        return AssetLoader.Open(new Uri(_appSettings.DefaultTaskImageUri));
     }
 
     /// <summary>

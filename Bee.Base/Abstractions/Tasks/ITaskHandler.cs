@@ -18,7 +18,7 @@ public interface ITaskHandler<in T> where T : TaskArgumentBase
     /// <param name="progressCallback">进度回调函数，用于通知任务进度。</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns>返回一个执行结果对象</returns>
-    Task<Fin<Unit>> ExecuteAsync(TaskItem taskItem, T? arguments, Action<double> progressCallback, CancellationToken cancellationToken = default);
+    Task<Fin<Unit>> ExecuteAsync(TaskItem taskItem, T arguments, Action<double> progressCallback, CancellationToken cancellationToken = default);
     /// <summary>
     /// 从输入路径创建任务列表
     /// </summary>
