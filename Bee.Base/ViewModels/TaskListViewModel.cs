@@ -13,7 +13,6 @@ using CommunityToolkit.Mvvm.Input;
 using Ke.Bee.Localization.Localizer.Abstractions;
 
 using LanguageExt;
-using LanguageExt.Common;
 
 using Microsoft.Extensions.Options;
 
