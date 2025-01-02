@@ -1,8 +1,9 @@
 
 using Avalonia.Media.Imaging;
 
-using Bee.Base.Models.Plugin;
 using Bee.Base.Models.Tasks;
+
+using LanguageExt;
 
 
 namespace Bee.Base.Abstractions.Tasks;
@@ -25,7 +26,7 @@ public abstract class TaskHandlerBase<T>(ICoverHandler coverHandler) : ITaskHand
     /// <param name="arguments">任务参数</param>
     /// <param name="inputExtensions"></param>
     /// <returns></returns>
-    public virtual async Task<List<TaskItem>> CreateTasksFromInputPathsAsync(List<string> inputPaths, 
+    public virtual async Task<List<TaskItem>> CreateTasksFromInputPathsAsync(List<string> inputPaths,
         IEnumerable<string>? inputExtensions = null,
         T? arguments = null)
     {
@@ -53,7 +54,7 @@ public abstract class TaskHandlerBase<T>(ICoverHandler coverHandler) : ITaskHand
         return tasks;
     }
 
-    public abstract Task<Result> ExecuteAsync(TaskItem taskItem,
+    public abstract Task<Fin<Unit>> ExecuteAsync(TaskItem taskItem,
         T? arguments,
         Action<double> progressCallback,
         CancellationToken cancellationToken = default)

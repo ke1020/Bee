@@ -110,6 +110,14 @@
           }
         }
       },
+      "LanguageExt.Core/5.0.0-beta-45": {
+        "runtime": {
+          "lib/net8.0/LanguageExt.Core.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
+          }
+        }
+      },
       "MicroCom.Runtime/0.11.0": {
         "runtime": {
           "lib/net5.0/MicroCom.Runtime.dll": {
@@ -251,6 +259,7 @@
           "CliWrap": "3.7.0",
           "CommunityToolkit.Mvvm": "8.2.1",
           "Ke.Bee.Localization": "0.1.3",
+          "LanguageExt.Core": "5.0.0-beta-45",
           "Microsoft.Extensions.Options": "8.0.2",
           "Serilog": "4.2.0",
           "Serilog.Sinks.File": "6.0.0",
@@ -335,6 +344,13 @@
       "sha512": "sha512-6HyerB64u8A9VIIxwbeEV9AQEjyxoHlrfMgVYkbDBoVmX/be9UhS8dy2vlH72EPPwxpk8m8kvYx43SVxcUbeWQ==",
       "path": "ke.bee.localization/0.1.3",
       "hashPath": "ke.bee.localization.0.1.3.nupkg.sha512"
+    },
+    "LanguageExt.Core/5.0.0-beta-45": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fPdAU1m9JFvaK8p6oubs6KMqXS/l7TvGYvoFOgTOqSdI995NSw+Z6NR6DPLhenClsG2KsLcB6hTNJqNAqdDqqA==",
+      "path": "languageext.core/5.0.0-beta-45",
+      "hashPath": "languageext.core.5.0.0-beta-45.nupkg.sha512"
     },
     "MicroCom.Runtime/0.11.0": {
       "type": "package",

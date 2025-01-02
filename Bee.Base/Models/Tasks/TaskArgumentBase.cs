@@ -14,5 +14,5 @@ public class TaskArgumentBase : ObservableObject
     /// <summary>
     /// 并发请求数
     /// </summary>
-    public int MaxDegreeOfParallelism { get; set; } = 1;
+    public int MaxDegreeOfParallelism { get; set; } = 5;
 }
