@@ -96,7 +96,7 @@
           }
         }
       },
-      "Ke.Bee.Localization/0.1.3": {
+      "Ke.Bee.Localization/0.1.4": {
         "dependencies": {
           "Avalonia": "11.2.3",
           "Microsoft.Extensions.DependencyInjection": "8.0.0",
@@ -104,8 +104,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Ke.Bee.Localization.dll": {
-            "assemblyVersion": "0.1.3.0",
-            "fileVersion": "0.1.3.0"
+            "assemblyVersion": "0.1.4.0",
+            "fileVersion": "0.1.4.0"
           }
         }
       },
@@ -257,7 +257,7 @@
           "Avalonia": "11.2.3",
           "CliWrap": "3.7.0",
           "CommunityToolkit.Mvvm": "8.2.1",
-          "Ke.Bee.Localization": "0.1.3",
+          "Ke.Bee.Localization": "0.1.4",
           "LanguageExt.Core": "5.0.0-beta-45",
           "Microsoft.Extensions.Options": "8.0.2",
           "Serilog": "4.2.0",
@@ -315,12 +315,12 @@
       "path": "communitytoolkit.mvvm/8.2.1",
       "hashPath": "communitytoolkit.mvvm.8.2.1.nupkg.sha512"
     },
-    "Ke.Bee.Localization/0.1.3": {
+    "Ke.Bee.Localization/0.1.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6HyerB64u8A9VIIxwbeEV9AQEjyxoHlrfMgVYkbDBoVmX/be9UhS8dy2vlH72EPPwxpk8m8kvYx43SVxcUbeWQ==",
-      "path": "ke.bee.localization/0.1.3",
-      "hashPath": "ke.bee.localization.0.1.3.nupkg.sha512"
+      "sha512": "sha512-nE5Rc/8kWhFFNVY7r7vwnOBDf9cq6J0+LPnEpoQHnB9WDQPPuKGKFpqqiDRZvwlwYjJiQbIeFYO1VPXpMhU92w==",
+      "path": "ke.bee.localization/0.1.4",
+      "hashPath": "ke.bee.localization.0.1.4.nupkg.sha512"
     },
     "LanguageExt.Core/5.0.0-beta-45": {
       "type": "package",

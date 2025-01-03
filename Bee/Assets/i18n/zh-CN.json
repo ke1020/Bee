@@ -11,6 +11,8 @@
 
   "Menu.Settings": "设置",
   "Menu.Settings.Language": "语言",
+  "Menu.Settings.Language.English": "English",
+  "Menu.Settings.Language.Chinese": "简体中文",
   "Menu.Settings.Theme": "主题",
   "Menu.Settings.Theme.Default": "默认主题",
   "Menu.Settings.Theme.Dark": "暗色主题",

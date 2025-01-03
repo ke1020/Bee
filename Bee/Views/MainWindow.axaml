@@ -9,7 +9,7 @@
     x:Class="Bee.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
     Icon="/Assets/favicon.ico"
-    Title="{i18n:Localize AppName}"
+    Title="{i18n:Localize 'AppName'}"
     Width="1440"
     Height="900"
     MinWidth="1440"
@@ -109,7 +109,7 @@
                 <DockPanel>
                     <!--搜索框-->
                     <TextBox Classes="Search"
-                        Watermark="{i18n:Localize View.SearchInput.Placeholder}"
+                        Watermark="{i18n:Localize 'View.SearchInput.Placeholder'}"
                         KeyUp="SerachMenuKeyUp"
                         DockPanel.Dock="Top" Margin="0,0,0,5" />
 

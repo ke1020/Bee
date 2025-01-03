@@ -107,13 +107,13 @@
         "Items":[
           {
             "Key": "en-US",
-            "LocaleKey": "English",
+            "LocaleKey": "Menu.Settings.Language.English",
             "CommandType": "SwitchLanguage",
             "CommandParameter": "en-US"
           },
           {
             "Key": "zh-CN",
-            "LocaleKey": "简体中文",
+            "LocaleKey": "Menu.Settings.Language.Chinese",
             "CommandType": "SwitchLanguage",
             "CommandParameter": "zh-CN"
           }

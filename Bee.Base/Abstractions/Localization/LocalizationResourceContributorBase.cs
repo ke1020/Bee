@@ -1,7 +1,9 @@
 using System.Globalization;
 using System.Text.Json;
 using Bee.Base.Models;
+
 using Ke.Bee.Localization.Providers.Abstractions;
+
 using Microsoft.Extensions.Options;
 
 namespace Bee.Base.Abstractions.Localization;
@@ -9,7 +11,7 @@ namespace Bee.Base.Abstractions.Localization;
 /// <summary>
 /// 本地化资源贡献基类
 /// </summary>
-public abstract class LocalizationResourceContributorBase : ILocalizaitonResourceContributor
+public abstract class LocalizationResourceContributorBase : ILocalizationResourceContributor
 {
     /// <summary>
     /// 插件根目录
