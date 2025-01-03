@@ -12,6 +12,10 @@ public class AppSettings
     /// </summary>
     public string PluginPath { get; set; } = string.Empty;
     /// <summary>
+    /// 全局临时目录
+    /// </summary>
+    public string TempPath { get; set; } = string.Empty;
+    /// <summary>
     /// 任务列表项默认封面图
     /// </summary>
     public string DefaultTaskImageUri { get; set; } = string.Empty;

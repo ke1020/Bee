@@ -103,7 +103,6 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
     /// Toastr 消息提示
     /// </summary>
     private readonly ToastrViewModel _toastr = toastrViewModel;
-
     /// <summary>
     /// 应用配置
     /// </summary>
@@ -277,6 +276,9 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
 
             try
             {
+                // 设置系统不进入休眠，并保持这种状态直到程序结束
+                WinAPI.SetThreadExecutionState(EXECUTION_STATE.ES_SYSTEM_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
+
                 // 开始并行处理...
                 await Parallel.ForEachAsync(TaskItems, parallelOptions, async (taskItem, token) =>
                     {
@@ -310,6 +312,9 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
                 // 所有项处理完毕
                 SetCompletedStatus();
                 _toastr.ToastrSuccess(_l["Task.TaskCompletedStatusText"]);
+
+                // 恢复默认的执行状态
+                WinAPI.SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
             }
             catch (OperationCanceledException)
             {

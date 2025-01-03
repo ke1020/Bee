@@ -47,6 +47,7 @@
   "Task.OutputDirectoryButtonText": "Output Directory",
   "Task.MaxDegreeOfParallelism.Label": "Degree Of Parallelism {0}",
   "Task.Arguments.Null": "Task Arguments Is Null",
+  "Task.Execution.Failed": "The Task Execution Failed",
 
   "Toastr.Title": "Information Prompt!",
 

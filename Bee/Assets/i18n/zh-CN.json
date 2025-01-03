@@ -48,6 +48,7 @@
   "Task.OutputDirectoryButtonText": "输出目录",
   "Task.MaxDegreeOfParallelism.Label": "并发执行 {0}",
   "Task.Arguments.Null": "任务参数对象为空",
+  "Task.Execution.Failed": "任务执行失败",
 
   "Toastr.Title": "信息提示",
 

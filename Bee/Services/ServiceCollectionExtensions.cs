@@ -80,6 +80,7 @@ public static class ServiceCollectionExtensions
         }
 
         appSettings.PluginPath = Path.Combine(AppContext.BaseDirectory, "Plugins");
+        appSettings.TempPath = Path.Combine(AppContext.BaseDirectory, "Temp");
         services.AddSingleton(Options.Create(appSettings));
         return services;
     }
