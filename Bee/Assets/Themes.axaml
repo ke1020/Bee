@@ -22,11 +22,13 @@
       <SolidColorBrush x:Key="TextSecondary" Color="#343a40" />
       <SolidColorBrush x:Key="TextSuccess" Color="#198754" />
       <SolidColorBrush x:Key="TextDanger" Color="#dc3545" />
+      <SolidColorBrush x:Key="TextBlue" Color="#23a0ff" />
       <!--按钮-->
       <SolidColorBrush x:Key="BtnDefault" Color="#f5f5f6" />
       <SolidColorBrush x:Key="BtnDefaultHover" Color="#ececee" />
       <SolidColorBrush x:Key="BtnDefaultActive" Color="#e3e3e5" />
       <SolidColorBrush x:Key="BtnPrimary" Color="#446dff" />
+      <SolidColorBrush x:Key="BorderSecondary" Color="#3c3c3c" />
     </ResourceDictionary>
 
     <!--暗色主题-->
@@ -45,10 +47,12 @@
       <SolidColorBrush x:Key="TextSecondary" Color="#e9ecef" />
       <SolidColorBrush x:Key="TextSuccess" Color="#198754" />
       <SolidColorBrush x:Key="TextDanger" Color="#dc3545" />
+      <SolidColorBrush x:Key="TextBlue" Color="#23a0ff" />
       <SolidColorBrush x:Key="BtnDefault" Color="#222226" />
       <SolidColorBrush x:Key="BtnDefaultHover" Color="#2e2e32" />
       <SolidColorBrush x:Key="BtnDefaultActive" Color="#3a3a3f" />
       <SolidColorBrush x:Key="BtnPrimary" Color="#446dff" />
+      <SolidColorBrush x:Key="BorderSecondary" Color="#dee2e6" />
     </ResourceDictionary>
 
   </ResourceDictionary.ThemeDictionaries>
