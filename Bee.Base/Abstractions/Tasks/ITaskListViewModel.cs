@@ -1,4 +1,5 @@
 using Avalonia.Platform.Storage;
+
 using Bee.Base.Models.Tasks;
 
 namespace Bee.Base.Abstractions.Tasks;
@@ -35,4 +36,13 @@ public interface ITaskListViewModel<out T> where T : TaskArgumentBase
     /// </summary>
     /// <param name="inputExtensions"></param>
     void SetInputExtensions(IEnumerable<string>? inputExtensions = null);
+    /// <summary>
+    /// 启用任务项配置
+    /// </summary>
+    void EnableConfigure();
+    /// <summary>
+    /// 配置任务项
+    /// </summary>
+    /// <param name="item"></param>
+    void ConfigureTaskItem(TaskItem item);
 }

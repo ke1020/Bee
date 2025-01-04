@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.VisualTree;
 
 using Bee.Base.Abstractions.Tasks;
 using Bee.Base.Models.Tasks;
@@ -68,5 +69,27 @@ public partial class TaskList : UserControl
             // FileTypeFilter = [FilePickerFileTypes.ImageAll]
         });
         */
+    }
+
+    private void OnEditItemPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (sender is not PathIcon pathIcon)
+        {
+            return;
+        }
+
+        if (pathIcon.DataContext is not TaskItem item)
+        {
+            return;
+        }
+
+        // (DataContext as ITaskListViewModel<TaskArgumentBase>)?.Configure(item);
+
+        // 直接使用扩展方法查找 StackPanel 祖先
+        //var grid = pathIcon.FindAncestorOfType<Grid>().FindAncestorOfType<Grid>()!;
+        //var scrollViewer = (ScrollViewer)grid.Parent!;
+        //var shownTextBox = scrollViewer.FindControl<TextBox>("");
+
+        (DataContext as ITaskListViewModel<TaskArgumentBase>)?.ConfigureTaskItem(item);
     }
 }

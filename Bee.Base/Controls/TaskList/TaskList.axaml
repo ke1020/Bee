@@ -85,15 +85,10 @@
                   <ColumnDefinition Width="Auto" />
                   <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                  <RowDefinition Height="Auto" />
-                  <RowDefinition Height="Auto" />
-                  <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
+              
                 <!-- 左侧图像 -->
                 <Border Classes="Rounded-2" Margin="0,0,10,0" Width="80" Height="80"
-                  ClipToBounds="True" BorderThickness="0">
+                  ClipToBounds="True" BorderThickness="0" VerticalAlignment="Top">
                   <Image Source="{Binding Source}" />
                 </Border>
 
@@ -108,9 +103,9 @@
                     <TextBlock Text="{Binding Name}"
                       Margin="0,0,10,0" VerticalAlignment="Center" />
                     <!--<TextBlock
-                                                    Text="2MB" Margin="0,0,10,0"
-                                                    VerticalAlignment="Center" />
-                                                    -->
+                      Text="2MB" Margin="0,0,10,0"
+                      VerticalAlignment="Center" />
+                      -->
                     <Panel Grid.Column="1"
                       HorizontalAlignment="Right"
                       Margin="0,0,0,10">
@@ -120,6 +115,12 @@
                         Path=DataContext.RemoveCommand}"
                         CommandParameter="{Binding}" />
                         -->
+                      <!-- 编辑图标 -->
+                      <PathIcon IsVisible="{Binding DataContext.IsEdit, RelativeSource={RelativeSource AncestorType=ItemsControl}}" Width="16" Height="16"
+                        PointerPressed="OnEditItemPressed"
+                        Data="{StaticResource edit}"
+                        Foreground="{DynamicResource TextBlue}"
+                        Cursor="Hand" Margin="0,0,48,0" />
                       <!--处理前显示删除图标-->
                       <PathIcon
                         IsVisible="{Binding !IsCompleted}"
@@ -147,6 +148,8 @@
                     Text="{Binding Percent, StringFormat='{}{0} %'}"
                     Margin="0,0,0,10"
                     VerticalAlignment="Center" />
+
+                  <TextBox IsVisible="{Binding IsEdit}" HorizontalAlignment="Stretch" Height="100" />
                 </StackPanel>
               </Grid>
             </DataTemplate>

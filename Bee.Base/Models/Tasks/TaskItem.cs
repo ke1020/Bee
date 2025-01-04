@@ -36,6 +36,15 @@ public partial class TaskItem : ObservableObject, IDisposable
     /// 输入地址 (根据 InputType 类型确认，可能为文件或目录地址类型)
     /// </summary>
     public string Input { get; set; } = string.Empty;
+    /// <summary>
+    /// 当前编辑状态
+    /// </summary>
+    [ObservableProperty]
+    private bool _isEdit = false;
+    /// <summary>
+    /// 自定义参数
+    /// </summary>
+    public string? CustomArguments { get; set; }
 
     /// <summary>
     /// 释放占用资源

@@ -90,6 +90,27 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
         get => _taskArguments;
         private set => SetProperty(ref _taskArguments, value);
     }
+    /// <summary>
+    /// 是否可编辑项
+    /// </summary>
+    private bool _isEdit = false;
+    /// <summary>
+    /// 是否可配置项
+    /// </summary>
+    public bool IsEdit
+    {
+        get => _isEdit;
+        private set => SetProperty(ref _isEdit, value);
+    }
+    private TaskItem? _currentEditTaskItem;
+    /// <summary>
+    /// 当前编辑文本框的索引
+    /// </summary>
+    public TaskItem? CurrentEditTaskItem
+    {
+        get => _currentEditTaskItem;
+        private set => SetProperty(ref _currentEditTaskItem, value);
+    }
 
     /// <summary>
     /// 本地化资源
@@ -194,6 +215,34 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
     {
         ClearTaskItems();
         InputExtensions = inputExtensions;
+    }
+
+    /// <summary>
+    /// 启用任务项配置
+    /// </summary>
+    public void EnableConfigure()
+    {
+        IsEdit = true;
+    }
+
+    /// <summary>
+    /// 配置任务项
+    /// </summary>
+    /// <param name="item"></param>
+    public void ConfigureTaskItem(TaskItem item)
+    {
+        if (CurrentEditTaskItem != null)
+        {
+            if (CurrentEditTaskItem == item)
+            {
+                item.IsEdit = !item.IsEdit;
+                return;
+            }
+
+            CurrentEditTaskItem.IsEdit = false;
+        }
+        item.IsEdit = true;
+        CurrentEditTaskItem = item;
     }
 
     /// <summary>

@@ -53,7 +53,7 @@
                     <!-- 面板区域 -->
                     <SplitView.Pane>
                         <ContentPresenter
-                            Content="{Binding Pane, RelativeSource={RelativeSource TemplatedParent}}" />
+                            Content="{Binding Pane, RelativeSource={RelativeSource TemplatedParent}}" Background="{DynamicResource BgPane}" />
                     </SplitView.Pane>
                 </SplitView>
             </ControlTemplate>
