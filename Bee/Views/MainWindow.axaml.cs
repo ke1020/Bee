@@ -11,8 +11,8 @@ public partial class MainWindow : Window
     public double OrignalWidth { get; private set; }
     public double OrignalHeight { get; private set; }
 
-    // public int X { get; private set; }
-    // public int Y { get; private set; }
+    public int X { get; private set; }
+    public int Y { get; private set; }
 
     public MainWindow()
     {
@@ -24,17 +24,21 @@ public partial class MainWindow : Window
 
         this.GetObservable(WindowStateProperty).Subscribe(new WindowStateObserver(this));
 
-        /*
         // 监听窗口位置变化
         PositionChanged += (sender, e) =>
         {
             if (WindowState == WindowState.Normal)
             {
-                X = e.Point.X;
-                Y = e.Point.Y;
+                if (e.Point.X > 0)
+                {
+                    X = e.Point.X;
+                }
+                if (e.Point.Y > 0)
+                {
+                    Y = e.Point.Y;
+                }
             }
         };
-        */
     }
 
     protected override void OnResized(WindowResizedEventArgs e)
@@ -67,17 +71,19 @@ public partial class MainWindow : Window
 internal class WindowStateObserver(MainWindow window) : IObserver<WindowState>
 {
     private readonly MainWindow _window = window;
-
     public void OnCompleted() { }
-
     public void OnError(Exception error) { }
-
     public void OnNext(WindowState value)
     {
         if (value == WindowState.Maximized)
         {
+            _window.Position = new PixelPoint(0, 0);
+        }
+        else if (value == WindowState.Normal)
+        {
             _window.Width = _window.OrignalWidth;
             _window.Height = _window.OrignalHeight;
+            _window.Position = new PixelPoint(_window.X, _window.Y);
         }
     }
 }
