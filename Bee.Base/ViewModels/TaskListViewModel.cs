@@ -3,6 +3,7 @@ using System.Diagnostics;
 
 using Avalonia.Platform.Storage;
 
+using Bee.Base.Abstractions;
 using Bee.Base.Abstractions.Tasks;
 using Bee.Base.Models;
 using Bee.Base.Models.Tasks;
@@ -33,6 +34,7 @@ namespace Bee.Base.ViewModels;
 public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettings,
     ILocalizer localizer,
     ITaskHandler<T> taskHandler,
+    ISleeping sleeping,
     ToastrViewModel toastrViewModel) :
     ObservableObject,
     ITaskListViewModel<T>
@@ -51,7 +53,6 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
         get => _inputExtensions;
         private set => SetProperty(ref _inputExtensions, value);
     }
-
     /// <summary>
     /// 任务状态文本
     /// </summary>
@@ -64,7 +65,6 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
         get => _taskStatusText;
         private set => SetProperty(ref _taskStatusText, value);
     }
-
     /// <summary>
     /// 任务列表
     /// </summary>
@@ -77,7 +77,6 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
         get => _taskItems;
         private set => SetProperty(ref _taskItems, value);
     }
-
     /// <summary>
     /// 任务参数对象
     /// </summary>
@@ -111,7 +110,6 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
         get => _currentEditTaskItem;
         private set => SetProperty(ref _currentEditTaskItem, value);
     }
-
     /// <summary>
     /// 本地化资源
     /// </summary>
@@ -136,6 +134,10 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
     /// 当前正在处理的任务
     /// </summary>
     private Task? _currentTask;
+    /// <summary>
+    /// 系统休眠服务
+    /// </summary>
+    private readonly ISleeping _sleeping = sleeping;
 
     /// <summary>
     /// 设置任务准备状态
@@ -325,8 +327,8 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
 
             try
             {
-                // 设置系统不进入休眠，并保持这种状态直到程序结束
-                WinAPI.SetThreadExecutionState(EXECUTION_STATE.ES_SYSTEM_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
+                // 阻止系统进入休眠
+                _sleeping.Prevent();
 
                 // 开始并行处理...
                 await Parallel.ForEachAsync(TaskItems, parallelOptions, async (taskItem, token) =>
@@ -362,8 +364,8 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
                 SetCompletedStatus();
                 _toastr.ToastrSuccess(_l["Task.TaskCompletedStatusText"]);
 
-                // 恢复默认的执行状态
-                WinAPI.SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
+                // 恢复阻止休眠
+                _sleeping.Restore();
             }
             catch (OperationCanceledException)
             {

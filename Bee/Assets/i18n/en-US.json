@@ -2,6 +2,8 @@
   "AppName": "Bee",
   "SelectFolder": "Select Folder",
   "SelectFile": "Select File",
+  "Width": "Width",
+  "Height": "Height",
 
   "Menu.Toolbar.Home": "Home",
   "Menu.Toolbar.AI": "AI",
@@ -48,6 +50,7 @@
   "Task.MaxDegreeOfParallelism.Label": "Degree Of Parallelism {0}",
   "Task.Arguments.Null": "Task Arguments Is Null",
   "Task.Execution.Failed": "The Task Execution Failed",
+  "Task.TaskItem.Arguments.Empty": "{0} Arguments Is Empty",
 
   "Toastr.Title": "Information Prompt!",
 

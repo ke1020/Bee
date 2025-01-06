@@ -2,6 +2,8 @@
   "AppName": "日理万机",
   "SelectFolder": "选择文件夹",
   "SelectFile": "选择文件",
+  "Width": "宽",
+  "Height": "高",
 
   "Menu.Toolbar.Home": "主页",
   "Menu.Toolbar.AI": "AI",
@@ -49,6 +51,7 @@
   "Task.MaxDegreeOfParallelism.Label": "并发执行 {0}",
   "Task.Arguments.Null": "任务参数对象为空",
   "Task.Execution.Failed": "任务执行失败",
+  "Task.TaskItem.Arguments.Empty": "{0} 参数为空",
 
   "Toastr.Title": "信息提示",
 

@@ -5,6 +5,7 @@
     "Menu.Sidebar.AudioProcess": "Audio Transcoding",
     "Bee.Plugin.Multimedia.VideoProcessTitle": "Video Processing",
     "Bee.Plugin.Multimedia.VideoProcessViewComment": "Drag the documents into the dashed-line box above to add them to the task list, then set the parameters from the right-hand panel; finally, click the \"Execute Task\" button. Main function: Batch document format conversion.",
+    "Bee.Plugin.Multimedia.VideoTranscoding": "Video Transcoding",
     "Bee.Plugin.Multimedia.OutputFormat": "Output Format",
     "Bee.Plugin.Multimedia.Codec": "Codec (Optional)",
     "Bee.Plugin.Multimedia.Codec.PlaceHolder": "Select Codec",
@@ -17,5 +18,7 @@
     "Bee.Plugin.Multimedia.Mute": "Mute",
     "Bee.Plugin.Multimedia.Resolution.Format.Failed": "The resolution string is not in the correct format.",
     "Bee.Plugin.Multimedia.Resolution.NonInteger": "The resolution string contains non-integer values.",
-    "Bee.Plugin.Multimedia.Overwrite": "Overwrite if file exists"
+    "Bee.Plugin.Multimedia.Overwrite": "Overwrite if file exists",
+    "Bee.Plugin.Multimedia.VideoSnapshot": "Video Snapshot",
+    "Bee.Plugin.Multimedia.SnapshotSize": "Snapshot Size (Optional)"
 }

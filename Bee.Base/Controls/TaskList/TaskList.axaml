@@ -149,7 +149,7 @@
                     Margin="0,0,0,10"
                     VerticalAlignment="Center" />
 
-                  <TextBox IsVisible="{Binding IsEdit}" HorizontalAlignment="Stretch" Height="100" />
+                  <TextBox IsVisible="{Binding IsEdit}" Text="{Binding CustomArguments, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="100" />
                 </StackPanel>
               </Grid>
             </DataTemplate>

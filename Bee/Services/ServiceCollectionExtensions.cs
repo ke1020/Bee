@@ -54,6 +54,8 @@ public static class ServiceCollectionExtensions
 
         // 注册本地化
         services.AddLocalization();
+        // 系统休眠
+        services.AddSleeping();
 
         return services;
     }
@@ -183,6 +185,17 @@ public static class ServiceCollectionExtensions
                 $"{typeof(App).Namespace}/Assets/i18n");
             return options;
         });
+        return services;
+    }
+
+    /// <summary>
+    /// 阻止系统进入休眠状态
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    private static IServiceCollection AddSleeping(this IServiceCollection services)
+    {
+        services.AddSingleton<ISleeping, Sleeping>();
         return services;
     }
 }
