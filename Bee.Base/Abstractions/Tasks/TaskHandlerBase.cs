@@ -1,4 +1,6 @@
 
+using System.Collections.ObjectModel;
+
 using Avalonia.Media.Imaging;
 
 using Bee.Base.Models.Tasks;
@@ -54,11 +56,68 @@ public abstract class TaskHandlerBase<T>(ICoverHandler coverHandler) : ITaskHand
         return tasks;
     }
 
-    public abstract Task<Fin<Unit>> ExecuteAsync(TaskItem taskItem,
+    /// <summary>
+    /// 任务列表处理逻辑
+    /// </summary>
+    /// <param name="taskItems">任务列表对象</param>
+    /// <param name="arguments">任务参数</param>
+    /// <param name="cancellationToken">取消令牌</param>
+    /// <param name="onItemExecuted">单个任务处理完成后执行的回调方法</param>
+    /// <returns></returns>
+    public virtual async Task ExecuteAsync(ObservableCollection<TaskItem> taskItems,
+        T arguments,
+        CancellationToken cancellationToken = default,
+        Action<Fin<Unit>>? onItemExecuted = null)
+    {
+        // 创建 ParallelOptions 并设置 CancellationToken
+        var parallelOptions = new ParallelOptions
+        {
+            CancellationToken = cancellationToken,
+            MaxDegreeOfParallelism = arguments.MaxDegreeOfParallelism // 设置最大并行度
+        };
+
+        // 开始并行处理...
+        await Parallel.ForEachAsync(taskItems, parallelOptions, async (taskItem, token) =>
+            {
+                // 检查是否应该取消
+                token.ThrowIfCancellationRequested();
+
+                // 任务是已完成状态
+                if (taskItem.IsCompleted)
+                {
+                    return;
+                }
+
+                //await Task.Delay(300, token); // 模拟异步工作
+                
+                var result = await ExecuteAsync(taskItem, arguments, (percent) =>
+                {
+                    taskItem.Percent = percent; // 设置任务进度
+                    taskItem.IsCompleted = percent == 100; // 设置完成状态
+                }, token);
+
+                // 单个任务处理完成
+                onItemExecuted?.Invoke(result);
+            })
+            ;
+    }
+
+    /// <summary>
+    /// 任务项处理逻辑
+    /// </summary>
+    /// <remarks>由子类重写具体实现</remarks>
+    /// <param name="taskItem"></param>
+    /// <param name="arguments"></param>
+    /// <param name="progressCallback"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public virtual Task<Fin<Unit>> ExecuteAsync(TaskItem taskItem,
         T arguments,
         Action<double> progressCallback,
         CancellationToken cancellationToken = default)
-        ;
+    {
+        return Task.FromResult(Fin<Unit>.Succ(Unit.Default));
+    }
 
     /// <summary>
     /// 从输入的文件路径集合中，获取指定扩展名的文件

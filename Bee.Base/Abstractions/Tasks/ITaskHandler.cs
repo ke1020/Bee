@@ -1,14 +1,31 @@
+using System.Collections.ObjectModel;
+
 using Bee.Base.Models.Tasks;
 
 using LanguageExt;
 
 namespace Bee.Base.Abstractions.Tasks;
 
+public delegate void MyDelegate(string message);
+
 /// <summary>
 /// 任务处理接口
 /// </summary>
 public interface ITaskHandler<in T> where T : TaskArgumentBase
 {
+    /// <summary>
+    /// 任务列表处理逻辑
+    /// </summary>
+    /// <param name="taskItems">任务列表对象</param>
+    /// <param name="arguments">任务参数</param>
+    /// <param name="cancellationToken">取消令牌</param>
+    /// <param name="onItemExecuted">单个任务处理完成后执行的回调方法</param>
+    /// <returns></returns>
+    Task ExecuteAsync(ObservableCollection<TaskItem> taskItems,
+        T arguments,
+        CancellationToken cancellationToken = default,
+        Action<Fin<Unit>>? onItemExecuted = null)
+        ;
     /// <summary>
     /// 执行任务，并返回执行结果
     /// </summary>

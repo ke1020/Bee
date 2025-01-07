@@ -315,57 +315,25 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
         // 重置令牌
         _cancellationTokenSource = new CancellationTokenSource();
 
-        // 为了避免操作阻塞 UI，在后台执行耗时操作
+        // 阻止系统进入休眠
+        _sleeping.Prevent();
+
         _currentTask = Task.Run(async () =>
         {
-            // 创建 ParallelOptions 并设置 CancellationToken
-            var parallelOptions = new ParallelOptions
-            {
-                CancellationToken = _cancellationTokenSource.Token,
-                MaxDegreeOfParallelism = TaskArguments.MaxDegreeOfParallelism // 设置最大并行度
-            };
-
             try
             {
-                // 阻止系统进入休眠
-                _sleeping.Prevent();
-
-                // 开始并行处理...
-                await Parallel.ForEachAsync(TaskItems, parallelOptions, async (taskItem, token) =>
-                    {
-                        // 检查是否应该取消
-                        token.ThrowIfCancellationRequested();
-
-                        // 任务是已完成状态
-                        if (taskItem.IsCompleted)
-                        {
-                            return;
-                        }
-
-                        //await Task.Delay(300, token); // 模拟异步工作
-
-                        var result = await _taskHandler.ExecuteAsync(taskItem, TaskArguments, (percent) =>
-                        {
-                            taskItem.Percent = percent; // 设置任务进度
-                            taskItem.IsCompleted = percent == 100; // 设置完成状态
-                        }, token);
-
-                        // 失败时显示错误信息
-                        result.IfFail(
-                            l => _toastr.ToastrError(l.Message)
-                        );
-
-                        // 设置已完成数量
-                        SetRunningStatus(TaskItems.Count(x => x.IsCompleted), taskListCount);
-                    })
-                    ;
+                await _taskHandler.ExecuteAsync(TaskItems, TaskArguments, _cancellationTokenSource.Token, (itemResult) =>
+                {
+                    // 失败时显示错误信息
+                    itemResult?.IfFail(l => _toastr.ToastrError(l.Message));
+                    // 设置已完成数量
+                    SetRunningStatus(TaskItems.Count(x => x.IsCompleted), taskListCount);
+                });
 
                 // 所有项处理完毕
                 SetCompletedStatus();
+                // 显示执行完毕提示
                 _toastr.ToastrSuccess(_l["Task.TaskCompletedStatusText"]);
-
-                // 恢复阻止休眠
-                _sleeping.Restore();
             }
             catch (OperationCanceledException)
             {
@@ -387,6 +355,9 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
                 _cancellationTokenSource = null;
             }
         });
+
+        // 恢复休眠
+        _sleeping.Restore();
     }
 
     /// <summary>

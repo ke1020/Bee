@@ -2,10 +2,11 @@
     "Menu.Sidebar.VideoProcess": "视频处理",
     "Menu.Sidebar.VideoMerge": "视频合并",
     "Menu.Sidebar.VideoSplit": "视频分割",
-    "Menu.Sidebar.AudioProcess": "音频处理",
+    "Menu.Sidebar.AudioProcess": "音频提取",
     "Bee.Plugin.Multimedia.VideoProcessTitle": "视频处理",
-    "Bee.Plugin.Multimedia.VideoProcessViewComment": "将文档拖入上方虚线框内加入任务列表，然后从右侧面板设置参数；最后，点击 “执行任务” 按钮。主要功能：",
+    "Bee.Plugin.Multimedia.VideoProcessViewComment": "将视频文件拖入上方虚线框内加入任务列表，然后从右侧面板设置参数；最后，点击 “执行任务” 按钮。主要功能：视频批量转码、截图、合并、分割等...",
     "Bee.Plugin.Multimedia.VideoTranscoding": "视频转码",
+    "Bee.Plugin.Multimedia.InputFormat": "输入格式",
     "Bee.Plugin.Multimedia.OutputFormat": "输出格式",
     "Bee.Plugin.Multimedia.Codec": "编解码器 (可选)",
     "Bee.Plugin.Multimedia.Codec.PlaceHolder": "选择编解码器",
@@ -20,5 +21,10 @@
     "Bee.Plugin.Multimedia.Resolution.NonInteger": "分辨率包含非 Integer 值",
     "Bee.Plugin.Multimedia.Overwrite": "文件存在时覆盖",
     "Bee.Plugin.Multimedia.VideoSnapshot": "视频快照",
-    "Bee.Plugin.Multimedia.SnapshotSize": "快照尺寸 (可选)"
+    "Bee.Plugin.Multimedia.SnapshotSize": "快照尺寸 (可选)",
+    "Bee.Plugin.Multimedia.VideoMerge": "视频合并",
+    "Bee.Plugin.Multimedia.VideoSplit": "视频分割",
+    "Bee.Plugin.Multimedia.AudioProcessTitle": "音频提取",
+    "Bee.Plugin.Multimedia.AudioProcessViewComment": "将视频文件拖入上方虚线框内加入任务列表，然后从右侧面板设置参数；最后，点击 “执行任务” 按钮。主要功能：批量从视频文件提取音频...",
+    "Bee.Plugin.Multimedia.Invalid.InputFormatInconsistency": "输入文件格式不一致"
 }
