@@ -20,11 +20,14 @@
     "Bee.Plugin.Multimedia.Resolution.Format.Failed": "The resolution string is not in the correct format.",
     "Bee.Plugin.Multimedia.Resolution.NonInteger": "The resolution string contains non-integer values.",
     "Bee.Plugin.Multimedia.Overwrite": "Overwrite if file exists",
+    "Bee.Plugin.Multimedia.RemoveBlackFrame": "Remove Black Frame",
     "Bee.Plugin.Multimedia.VideoSnapshot": "Snapshot",
     "Bee.Plugin.Multimedia.SnapshotSize": "Snapshot Size (Optional)",
     "Bee.Plugin.Multimedia.VideoMerge": "Merge",
     "Bee.Plugin.Multimedia.VideoSplit": "Splitting",
     "Bee.Plugin.Multimedia.AudioProcessTitle": "Audio Extraction",
     "Bee.Plugin.Multimedia.AudioProcessViewComment": "Drag the video files into the dashed-line box above to add them to the task list, then set the parameters from the right-hand panel; finally, click the \"Execute Task\" button. Main feature: batch audio extraction from video files...",
+    "Bee.Plugin.Multimedia.Bitrate": "Bitrate(kbps)",
+    "Bee.Plugin.Multimedia.SamplingRate": "Sample Rate(kHz)",
     "Bee.Plugin.Multimedia.Invalid.InputFormatInconsistency": "The input files format inconsistency"
 }

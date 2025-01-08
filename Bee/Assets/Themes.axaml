@@ -12,7 +12,7 @@
       <SolidColorBrush x:Key="BgBody" Color="White" />
       <SolidColorBrush x:Key="BgSidebarItemHover" Color="#f5f5f6" />
       <SolidColorBrush x:Key="BgSidebarItemPressed" Color="#ebebed" />
-      <SolidColorBrush x:Key="BgSearchInput" Color="#f6f6f7" />
+      <SolidColorBrush x:Key="BgInput" Color="#ebebed" />
       <SolidColorBrush x:Key="BgTransparent" Color="#80eeeeee" />
       <SolidColorBrush x:Key="BgSuccess" Color="#198754" />
       <SolidColorBrush x:Key="BgDanger" Color="#f32840" />
@@ -38,7 +38,7 @@
       <SolidColorBrush x:Key="BgBody" Color="#111113" />
       <SolidColorBrush x:Key="BgSidebarItemHover" Color="#1f1f22" />
       <SolidColorBrush x:Key="BgSidebarItemPressed" Color="#2d2d30" />
-      <SolidColorBrush x:Key="BgSearchInput" Color="#19191c" />
+      <SolidColorBrush x:Key="BgInput" Color="#19191c" />
       <SolidColorBrush x:Key="BgTransparent" Color="#80171717" />
       <SolidColorBrush x:Key="BgSuccess" Color="#198754" />
       <SolidColorBrush x:Key="BgDanger" Color="#f32840" />

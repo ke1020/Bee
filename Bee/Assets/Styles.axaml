@@ -62,8 +62,8 @@
 
   <!--侧边栏搜索框-->
   <Style Selector="TextBox">
-    <Setter Property="Background" Value="{DynamicResource BgSearchInput}" />
-    <Setter Property="BorderBrush" Value="{DynamicResource BgSearchInput}" />
+    <Setter Property="Background" Value="{DynamicResource BgInput}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BgInput}" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="CornerRadius" Value="10" />
     <Setter Property="Padding" Value="10" />
@@ -74,20 +74,20 @@
     <Style Selector="^:pointerover">
       <Style Selector="^ /template/ Border#PART_BorderElement">
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Background" Value="{DynamicResource BgSearchInput}" />
+        <Setter Property="Background" Value="{DynamicResource BgInput}" />
       </Style>
     </Style>
     <Style Selector="^:focus">
       <Style Selector="^ /template/ Border#PART_BorderElement">
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Background" Value="{DynamicResource BgSearchInput}" />
+        <Setter Property="Background" Value="{DynamicResource BgInput}" />
       </Style>
     </Style>
   </Style>
 
   <Style Selector="ComboBox">
-    <Setter Property="Background" Value="{DynamicResource BgSearchInput}" />
-    <Setter Property="BorderBrush" Value="{DynamicResource BgSearchInput}" />
+    <Setter Property="Background" Value="{DynamicResource BgInput}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BgInput}" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="CornerRadius" Value="10" />
     <Setter Property="Padding" Value="10" />
