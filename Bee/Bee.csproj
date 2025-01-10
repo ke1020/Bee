@@ -20,20 +20,19 @@
     <!--Condition
     below is needed to remove Avalonia.Diagnostics package from build output in Release
     configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"
-      Version="11.2.3" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.3" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
     <ProjectReference Include="../Bee.Base/Bee.Base.csproj" />
   </ItemGroup>
 
   <!-- 定义需要复制的文件 -->
   <ItemGroup>
-    <None Include="Configs\**\*.*" CopyToOutputDirectory="PreserveNewest"
-      CopyToPublishDirectory="PreserveNewest" />
-    <None Include="Plugins\**\*.*" CopyToOutputDirectory="PreserveNewest"
-      CopyToPublishDirectory="PreserveNewest" />
+    <None Include="Configs\**\*.*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="Plugins\**\*.*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
   <!-- 自定义目标：在构建和发布时复制文件并保留目录结构 -->
@@ -42,10 +41,8 @@
       <ResourcesToCopy Include="\Configs\**\*.*" />
       <ResourcesToCopy Include="\Plugins\**\*.*" />
     </ItemGroup>
-    <Copy SourceFiles="@(ResourcesToCopy)" DestinationFolder="$(OutputPath)\%(RecursiveDir)"
-      SkipUnchangedFiles="true" />
-    <Copy SourceFiles="@(ResourcesToCopy)" DestinationFolder="$(PublishDir)\%(RecursiveDir)"
-      SkipUnchangedFiles="true" Condition="'$(PublishDir)' != ''" />
+    <Copy SourceFiles="@(ResourcesToCopy)" DestinationFolder="$(OutputPath)\%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(ResourcesToCopy)" DestinationFolder="$(PublishDir)\%(RecursiveDir)" SkipUnchangedFiles="true" Condition="'$(PublishDir)' != ''" />
   </Target>
 
 </Project>

@@ -15,9 +15,8 @@ using Ke.Bee.Localization.Localizer.Abstractions;
 
 using LanguageExt;
 
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
-using Serilog;
 
 namespace Bee.Base.ViewModels;
 
@@ -34,6 +33,7 @@ namespace Bee.Base.ViewModels;
 public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettings,
     ILocalizer localizer,
     ITaskHandler<T> taskHandler,
+    ILogger<T> logger,
     ISleeping sleeping,
     ToastrViewModel toastrViewModel) :
     ObservableObject,
@@ -118,6 +118,10 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
     /// 任务处理接口
     /// </summary>
     private readonly ITaskHandler<T> _taskHandler = taskHandler;
+    /// <summary>
+    /// 日志记录器
+    /// </summary>
+    private readonly ILogger<T> _logger = logger;
     /// <summary>
     /// Toastr 消息提示
     /// </summary>
@@ -342,11 +346,11 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
             catch (IOException ioEx)
             {
                 // 如果不处理 IO 异常，会走 finally 块，导致整个任务队列停止
-                Log.Information(ioEx.Message);
+                _logger.LogInformation(ioEx.Message);
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                _logger.LogError(ex.Message);
             }
             finally
             {
@@ -402,7 +406,7 @@ public sealed partial class TaskListViewModel<T>(IOptions<AppSettings> appSettin
         }
         catch (Exception ex)
         {
-            Log.Error(ex.Message);
+            _logger.LogError(ex.Message);
         }
     }
 

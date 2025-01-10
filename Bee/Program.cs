@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.Media;
-using Bee.Base;
 using Bee.Services;
 using Serilog;
 using System;
@@ -17,10 +16,15 @@ sealed class Program
     {
         // 配置 Serilog
         Log.Logger = new LoggerConfiguration()
-            // .MinimumLevel.Debug() // 设置最低日志级别
+            //.Enrich.FromLogContext()
+            .MinimumLevel.Warning() // 设置最低日志级别
             .WriteTo.File("logs/log.txt") // 日志文件路径
-            .CreateLogger();
+            .CreateLogger()
+            ;
 
+        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+
+        /*
         try
         {
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
@@ -33,6 +37,7 @@ sealed class Program
         {
             Log.CloseAndFlush();
         }
+        */
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
@@ -46,7 +51,6 @@ sealed class Program
         {
             DefaultFamilyName = "fonts:HarmonyOS Sans#HarmonyOS Sans SC"
         })
-        .LogToSerilog(Avalonia.Logging.LogEventLevel.Warning)
-        .LogToTrace()
+        //.LogToTrace()
         ;
 }

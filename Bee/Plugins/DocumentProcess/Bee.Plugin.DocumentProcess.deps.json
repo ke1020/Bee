@@ -147,6 +147,30 @@
           }
         }
       },
+      "Microsoft.Extensions.Logging/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Options": "8.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Logging.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
       "Microsoft.Extensions.Options/8.0.2": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
@@ -171,25 +195,6 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.BannedApiAnalyzers": "3.11.0-beta1.24527.2",
           "Microsoft.CodeAnalysis.PublicApiAnalyzers": "3.11.0-beta1.24527.2"
-        }
-      },
-      "Serilog/4.2.0": {
-        "runtime": {
-          "lib/net8.0/Serilog.dll": {
-            "assemblyVersion": "4.2.0.0",
-            "fileVersion": "4.2.0.0"
-          }
-        }
-      },
-      "Serilog.Sinks.File/6.0.0": {
-        "dependencies": {
-          "Serilog": "4.2.0"
-        },
-        "runtime": {
-          "lib/net8.0/Serilog.Sinks.File.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.0.0"
-          }
         }
       },
       "SixLabors.Fonts/2.0.4": {
@@ -260,9 +265,8 @@
           "CommunityToolkit.Mvvm": "8.2.1",
           "Ke.Bee.Localization": "0.1.4",
           "LanguageExt.Core": "5.0.0-beta-45",
+          "Microsoft.Extensions.Logging": "8.0.0",
           "Microsoft.Extensions.Options": "8.0.2",
-          "Serilog": "4.2.0",
-          "Serilog.Sinks.File": "6.0.0",
           "SixLabors.ImageSharp": "3.1.6",
           "SixLabors.ImageSharp.Drawing": "2.1.4"
         },
@@ -385,6 +389,20 @@
       "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
       "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
     },
+    "Microsoft.Extensions.Logging/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tvRkov9tAJ3xP51LCv3FJ2zINmv1P8Hi8lhhtcKGqM+ImiTCC84uOPEI4z8Cdq2C3o9e+Aa0Gw0rmrsJD77W+w==",
+      "path": "microsoft.extensions.logging/8.0.0",
+      "hashPath": "microsoft.extensions.logging.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-arDBqTgFCyS0EvRV7O3MZturChstm50OJ0y9bDJvAcmEPJm0FFpFyjU/JLYyStNGGey081DvnQYlncNX5SJJGA==",
+      "path": "microsoft.extensions.logging.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512"
+    },
     "Microsoft.Extensions.Options/8.0.2": {
       "type": "package",
       "serviceable": true,
@@ -405,20 +423,6 @@
       "sha512": "sha512-jbUTZiY029zgHpLFBcYwv431yCE7Q3wjdo5PALjBSS5UIKjX8Fg0tbKcNebS+3PHIgW2f1Q6tRmNk3Io1lip0g==",
       "path": "roslyn.diagnostics.analyzers/3.11.0-beta1.24527.2",
       "hashPath": "roslyn.diagnostics.analyzers.3.11.0-beta1.24527.2.nupkg.sha512"
-    },
-    "Serilog/4.2.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-gmoWVOvKgbME8TYR+gwMf7osROiWAURterc6Rt2dQyX7wtjZYpqFiA/pY6ztjGQKKV62GGCyOcmtP1UKMHgSmA==",
-      "path": "serilog/4.2.0",
-      "hashPath": "serilog.4.2.0.nupkg.sha512"
-    },
-    "Serilog.Sinks.File/6.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-lxjg89Y8gJMmFxVkbZ+qDgjl+T4yC5F7WSLTvA+5q0R04tfKVLRL/EHpYoJ/MEQd2EeCKDuylBIVnAYMotmh2A==",
-      "path": "serilog.sinks.file/6.0.0",
-      "hashPath": "serilog.sinks.file.6.0.0.nupkg.sha512"
     },
     "SixLabors.Fonts/2.0.4": {
       "type": "package",

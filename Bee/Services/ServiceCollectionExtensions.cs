@@ -22,6 +22,7 @@ using Ke.Bee.Localization.Options;
 using Ke.Bee.Localization.Providers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace Bee.Services;
 
@@ -52,10 +53,15 @@ public static class ServiceCollectionExtensions
 
         services.AddPlugins();
 
-        // 注册本地化
+        // 注册本地化 (要放在注册插件之后)
         services.AddLocalization();
         // 系统休眠
         services.AddSleeping();
+        // 配置日志
+        services.AddLogging(logBuilder =>
+        {
+            logBuilder.AddSerilog(dispose: true);
+        });
 
         return services;
     }
