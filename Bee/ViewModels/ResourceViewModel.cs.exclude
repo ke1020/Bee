@@ -1,0 +1,30 @@
+using Bee.Base.Models;
+using Bee.Base.ViewModels;
+
+namespace Bee.ViewModels;
+
+/*
+public class OtherResourceItem(string name, string value) : NameValue(name, value)
+{
+}
+*/
+
+public partial class ResourceViewModel : PageViewModelBase
+{
+    /*
+    private readonly ILocalizer _l;
+
+    public ObservableCollection<OtherResourceItem> Resources { get; }
+
+    public ResourceViewModel(ILocalizer localizer)
+    {
+        _l = localizer;
+        Resources = [.. new List<OtherResourceItem>
+        {
+            new(_l["App.User.Guide"], "http://bee.koudingke.cn/docs/guide/"),
+            new(_l["ViewData.Resource.DataName.Gitee"], "https://gitee.com/xkpro/bee"),
+            new(_l["ViewData.Resource.DataName.GitHub"], "https://github.com/ke1020/Bee"),
+        }];
+    }
+    */
+}

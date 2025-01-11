@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  x:Class="Bee.Views.DonateView">
+  <Border Padding="20">
+    <StackPanel>
+      <TextBlock Classes="h1">❤️ 捐助项目，助力项目持续维护</TextBlock>
+      <TextBlock Classes="p">本项目基于开源创建，您可以免费使用，或者 fork 源码后修改 (须遵守 Apache-2.0 license 开源协议) 。</TextBlock>
+      <TextBlock Classes="p">如果觉得项目对您有帮助，希望该项目能一直稳定持续维护和优化，也欢迎各位朋友小额捐助。</TextBlock>
+      <TextBlock Classes="h2" Margin="0,20,0,10">如何捐助</TextBlock>
+      <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,Auto">
+        <!-- 表头 -->
+        <Border Grid.Row="0" Grid.Column="0" BorderBrush="{DynamicResource BorderColor}"
+          Background="{DynamicResource BgToolbar}"
+          BorderThickness="0.5" Padding="0,5,0,5" CornerRadius="10,0,0,0">
+          <TextBlock Classes="p" HorizontalAlignment="Center" FontWeight="Bold">微信支付</TextBlock>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="1" BorderBrush="{DynamicResource BorderColor}"
+          Background="{DynamicResource BgToolbar}"
+          BorderThickness="0.5" Padding="0,5,0,5" CornerRadius="0,10,0,0">
+          <TextBlock Classes="p" HorizontalAlignment="Center" FontWeight="Bold">支付宝</TextBlock>
+        </Border>
+
+        <!-- 微信支付图片 -->
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="{DynamicResource BorderColor}"
+          BorderThickness="0.5" CornerRadius="0,0,0,10">
+          <Image Source="avares://Bee/Assets/images/wxpay.jpg" Width="240" Margin="20" />
+        </Border>
+
+        <!-- 支付宝图片 -->
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="{DynamicResource BorderColor}"
+          BorderThickness="0.5" CornerRadius="0,0,10,0">
+          <Image Source="avares://Bee/Assets/images/alipay.jpg" Width="240" Margin="20" />
+        </Border>
+      </Grid>
+      <TextBlock Classes="p">感谢所有支持者，软件的每一点进步都离不开您的支持和帮助。</TextBlock>
+    </StackPanel>
+  </Border>
+</UserControl>

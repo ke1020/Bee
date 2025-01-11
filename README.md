@@ -16,3 +16,5 @@
 
 - [图片处理](https://gitee.com/xkpro/bee-plugin-image-process)：批量格式转换、批量缩放、批量水印
 - [文档处理](https://gitee.com/xkpro/bee-plugin-document-process)：批量文档格式转换
+- [音视频处理](https://gitee.com/xkpro/bee-plugin-multimedia): 批量音视频格式转换（转码）、快照、分割、合并
+- [UML生成器](https://gitee.com/xkpro/bee-plugin-uml-generate): 从 .puml 文件或 C# 源码生成 UML 图

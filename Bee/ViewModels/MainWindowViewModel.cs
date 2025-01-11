@@ -15,7 +15,6 @@ using Bee.Base.Abstractions.Navigation;
 using Bee.Base.ViewModels;
 using Bee.Base.Models.Menu;
 using Bee.Base.ViewModels.Menus;
-using CommunityToolkit.Mvvm.Messaging;
 
 namespace Bee.ViewModels;
 

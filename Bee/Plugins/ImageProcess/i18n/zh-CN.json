@@ -1,10 +1,7 @@
 {
-    "Menu.Sidebar.ImageProcess": "图片处理",
     "Menu.Sidebar.ImageProcessor": "图片处理(缩放,水印)",
     "Bee.Plugin.ImageProcess.ViewComment": "将图片拖入上方虚线框内加入任务列表，然后从右侧面板设置参数；最后，点击 “执行任务” 按钮。主要功能：批量处理图片格式转换、等比缩放、固定尺寸裁剪、图像水印、文本水印。",
     "Bee.Plugin.ImageProcess.ImageConvertTitle": "图片格式转换、缩放、水印",
-    "Bee.Plugin.ImageProcess.Width": "宽",
-    "Bee.Plugin.ImageProcess.Height": "高",
     "Bee.Plugin.ImageProcess.Rotation": "旋转角度 {0}",
     "Bee.Plugin.ImageProcess.Opacity": "透明度 {0}",
     "Bee.Plugin.ImageProcess.InputFormat": "输入格式",

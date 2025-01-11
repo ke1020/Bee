@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:i18n="using:Ke.Bee.Localization.Extensions"
+  xmlns:vm="using:Bee.ViewModels"
+  x:DataType="vm:ResourceViewModel"
+  x:Class="Bee.Views.ResourceView">
+  <Border Padding="20">
+    <StackPanel>
+      <TextBlock Classes="h2" Text="{i18n:Localize 'Views.ResourceView.Title'}"></TextBlock>
+      <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto">
+        <!-- 表头 -->
+        <Border Grid.Row="0" Grid.Column="0" BorderBrush="{DynamicResource BorderColor}"
+          Background="{DynamicResource BgToolbar}"
+          BorderThickness="0.5" CornerRadius="10,0,0,0">
+          <TextBlock Classes="p" HorizontalAlignment="Center" FontWeight="Bold" Text="{i18n:Localize 'Views.ResourceView.DataGrid.ColumnHeader.Name'}" />
+        </Border>
+        <Border Grid.Row="0" Grid.Column="1" BorderBrush="{DynamicResource BorderColor}"
+          Background="{DynamicResource BgToolbar}"
+          BorderThickness="0.5" CornerRadius="0,10,0,0">
+          <TextBlock Classes="p" HorizontalAlignment="Center" FontWeight="Bold" Text="{i18n:Localize 'Views.ResourceView.DataGrid.ColumnHeader.Value'}" />
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="{DynamicResource BorderColor}"
+          BorderThickness="0.5">
+          <TextBlock Classes="p" Text="{i18n:Localize 'App.User.Guide'}" Padding="10" />
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="{DynamicResource BorderColor}"
+          BorderThickness="0.5">
+          <TextBlock Classes="p" Text="http://bee.koudingke.cn/docs/guide/" Padding="10" />
+        </Border>
+        <Border Grid.Row="2" Grid.Column="0" BorderBrush="{DynamicResource BorderColor}"
+          BorderThickness="0.5">
+          <TextBlock Classes="p" Text="{i18n:Localize 'ViewData.Resource.DataName.Gitee'}" Padding="10" />
+        </Border>
+        <Border Grid.Row="2" Grid.Column="1" BorderBrush="{DynamicResource BorderColor}"
+          BorderThickness="0.5">
+          <TextBlock Classes="p" Text="https://gitee.com/xkpro/bee" Padding="10" />
+        </Border>
+
+        <!-- Footer -->
+        <Border Grid.Row="3" Grid.Column="0" BorderBrush="{DynamicResource BorderColor}"
+          BorderThickness="0.5" CornerRadius="0,0,0,10">
+          <TextBlock Classes="p" Text="{i18n:Localize 'ViewData.Resource.DataName.GitHub'}" Padding="10" />
+        </Border>
+        <Border Grid.Row="3" Grid.Column="1" BorderBrush="{DynamicResource BorderColor}"
+          BorderThickness="0.5" CornerRadius="0,0,10,0">
+          <TextBlock Classes="p" Text="https://github.com/ke1020/Bee" Padding="10" />
+        </Border>
+      </Grid>
+      <!--
+      <DataGrid ItemsSource="{Binding Resources}"
+        IsReadOnly="True"
+        GridLinesVisibility="Horizontal"
+        BorderThickness="0.5" BorderBrush="Gray">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="{i18n:Localize 'Views.ResourceView.DataGrid.ColumnHeader.Name'}"
+      Width="*"
+            Binding="{Binding Name}" />
+          <DataGridTextColumn Header="{i18n:Localize 'Views.ResourceView.DataGrid.ColumnHeader.Value'}"
+      Width="*"
+            Binding="{Binding Value}" />
+        </DataGrid.Columns>
+      </DataGrid>
+      -->
+    </StackPanel>
+  </Border>
+</UserControl>

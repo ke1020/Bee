@@ -4,13 +4,12 @@
   "SelectFile": "Select File",
   "Width": "Width",
   "Height": "Height",
-
+  "App.User.Guide": "User's Guide",
   "Menu.Toolbar.Home": "Home",
   "Menu.Toolbar.AI": "AI",
   "Menu.Toolbar.AV": "Audio And Video",
   "Menu.Toolbar.Document": "Document",
   "Menu.Toolbar.Other": "Other",
-
   "Menu.Settings": "Settings",
   "Menu.Settings.Language": "Language",
   "Menu.Settings.Language.English": "English",
@@ -19,7 +18,7 @@
   "Menu.Settings.Theme.Default": "Default",
   "Menu.Settings.Theme.Dark": "Dark",
   "Menu.Settings.About": "About",
-
+  "Menu.Sidebar.ImageProcess": "Image Processing",
   "Menu.Sidebar.ImageGenerationAndProcessing": "Image Generation and Processing",
   "Menu.Sidebar.PosterGenerator": "Poster Generator",
   "Menu.Sidebar.TextToImage": "Text to Image",
@@ -30,14 +29,19 @@
   "Menu.Sidebar.SpeechRecognition": "Speech Recognition",
   "Menu.Sidebar.TTS": "Text to Speech",
   "Menu.Sidebar.VoiceClone": "Voice Clone",
-  "Menu.Sidebar.DocumentProcessing": "Document Processing",
+  "Menu.Sidebar.DocumentProcess": "Document Processing",
   "Menu.Sidebar.DevTools": "Development Tools",
-
   "Menu.Sidebar.ChartingTools": "Charting Tools",
   "Menu.Sidebar.MultimediaProcess": "Audio Visual Processing",
-  
+  "Menu.Sidebar.Donate": "Donate Project",
+  "Menu.Sidebar.Resources": "Other Resources",
+  "Menu.Sidebar.Other": "Other",
   "View.SearchInput.Placeholder": "Search The Toolbox",
-
+  "Views.ResourceView.Title": "Other Resources",
+  "Views.ResourceView.DataGrid.ColumnHeader.Name": "Resource Item",
+  "Views.ResourceView.DataGrid.ColumnHeader.Value": "Value",
+  "ViewData.Resource.DataName.GitHub": "Open Source Repository (Github)",
+  "ViewData.Resource.DataName.Gitee": "Open Source Repository (Gitee)",
   "Task.TaskListTitle": "Task List",
   "Task.DragDropText": "Drag and drop directories or files from your local computer here",
   "Task.TaskPendingStatusText": "The list has {0} task pending processing",
@@ -51,9 +55,7 @@
   "Task.Arguments.Null": "Task Arguments Is Null",
   "Task.Execution.Failed": "The Task Execution Failed",
   "Task.TaskItem.Arguments.Empty": "{0} Arguments Is Empty",
-
   "Toastr.Title": "Information Prompt!",
-
   "Errors.Invalid.ViewPage": "Invalid View Page",
   "Errors.NotSupported.InputFormat": "Input format is not supported.",
   "Errors.NotSupported.OutputFormat": "Output format is not supported.",

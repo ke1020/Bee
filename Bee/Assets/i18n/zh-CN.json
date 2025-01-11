@@ -4,13 +4,12 @@
   "SelectFile": "选择文件",
   "Width": "宽",
   "Height": "高",
-
-  "Menu.Toolbar.Home": "主页",
+  "App.User.Guide": "用户指南",
+  "Menu.Toolbar.Home": "面板",
   "Menu.Toolbar.AI": "AI",
   "Menu.Toolbar.AV": "音视频",
   "Menu.Toolbar.Document": "文档",
   "Menu.Toolbar.Other": "其它",
-
   "Menu.Settings": "设置",
   "Menu.Settings.Language": "语言",
   "Menu.Settings.Language.English": "English",
@@ -19,26 +18,30 @@
   "Menu.Settings.Theme.Default": "默认主题",
   "Menu.Settings.Theme.Dark": "暗色主题",
   "Menu.Settings.About": "关于",
-
+  "Menu.Sidebar.ImageProcess": "图片处理",
   "Menu.Sidebar.ImageGenerationAndProcessing": "图片生成与处理",
   "Menu.Sidebar.PosterGenerator": "创意海报生成",
   "Menu.Sidebar.TextToImage": "文本生成图片",
   "Menu.Sidebar.ImageCompletion": "图像擦除补全",
   "Menu.Sidebar.ImageBackgroundSynthesis": "图像背景生成",
   "Menu.Sidebar.ImageFormatConversion": "图片格式转换",
-
   "Menu.Sidebar.SpeechRecognitionAndSynthesis": "语音识别与合成",
   "Menu.Sidebar.SpeechRecognition": "语音识别",
   "Menu.Sidebar.TTS": "语音合成",
   "Menu.Sidebar.VoiceClone": "语音克隆",
-  "Menu.Sidebar.DocumentProcessing": "文档处理",
+  "Menu.Sidebar.DocumentProcess": "文档处理",
   "Menu.Sidebar.DevTools": "开发工具",
-
   "Menu.Sidebar.ChartingTools": "图表工具",
   "Menu.Sidebar.MultimediaProcess": "音视频处理",
-
+  "Menu.Sidebar.Donate": "捐助项目",
+  "Menu.Sidebar.Resources": "其它资源",
+  "Menu.Sidebar.Other": "其它",
   "View.SearchInput.Placeholder": "在工具箱中搜索",
-
+  "Views.ResourceView.Title": "其它资源",
+  "Views.ResourceView.DataGrid.ColumnHeader.Name": "资源项",
+  "Views.ResourceView.DataGrid.ColumnHeader.Value": "值",
+  "ViewData.Resource.DataName.GitHub": "开源仓库地址（Github）",
+  "ViewData.Resource.DataName.Gitee": "开源仓库地址（Gitee）",
   "Task.TaskListTitle": "任务列表",
   "Task.DragDropText": "从本地电脑拖放目录或文件到此处",
   "Task.TaskPendingStatusText": "列表有 {0} 个任务待处理",
@@ -52,9 +55,7 @@
   "Task.Arguments.Null": "任务参数对象为空",
   "Task.Execution.Failed": "任务执行失败",
   "Task.TaskItem.Arguments.Empty": "{0} 参数为空",
-
   "Toastr.Title": "信息提示",
-
   "Errors.Invalid.ViewPage": "无效的视图页面",
   "Errors.NotSupported.InputFormat": "不支持的输入格式",
   "Errors.NotSupported.OutputFormat": "不支持的输出格式",

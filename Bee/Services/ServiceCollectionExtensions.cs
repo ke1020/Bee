@@ -14,9 +14,8 @@ using Bee.Base.Impl.Navigation;
 using Bee.Base.Models;
 using Bee.Base.Models.Menu;
 using Bee.Base.ViewModels;
-using Bee.Services.Impl.Navigation.Commands;
+using Bee.Navigation.Commands;
 using Bee.ViewModels;
-using Bee.ViewModels.Images;
 using Ke.Bee.Localization.Extensions;
 using Ke.Bee.Localization.Options;
 using Ke.Bee.Localization.Providers;
@@ -37,17 +36,14 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<ToastrViewModel>();
-        services.AddTransient<PosterGeneratorViewModel>();
-
+        services.AddTransient<DonateViewModel>();
+        //services.AddTransient<ResourceViewModel>();
+        services.AddSingleton<INavigationCommand, DonateNavigationCommand>();
+        //services.AddSingleton<INavigationCommand, ResourceNavigationCommand>();
         services.AddSettings();
         services.AddMenus();
-
         // 注册视图导航器
         services.AddSingleton<IViewNavigator, DefaultViewNavigator>();
-
-        // 注册命令
-        services.AddSingleton<INavigationCommand, PosterGeneratorNavigationCommand>();
-
         // 注册默认封面处理器
         services.AddSingleton<ICoverHandler, DefaultCoverHandler>();
 

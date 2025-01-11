@@ -2,6 +2,12 @@
 
 本项目的所有重要变更都将记录在此文件中。
 
+## [] - 2025-01-11
+
+- 移除 `Bee/ViewModels/PosterGeneratorViewModel.cs` 类文件
+- 移除 `Bee/Views/Images/*` 文件
+- 移除 `Bee/Services/Impl/Navigation/Commands/PosterGeneratorNavigationCommand.cs` 类文件
+
 ## [] - 2025-01-10
 
 ### 修改
