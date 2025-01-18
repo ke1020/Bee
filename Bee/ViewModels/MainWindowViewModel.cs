@@ -198,12 +198,13 @@ public partial class MainWindowViewModel : PageViewModelBase
     /// <param name="isReload">是否重载菜单（true: 保持当前激活菜单）</param>
     private void LoadToolbarMenus(bool isReload = false)
     {
-        MenuItemViewModel? currentActiveToolbarMenu = isReload ? 
-            ToolbarMenus?.FirstOrDefault(x => x.IsActive) : 
+        // 重载菜单之前，记录当前激活菜单
+        MenuItemViewModel? currentActiveToolbarMenu = isReload ?
+            ToolbarMenus?.FirstOrDefault(x => x.IsActive) :
             null
             ;
-        MenuItemViewModel? currentActiveSidebarMenu = isReload ? 
-            SidebarMenus?.Values.SelectMany(x => x).FirstOrDefault(x => x.IsActive) : 
+        MenuItemViewModel? currentActiveSidebarMenu = isReload ?
+            SidebarMenus?.Values.SelectMany(x => x).FirstOrDefault(x => x.IsActive) :
             null
             ;
 
@@ -225,17 +226,31 @@ public partial class MainWindowViewModel : PageViewModelBase
     /// <summary>
     /// 载入侧栏二级菜单
     /// </summary>
-    /// <param name="menuItem">当前激活菜单项</param>
-    private void LoadSidebarMenus(MenuItemViewModel? menuItem, MenuItemViewModel? activeSidebarMenu = null)
+    /// <param name="toolbarMenu">要激活一级菜单项</param>
+    /// <param name="sidebarMenu">要激活二级菜单项</param>
+    private void LoadSidebarMenus(MenuItemViewModel? toolbarMenu, MenuItemViewModel? sidebarMenu = null)
     {
-        // 找到激活菜单的子菜单
-        var items = _menuItems.FirstOrDefault(x => x.Key == menuItem?.Key)?.Items;
-        // 将子菜单分组 (分组键就是组名，分组值就是分组之后的菜单集合)
-        _originalSidebarMenus = SidebarMenus = ParseGroupDictionary(items?.Select(MenuItemToViewModel));
-
-        if (activeSidebarMenu != null)
+        // 取消已激活的项
+        var beforeIsActivedItem = _menuItems.FirstOrDefault(x => x.IsActive == true);
+        if (beforeIsActivedItem != null)
         {
-            var active = SidebarMenus?.Values.SelectMany(x => x).FirstOrDefault(x => x.Key.Equals(activeSidebarMenu.Key));
+            beforeIsActivedItem.IsActive = false;
+        }
+
+        var activeToolbar = _menuItems.FirstOrDefault(x => x.Key == toolbarMenu?.Key);
+        if (activeToolbar == null)
+        {
+            return;
+        }
+
+        activeToolbar.IsActive = true;
+
+        // 将子菜单分组 (分组键就是组名，分组值就是分组之后的菜单集合)
+        _originalSidebarMenus = SidebarMenus = ParseGroupDictionary(activeToolbar.Items?.Select(MenuItemToViewModel));
+
+        if (sidebarMenu != null)
+        {
+            var active = SidebarMenus?.Values.SelectMany(x => x).FirstOrDefault(x => x.Key.Equals(sidebarMenu.Key));
             if (active != null)
             {
                 active.IsActive = true;
@@ -243,7 +258,7 @@ public partial class MainWindowViewModel : PageViewModelBase
             return;
         }
 
-        // 激活首个菜单
+        // 激活首个二级菜单
         var first = SidebarMenus?.Values.FirstOrDefault()?.FirstOrDefault();
         if (first == null)
         {
