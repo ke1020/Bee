@@ -53,6 +53,7 @@
       <SolidColorBrush x:Key="BtnDefaultActive" Color="#3a3a3f" />
       <SolidColorBrush x:Key="BtnPrimary" Color="#446dff" />
       <SolidColorBrush x:Key="BorderSecondary" Color="#dee2e6" />
+      <SolidColorBrush x:Key="ShadowBrush" Color="" />
     </ResourceDictionary>
 
   </ResourceDictionary.ThemeDictionaries>

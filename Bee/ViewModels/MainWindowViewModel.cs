@@ -198,6 +198,15 @@ public partial class MainWindowViewModel : PageViewModelBase
     /// <param name="isReload">是否重载菜单（true: 保持当前激活菜单）</param>
     private void LoadToolbarMenus(bool isReload = false)
     {
+        MenuItemViewModel? currentActiveToolbarMenu = isReload ? 
+            ToolbarMenus?.FirstOrDefault(x => x.IsActive) : 
+            null
+            ;
+        MenuItemViewModel? currentActiveSidebarMenu = isReload ? 
+            SidebarMenus?.Values.SelectMany(x => x).FirstOrDefault(x => x.IsActive) : 
+            null
+            ;
+
         var toolbarMenus = _menuItems.Where(x => x.Group == "Toolbar").Select(MenuItemToViewModel);
         ToolbarMenus = [.. toolbarMenus];
         var settingMenus = _menuItems.Where(x => x.Group == "Settings").Select(MenuItemToViewModel);
@@ -205,8 +214,6 @@ public partial class MainWindowViewModel : PageViewModelBase
 
         if (isReload)
         {
-            var currentActiveToolbarMenu = ToolbarMenus?.FirstOrDefault(x => x.IsActive);
-            var currentActiveSidebarMenu = SidebarMenus?.Values.SelectMany(x => x).FirstOrDefault(x => x.IsActive);
             LoadSidebarMenus(currentActiveToolbarMenu, currentActiveSidebarMenu);
         }
         else

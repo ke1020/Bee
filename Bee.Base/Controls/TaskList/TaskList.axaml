@@ -3,6 +3,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:i18n="using:Ke.Bee.Localization.Extensions"
+  xmlns:ctrl="using:Bee.Base.Controls"
   x:Class="Bee.Base.Controls.TaskList">
   <Grid>
     <Grid.ColumnDefinitions>
@@ -75,6 +76,11 @@
       <Border Margin="0,0,0,10" DockPanel.Dock="Top">
         <TextBlock Text="{Binding TaskStatusText}" />
       </Border>
+      
+      <!--
+      <ctrl:Progress1 Duration="0:0:1.5" />
+      -->
+      
       <!-- 列表 -->
       <ScrollViewer>
         <ItemsControl ItemsSource="{Binding TaskItems}" Padding="0,0,20,0">

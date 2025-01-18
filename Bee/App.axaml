@@ -19,6 +19,7 @@
         <StyleInclude Source="avares://Bee/Assets/Toastr.axaml" />
         <StyleInclude Source="avares://Bee.Base/Controls/Workspace/Workspace.axaml"/>
         <StyleInclude Source="avares://Bee.Base/Controls/Toastr/Toastr.axaml"/>
+        <StyleInclude Source="avares://Bee.Base/Controls/Progress/Progress1.axaml"/>
         <!--
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
         -->

@@ -1,0 +1,49 @@
+<Styles xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="using:Bee.Base.Controls"
+>
+    <Style Selector="ctrl|Progress1">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <Grid.Styles>
+                        <Style Selector="Rectangle#Rect1">
+                            <Style.Animations>
+                                <Animation Easing="CubicEaseIn" IterationCount="Infinite"
+                                    Duration="{Binding Duration, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <KeyFrame Cue="0%">
+                                        <Setter Property="TranslateTransform.X" Value="-100" />
+                                    </KeyFrame>
+                                    <KeyFrame Cue="100%">
+                                        <Setter Property="TranslateTransform.X" Value="500" />
+                                    </KeyFrame>
+                                </Animation>
+                            </Style.Animations>
+                        </Style>
+                    </Grid.Styles>
+
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <!--裁剪区-->
+                        <Grid.Clip>
+                            <RectangleGeometry Rect="0,0,500,5"
+                                RadiusX="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}}"
+                                RadiusY="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Grid.Clip>
+                        <!--背景区-->
+                        <Rectangle Width="500" Height="5" Fill="#588A8A8A"
+                            RadiusX="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}}"
+                            RadiusY="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <!--滑动条-->
+                        <Rectangle x:Name="Rect1"
+                            Width="{Binding ScrollWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                            Height="5"
+                            HorizontalAlignment="Left"
+                            Fill="#44B7FF"
+                            RadiusX="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}}"
+                            RadiusY="{Binding Radius, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Grid>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
