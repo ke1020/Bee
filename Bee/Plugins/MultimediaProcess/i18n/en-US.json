@@ -29,5 +29,10 @@
     "Bee.Plugin.Multimedia.AudioProcessViewComment": "Drag the video files into the dashed-line box above to add them to the task list, then set the parameters from the right-hand panel; finally, click the \"Execute Task\" button. Main feature: batch audio extraction from video files...",
     "Bee.Plugin.Multimedia.Bitrate": "Bitrate(kbps)",
     "Bee.Plugin.Multimedia.SamplingRate": "Sample Rate(kHz)",
+    "Bee.Plugin.Multimedia.NumChannels": "Channels (Optional)",
+    "Bee.Plugin.Multimedia.NumChannels.PlaceHolder": "Select Output Channels",
+    "Bee.Plugin.Multimedia.AudioCodec": "Codec (Optional)",
+    "Bee.Plugin.Multimedia.AudioCodec.PlaceHolder": "Select Codec",
+    "Bee.Plugin.Multimedia.ForceFormat": "Force Output Format?",
     "Bee.Plugin.Multimedia.Invalid.InputFormatInconsistency": "The input files format inconsistency"
 }

@@ -155,11 +155,11 @@ public static class ServiceCollectionExtensions
         }
         catch (ReflectionTypeLoadException ex)
         {
-            File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "run.log"), ex.Message);
+            //File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "run.log"), ex.Message);
             foreach (var loaderEx in ex.LoaderExceptions)
             {
                 throw new Exception(loaderEx?.Message);
-            }
+            } 
         }
         return services;
     }

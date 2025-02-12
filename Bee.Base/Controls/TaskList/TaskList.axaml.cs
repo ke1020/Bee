@@ -1,7 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.VisualTree;
 
 using Bee.Base.Abstractions.Tasks;
 using Bee.Base.Models.Tasks;
