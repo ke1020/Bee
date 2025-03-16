@@ -1,0 +1,77 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Loader;
+using Avalonia.Markup.Xaml;
+using Bee.Base.Abstractions.Plugin;
+using Bee.Base.Models;
+using Bee.Base.Models.Menu;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+
+namespace Bee.Loaders;
+
+public class MultimediaAssemblyLoadContext : AssemblyLoadContext
+{
+    private readonly string _pluginPath;
+
+    public MultimediaAssemblyLoadContext(IServiceCollection services) : base(isCollectible: true)
+    {
+        var serviceProvider = services.BuildServiceProvider();
+        var appSettings = serviceProvider.GetService<IOptions<AppSettings>>();
+        _pluginPath = Path.Combine(appSettings?.Value.PluginPath!, "MultimediaProcess");
+        this.Load(_pluginPath, services);
+    }
+
+    protected override Assembly? Load(AssemblyName assemblyName)
+    {
+        // 尝试从插件目录加载依赖项
+        var dllPath = Path.Combine(_pluginPath, $"{assemblyName.Name}.dll");
+        if (File.Exists(dllPath))
+        {
+            return LoadFromAssemblyPath(dllPath);
+        }
+
+        return null;
+    }
+}
+
+public class UmlGenerateAssemblyLoadContext : AssemblyLoadContext
+{
+    public UmlGenerateAssemblyLoadContext(IServiceCollection services) : base(isCollectible: true)
+    {
+        this.Load("UmlGenerate", services);
+    }
+
+    protected override Assembly? Load(AssemblyName assemblyName)
+    {
+        return null;
+    }
+}
+
+public static class AssemblyLoadContextExtensions
+{
+    public static void Load<T>(this T context, string pluginPath, IServiceCollection services) where T : AssemblyLoadContext
+    {
+        var serviceProvider = services.BuildServiceProvider();
+        var dlls = Directory.GetFiles(pluginPath, "*.dll");
+
+        foreach (var dll in dlls)
+        {
+            var assembly = context.LoadFromAssemblyPath(dll);
+            var plugins = assembly.GetTypes()
+                    // 所有 IPlugin 接口的非抽象类实现
+                    .Where(t => typeof(PluginBase).IsAssignableFrom(t) && !t.IsAbstract)
+                    // 创建实例
+                    .Select(t => (IPlugin)Activator.CreateInstance(t, serviceProvider)!)
+                    ;
+
+            foreach (var plugin in plugins)
+            {
+                plugin.RegisterServices(services);
+                plugin.ConfigureMenu(serviceProvider.GetService<MenuConfigurationContext>()!);
+            }
+        }
+    }
+}

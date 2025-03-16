@@ -122,7 +122,13 @@ public static class ServiceCollectionExtensions
 
         var menuContext = serviceProvider.GetService<MenuConfigurationContext>();
         // 插件根目录数组
-        var pluginDirectories = Directory.GetDirectories(pluginPath);
+        string[] pluginDirectories = Directory.GetDirectories(pluginPath);
+        /*
+        [
+            //Path.Combine(pluginPath, "ImageProcess"),
+            //Path.Combine(pluginPath, "DocumentProcess")
+        ];
+        */
 
         List<string> files = [];
         if (pluginDirectories != null)
@@ -152,6 +158,9 @@ public static class ServiceCollectionExtensions
                     plugin.ConfigureMenu(menuContext!);
                 }
             }
+
+            //var multimediaLoader = new MultimediaAssemblyLoadContext(services);
+            //multimediaLoader.Load("MultimediaProcess", services);
         }
         catch (ReflectionTypeLoadException ex)
         {
@@ -159,8 +168,9 @@ public static class ServiceCollectionExtensions
             foreach (var loaderEx in ex.LoaderExceptions)
             {
                 throw new Exception(loaderEx?.Message);
-            } 
+            }
         }
+
         return services;
     }
 
